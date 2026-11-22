@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import Icon from '../../../components/Icon.astro';
+import Photo from '../../../components/Photo.astro';
+import AffiliateNote from '../../../components/AffiliateNote.astro';
+import Newsletter from '../../../components/Newsletter.astro';
+import { CATEGORIAS } from '../../../data/categorias';
+const entries = (await getCollection('preparate')).filter((e) => e.data.nivel === 'prepper');
+const by = Object.fromEntries(entries.map((e) => [e.data.categoria, e]));
+const crumbs = [{ name: 'Prepárate', href: '/preparate/' }, { name: 'Prepper', href: '/preparate/prepper/' }];
+const total = entries.reduce((n, e) => n + e.data.checklist.length, 0);
+---
+<Base title="Nivel Prepper: un año de reservas, energía off-grid, radio y más" description="El tercer nivel de Modo Refugio: un artículo y una checklist Prepper por cada área. Agua a escala, 1 año de comida, solar con LiFePO4, radio HF, mochila de evacuación y seguridad, siempre con la legalidad en España." crumbs={crumbs} image="/og/preparate-prepper.png">
+  <section class="phero">
+    <div class="phero__img"><Photo k="mochila" eager sizes="100vw" /></div>
+    <div class="container phero__inner">
+      <Breadcrumbs items={crumbs} />
+      <p class="eyebrow"><Icon name="flame" size={16} /> Nivel Prepper</p>
+      <h1>Nivel Prepper: para quien va en serio</h1>
+      <p class="lead">Tras el <a href="/preparate/">Básico</a> (72 horas) y el <a href="/preparate/">Avanzado</a> (1–2 semanas) llega el nivel que viene de Estados Unidos: un año de reservas, energía off-grid, radio HF y plan de evacuación. Con humor, con los pies en el suelo y marcando qué es legal en España.</p>
+    </div>
+  </section>
+  <section class="container section--tight">
+    <p class="small muted prepnote"><strong>Aviso:</strong> nada de lo que sigue sustituye a Protección Civil, a tu médico ni a un profesional. Aquí no hay tutoriales de armas ni de medicación sin receta: cuando una práctica tiene límites legales (pozos, radio, efectivo, armas blancas, yodo), lo decimos.</p>
+    <div class="pp-grid">
+      <div class="pp-card"><Icon name="flame" size={22} /><div><strong>{entries.length} áreas</strong><span>Un artículo corto + checklist en cada una.</span></div></div>
+      <div class="pp-card"><Icon name="list-checks" size={22} /><div><strong>{total} puntos</strong><span>Marcables, guardados en tu navegador.</span></div></div>
+      <div class="pp-card"><Icon name="scale" size={22} /><div><strong>Legalidad en España</strong><span>Pozos, radio, efectivo, yodo, armas blancas.</span></div></div>
+    </div>
+    <h2 class="t">Elige un área</h2>
+    <div class="pp-list">
+      {CATEGORIAS.filter((c) => by[c.id]).map((c) => (
+        <a class="pp-item" href={`/preparate/${c.id}/prepper/`}>
+          <span class="pp-item__i"><Icon name={c.icon} size={22} /></span>
+          <span><strong>{by[c.id].data.title}</strong><small>{by[c.id].data.resumen}</small></span>
+          <Icon name="arrow-right" size={18} class="pp-go" />
+        </a>
+      ))}
+    </div>
+    <div class="pp-aff"><AffiliateNote /></div>
+  </section>
+  <section class="section section--subtle">
+    <div class="container pp-cta">
+      <div>
+        <h2>¿Aún no tienes el Básico?</h2>
+        <p class="muted">Un Prepper de verdad empieza por el principio: 3 días de agua, comida, linterna y radio. Hazlo en una tarde y vuelve.</p>
+        <div class="pp-row"><a class="btn btn--primary btn--lg" href="/preparate/">Ver niveles Básico y Avanzado</a><a class="btn btn--ghost btn--lg" href="/playbook/llamarada-solar/">Playbook: Llamarada solar</a></div>
+      </div>
+    </div>
+  </section>
+  <Newsletter />
+</Base>
+<style>
+  .prepnote{background:var(--color-prepper-bg);color:var(--color-prepper-text);border-radius:var(--radius-md);padding:var(--space-3) var(--space-4);margin:var(--space-2) 0 var(--space-8)}
+  .pp-grid{display:grid;gap:var(--space-4);grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));margin-bottom:var(--space-10)}
+  .pp-card{display:flex;gap:var(--space-3);align-items:center;background:var(--color-surface);border:1px solid var(--color-border);border-left:5px solid var(--color-prepper);border-radius:var(--radius-md);padding:var(--space-4)}
+  .pp-card > :global(.icon){color:var(--color-prepper);flex:none}
+  .pp-card strong{display:block}
+  .pp-card span{display:block;color:var(--color-text-muted);font-size:var(--size-sm)}
+  .phero .lead :global(a){color:#fff;text-decoration:underline;text-underline-offset:3px}
+  .t{margin-bottom:var(--space-6)}
+  .pp-list{display:grid;gap:var(--space-3);grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr))}
+  .pp-item{display:flex;gap:var(--space-3);align-items:center;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--space-4);text-decoration:none;color:var(--color-text);transition:border-color var(--motion-fast),transform var(--motion-fast)}
+  .pp-item:hover{border-color:var(--color-prepper);transform:translateY(-2px)}
+  .pp-item__i{display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:var(--color-prepper-bg);color:var(--color-prepper-text);flex:none}
+  .pp-item strong{display:block;color:var(--color-heading);line-height:1.25}
+  .pp-item small{display:block;color:var(--color-text-muted);font-size:var(--size-sm);margin-top:.25em}
+  .pp-item :global(.pp-go){margin-left:auto;color:var(--color-text-muted);flex:none}
+  .pp-aff{margin-top:var(--space-8)}
+  .pp-row{display:flex;gap:var(--space-3);flex-wrap:wrap;margin-top:var(--space-6)}
+</style>

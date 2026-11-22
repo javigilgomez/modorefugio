@@ -7,15 +7,15 @@ import { SITE } from '../../../../data/site';
 import { findRecs } from '../../../../data/recomendados';
 export async function getStaticPaths() {
   const all = await getCollection('preparate');
-  return CATEGORIAS.map((c) => ({ params: { cat: c.id }, props: { c, basico: all.find((e) => e.data.categoria === c.id && e.data.nivel === 'basico')!, avanzado: all.find((e) => e.data.categoria === c.id && e.data.nivel === 'avanzado')! } }));
+  return CATEGORIAS.map((c) => ({ params: { cat: c.id }, props: { c, basico: all.find((e) => e.data.categoria === c.id && e.data.nivel === 'basico')!, avanzado: all.find((e) => e.data.categoria === c.id && e.data.nivel === 'avanzado')!, prepper: all.find((e) => e.data.categoria === c.id && e.data.nivel === 'prepper') } }));
 }
-const { c, basico, avanzado } = Astro.props;
+const { c, basico, avanzado, prepper } = Astro.props;
 ---
 <Print title={`Checklist ${c.nombre}`}>
   <PrintHeader kicker="Prepárate · Checklist" title={c.nombre} subtitle={basico.data.resumen} url={`${SITE.url}/preparate/${c.id}/`} color="#1A648C" />
-  {[basico, avanzado].map((e) => (
+  {[basico, avanzado, prepper].filter(Boolean).map((e) => (
     <section class:list={['lv', e.data.nivel]}>
-      <h2>{e.data.nivel === 'basico' ? 'Nivel básico' : 'Nivel avanzado'}</h2>
+      <h2>{e.data.nivel === 'basico' ? 'Nivel básico' : e.data.nivel === 'prepper' ? 'Nivel Prepper' : 'Nivel avanzado'}</h2>
       <ul>{e.data.checklist.map((it) => <li><span class="box" /><span><strong>{it.item}</strong>{it.cantidad && <> · {it.cantidad}</>}{it.nota && <em> — {it.nota}</em>}{findRecs(it.item).length > 0 && <em class="rec"> Recomendado</em>}</span></li>)}</ul>
     </section>
   ))}
@@ -26,6 +26,7 @@ const { c, basico, avanzado } = Astro.props;
   .lv{border-radius:3mm;padding:3.5mm 4.5mm;margin-bottom:4mm;break-inside:avoid}
   .basico{background:#EAF4FA;border-left:2mm solid #1A648C}
   .avanzado{background:#F2EEF9;border-left:2mm solid #6B4C9A}
+  .prepper{background:#FBEAEE;border-left:2mm solid #9F1D35}
   h2{font-size:13pt;margin-bottom:2mm}
   li{display:flex;gap:2.4mm;padding:1.2mm 0;border-bottom:.3mm solid rgba(0,0,0,.08);break-inside:avoid}
   li em{font-style:normal;color:#5C5A50;font-size:9pt}

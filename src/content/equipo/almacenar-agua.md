@@ -15,7 +15,6 @@ faq:
   - q: "¿Puedo reutilizar garrafas de agua mineral?"
     a: "Sí, para periodos cortos. Son finas y no están pensadas para reutilizarse muchas veces. Para la reserva a largo plazo, mejor bidones rígidos alimentarios."
 fuentes:
-  - { nombre: "Ficha bidón Helguefer 20 L", url: "https://www.amazon.es/dp/B01M22FS00" }
   - { nombre: "Ficha Reliance Aqua-Tainer", url: "https://ferrehogar.es/p/reliance-aqua-tainer-bidon-26-5-litros-con-llave-para-agua-potable-00941003" }
 actualizado: 2026-11-22
 ---

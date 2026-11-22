@@ -124,3 +124,5 @@ La lección es sencilla: **un apagón no es peligroso en sí mismo, lo peligroso
 - **Fuego y monóxido:** velas, braseros y aparatos de combustión son el verdadero peligro. Usa luz LED y cocina solo en el exterior.
 
 > **Consejo Modo Refugio:** imprime este playbook y pégalo dentro de la caja de tu kit o en la puerta de un armario. Cuando se va la luz, el PDF del móvil no sirve si no tienes batería.
+
+> **¿Y si el origen es el Sol?** Una gran tormenta solar puede provocar apagones regionales y degradar el GPS y la radio. Tienes su propio plan: [Llamarada solar](/playbook/llamarada-solar/).

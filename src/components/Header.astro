@@ -22,7 +22,7 @@ const is = (p: string) => path.startsWith(p);
           </div>
           <div class="mega__foot">
             <a href="/preparate/#por-riesgo">Prepárate por riesgo →</a>
-            <span><span class="badge badge--basic">Básico</span> <span class="badge badge--advanced">Avanzado</span></span>
+            <span><span class="badge badge--basic">Básico</span> <span class="badge badge--advanced">Avanzado</span> <a class="badge badge--prepper" href="/preparate/prepper/">Prepper</a></span>
           </div>
         </div>
       </div>
@@ -33,7 +33,7 @@ const is = (p: string) => path.startsWith(p);
     </nav>
     <div class="bar__end">
       <button class="iconbtn theme-btn" id="theme-toggle" type="button" aria-label="Activar modo oscuro" title="Modo claro / oscuro"><span class="t-moon"><Icon name="moon" size={20} /></span><span class="t-sun"><Icon name="sun" size={20} /></span></button>
-      <a href="/playbook/" class="btn btn--playbook btn--sm now"><Icon name="siren" size={16} /> ¿Está pasando ahora?</a>
+      <a href="/playbook/" class="btn btn--playbook btn--sm now"><Icon name="siren" size={16} /> ¿Pasa ahora?</a>
       <button class="iconbtn menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú"><Icon name="menu" size={24} /></button>
     </div>
   </div>
@@ -63,18 +63,18 @@ const is = (p: string) => path.startsWith(p);
 </script>
 <style>
   header.site{position:sticky;top:0;z-index:var(--z-header);background:color-mix(in srgb,var(--color-bg) 88%,transparent);backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--color-border);overflow:visible}
-  .bar{display:flex;align-items:center;gap:var(--space-6);height:var(--header-height);overflow:visible}
+  .bar{display:flex;align-items:center;gap:var(--space-4);height:var(--header-height);overflow:visible}
   .logo{flex:none;display:flex;align-items:center;line-height:0;overflow:visible}
   .logo img{display:block;height:40px;width:auto}
-  .logo-dark{display:none}
+  .logo .logo-dark{display:none}
   .t-moon{display:inline-flex}
   .t-sun{display:none}
   :global(:root[data-theme='dark']) .t-sun{display:inline-flex}
   :global(:root[data-theme='dark']) .t-moon{display:none}
-  :global(:root[data-theme='dark']) .logo-dark{display:block}
-  :global(:root[data-theme='dark']) .logo-light{display:none}
-  .nav{display:flex;align-items:center;gap:var(--space-1);margin-left:var(--space-4)}
-  .nav > a,.nav__drop > a{display:inline-flex;align-items:center;gap:.35em;padding:.55em .8em;border-radius:var(--radius-pill);text-decoration:none;color:var(--color-text);font-weight:550;font-size:var(--size-sm)}
+  :global(:root[data-theme='dark']) .logo .logo-dark{display:block}
+  :global(:root[data-theme='dark']) .logo .logo-light{display:none}
+  .nav{display:flex;align-items:center;gap:2px;margin-left:var(--space-2);flex-wrap:nowrap}
+  .nav > a,.nav__drop > a{display:inline-flex;align-items:center;gap:.35em;padding:.55em .6em;border-radius:var(--radius-pill);text-decoration:none;color:var(--color-text);font-weight:550;font-size:var(--size-sm);white-space:nowrap}
   .nav > a:hover,.nav__drop > a:hover{background:var(--color-bg-subtle);color:var(--color-heading)}
   .nav a[aria-current='page']{color:var(--color-heading);background:var(--color-secondary-soft)}
   .nav__pb{color:var(--color-playbook-text)!important;background:var(--color-playbook-bg)}
@@ -87,12 +87,13 @@ const is = (p: string) => path.startsWith(p);
   .mega__grid a:hover{background:var(--color-bg-subtle);color:var(--color-heading)}
   .mega__grid :global(.icon){color:var(--color-secondary)}
   .mega__foot{display:flex;justify-content:space-between;align-items:center;margin-top:var(--space-3);padding-top:var(--space-3);border-top:1px solid var(--color-border);font-size:var(--size-sm)}
-  .bar__end{margin-left:auto;display:flex;align-items:center;gap:var(--space-2)}
+  .bar__end{margin-left:auto;display:flex;align-items:center;gap:var(--space-2);flex:none}
+  .now{white-space:nowrap}
   .iconbtn{background:none;border:0;color:var(--color-text);padding:.5rem;border-radius:var(--radius-pill);cursor:pointer;display:inline-grid;place-items:center}
   .iconbtn:hover{background:var(--color-bg-subtle)}
   .menu-btn{display:none}
-  @media (max-width:1180px){ .now{display:none} }
-  @media (max-width:980px){
+  @media (max-width:1400px){ .now{display:none} }
+  @media (max-width:1100px){
     .menu-btn{display:inline-grid}
     .nav{position:fixed;inset:var(--header-height) 0 0 0;flex-direction:column;align-items:stretch;gap:0;margin:0;padding:var(--space-4) var(--gutter) var(--space-12);background:var(--color-bg);overflow-y:auto;display:none}
     .nav.open{display:flex}

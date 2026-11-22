@@ -13,6 +13,7 @@ const { c } = Astro.props;
     <div class="ccard__lv">
       <a href={`/preparate/${c.id}/`} class="badge badge--basic"><Icon name="circle-dot" size={12} /> Básico</a>
       <a href={`/preparate/${c.id}/avanzado/`} class="badge badge--advanced"><Icon name="layers" size={12} /> Avanzado</a>
+      <a href={`/preparate/${c.id}/prepper/`} class="badge badge--prepper"><Icon name="flame" size={12} /> Prepper</a>
     </div>
   </div>
 </article>
@@ -26,5 +27,5 @@ const { c } = Astro.props;
   .ccard h3 a::after{content:'';position:absolute;inset:0}
   .ccard{position:relative}
   .ccard h3 :global(.icon){color:var(--color-secondary)}
-  .ccard__lv{display:flex;gap:var(--space-2);position:relative;z-index:1}
+  .ccard__lv{display:flex;flex-wrap:wrap;gap:var(--space-2);position:relative;z-index:1}
 </style>

@@ -42,7 +42,7 @@ const preparate = defineCollection({
     title: z.string(),
     description: z.string(),
     categoria: z.string(),
-    nivel: z.enum(['basico', 'avanzado']),
+    nivel: z.enum(['basico', 'avanzado', 'prepper']),
     resumen: z.string(),
     checklist: z.array(z.object({ item: z.string(), cantidad: z.string().optional(), nota: z.string().optional() })),
     productos: z.array(z.string()).default([]),

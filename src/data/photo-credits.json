@@ -298,5 +298,12 @@
   "fuente": "Modo Refugio",
   "licencia": "Uso propio del sitio (tipo de producto genérico, sin marca)",
   "alt": "Raciones de comida de emergencia en envase genérico"
+ },
+ "solar": {
+  "autor": "NASA",
+  "fuente": "Wikimedia Commons",
+  "url": "https://commons.wikimedia.org/wiki/File:An_aurora_blankets_the_Earth_beneath_a_celestial_night_sky_as_the_International_Space_Station_orbited_261_miles_above_the_Atlantic_Ocean_off_the_coast_of_North_America.jpg",
+  "licencia": "Dominio público (NASA)",
+  "alt": "Aurora sobre la Tierra vista desde la Estación Espacial Internacional"
  }
 }

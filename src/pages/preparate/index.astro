@@ -10,20 +10,21 @@ import { CATEGORIAS } from '../../data/categorias';
 const pbs = (await getCollection('playbooks')).sort((a, b) => a.data.orden - b.data.orden);
 const crumbs = [{ name: 'Prepárate', href: '/preparate/' }];
 ---
-<Base title="Prepárate: listas básicas y avanzadas para cualquier emergencia" description="Cómo prepararte paso a paso en 12 categorías (agua, alimentos, energía, botiquín, mochila 72 h…) con nivel básico para todos y nivel avanzado para quien quiera más autonomía." crumbs={crumbs}>
+<Base title="Prepárate: listas básicas, avanzadas y Prepper para cualquier emergencia" description="Cómo prepararte paso a paso en 12 categorías (agua, alimentos, energía, botiquín, mochila 72 h…) con nivel básico para todos, avanzado para más autonomía y Prepper para quien quiere ir a por todas." crumbs={crumbs}>
   <section class="phero">
     <div class="phero__img"><Photo k="mochila" eager sizes="100vw" /></div>
     <div class="container phero__inner">
       <Breadcrumbs items={crumbs} />
       <p class="eyebrow"><Icon name="shield-check" size={16} /> Prepárate</p>
       <h1>Prepararse es para antes</h1>
-      <p class="lead">Doce áreas, dos niveles. Empieza por el <strong>Básico</strong>: es lo que recomiendan Protección Civil y la UE para que cualquier hogar aguante 72 horas. Cuando lo tengas, sube al <strong>Avanzado</strong>.</p>
+      <p class="lead">Doce áreas, tres niveles. Empieza por el <strong>Básico</strong>: es lo que recomiendan Protección Civil y la UE para que cualquier hogar aguante 72 horas. Cuando lo tengas, sube al <strong>Avanzado</strong>. Y si te va la marcha, hay un tercer nivel: <a href="/preparate/prepper/"><strong>Prepper</strong></a>.</p>
     </div>
   </section>
   <section class="container section--tight">
     <div class="legend">
       <div class="legend__b"><span class="badge badge--basic"><Icon name="circle-dot" size={12} /> Básico</span><p>Para todos. Barato, rápido y suficiente para un apagón o una DANA de 3 días. Sin obsesiones.</p></div>
       <div class="legend__a"><span class="badge badge--advanced"><Icon name="layers" size={12} /> Avanzado</span><p>Para quien quiere autonomía de 1–2 semanas o más: energía solar, potabilización, radio, redundancia.</p></div>
+      <div class="legend__p"><span class="badge badge--prepper"><Icon name="flame" size={12} /> Prepper</span><p>Para quien va en serio: un año de reservas, energía off-grid, radio HF, bug-out. <a href="/preparate/prepper/">Ver el nivel Prepper</a>.</p></div>
     </div>
     <h2 class="t">Por categoría</h2>
     <div class="grid grid--4">{CATEGORIAS.map((c) => <CategoryCard c={c} />)}</div>
@@ -61,6 +62,7 @@ const crumbs = [{ name: 'Prepárate', href: '/preparate/' }];
   .legend > div{background:var(--color-surface);border-radius:var(--radius-md);padding:var(--space-5);border:1px solid var(--color-border)}
   .legend__b{border-left:5px solid var(--color-basic)!important}
   .legend__a{border-left:5px solid var(--color-advanced)!important}
+  .legend__p{border-left:5px solid var(--color-prepper)!important}
   .legend p{margin:.6em 0 0;color:var(--color-text-muted);font-size:var(--size-sm)}
   .t{margin-bottom:var(--space-6)}
   .risks{display:grid;gap:var(--space-3);grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-top:var(--space-6)}

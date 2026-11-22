@@ -16,7 +16,6 @@ faq:
     a: "No. Son un complemento para mochila y coche. Para casa, una despensa rotativa de comida habitual es más barata, más sana y más agradable."
 fuentes:
   - { nombre: "Datrex: ración 3.600 kcal", url: "https://www.datrex.com/product/datrex-emergency-food-ration-20-pack-case/" }
-  - { nombre: "NRG-5: ración de emergencia", url: "https://www.amazon.es/dp/B099SD7LM3" }
 actualizado: 2026-11-22
 ---
 

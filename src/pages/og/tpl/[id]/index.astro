@@ -10,7 +10,8 @@ export async function getStaticPaths() {
     { params: { id: 'default' }, props: { kicker: 'La guía de preparación en español', title: 'Prepárate sin miedo. Actúa con un plan.', ph: 'hero', pb: false } },
     { params: { id: 'playbook' }, props: { kicker: 'The Playbook', title: 'Qué hacer cuando pasa', ph: 'incendio', pb: true } },
     ...pbs.map((p) => ({ params: { id: `playbook-${p.id}` }, props: { kicker: 'The Playbook', title: p.data.nombre, sub: p.data.subtitle ?? p.data.resumen, ph: p.data.photo, pb: true } })),
-    ...CATEGORIAS.map((c) => ({ params: { id: `preparate-${c.id}` }, props: { kicker: 'Prepárate · Básico y avanzado', title: c.nombre, sub: c.claim, ph: c.photo, pb: false } })),
+    { params: { id: 'preparate-prepper' }, props: { kicker: 'Prepárate · Nivel Prepper', title: 'Nivel Prepper', sub: 'Un año de reservas, energía off-grid, radio y más. Con la legalidad en España.', ph: 'mochila', pb: false } },
+    ...CATEGORIAS.map((c) => ({ params: { id: `preparate-${c.id}` }, props: { kicker: 'Prepárate · Básico, avanzado, Prepper', title: c.nombre, sub: c.claim, ph: c.photo, pb: false } })),
   ];
 }
 const { kicker, title, sub, ph, pb } = Astro.props as { kicker: string; title: string; sub?: string; ph: string; pb: boolean };

@@ -55,6 +55,10 @@ hr{border:0;border-top:1px solid var(--color-border);margin:var(--space-12) 0}
 .btn--sm{padding:.55em 1em;font-size:var(--size-xs)}
 .btn--block{width:100%}
 
+:root{--color-prepper:#9F1D35;--color-prepper-bg:#F8DCE1;--color-prepper-text:#5E0F1E;--color-on-prepper:#fff}
+:root[data-theme='dark']{--color-prepper:#F08CA0;--color-prepper-bg:#4A1822;--color-prepper-text:#F9D3DB;--color-on-prepper:#2A0A12}
+.badge--prepper{background:var(--color-prepper-bg);color:var(--color-prepper-text)}
+
 /* Badges (tokens define .badge, .badge--basic, .badge--advanced, .badge--playbook) */
 .badge{text-decoration:none}
 .badge .icon{width:1em;height:1em}
@@ -130,6 +134,8 @@ a.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);color:inheri
 .levels a{display:inline-flex;align-items:center;gap:.45em;padding:.6em 1.15em;border-radius:var(--radius-pill);font:600 var(--size-sm)/1 var(--font-body);color:#fff;text-decoration:none}
 .levels a[aria-current='page'].is-basic{background:var(--color-basic-bg);color:var(--color-basic-text)}
 .levels a[aria-current='page'].is-adv{background:var(--color-advanced-bg);color:var(--color-advanced-text)}
+.levels a[aria-current='page'].is-prep{background:var(--color-prepper-bg);color:var(--color-prepper-text)}
+@media (max-width:480px){.levels a{padding:.6em .8em;gap:.35em}}
 .levels a:not([aria-current]):hover{background:rgba(255,255,255,.12)}
 
 /* Layout with sidebar */

@@ -23,7 +23,7 @@ const crumbs = [{ name: 'Descargas', href: '/descargas/' }];
         <ul class="dl">{pbs.map((p) => <li><a href={`/pdf/playbook-${p.id}.pdf`} download><Icon name={p.data.icon} size={18} /> {p.data.nombre}<span>PDF</span></a></li>)}</ul>
       </section>
       <section>
-        <h2><Icon name="shield-check" size={22} /> Checklists · prepárate (básico + avanzado)</h2>
+        <h2><Icon name="shield-check" size={22} /> Checklists · prepárate (básico, avanzado y Prepper)</h2>
         <ul class="dl">{CATEGORIAS.map((c) => <li><a href={`/pdf/checklist-${c.id}.pdf`} download><Icon name={c.icon} size={18} /> {c.nombre}<span>PDF</span></a></li>)}</ul>
       </section>
     </div>
