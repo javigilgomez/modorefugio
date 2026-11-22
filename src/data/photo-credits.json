@@ -250,5 +250,53 @@
   "licencia": "CC0 1.0 (dominio público)",
   "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
   "alt": "Portátil con código en una pantalla a oscuras"
+ },
+ "prod-estacion": {
+  "autor": "Imagen generada para Modo Refugio",
+  "fuente": "Modo Refugio",
+  "licencia": "Uso propio del sitio (tipo de producto genérico, sin marca)",
+  "alt": "Estación de energía portátil genérica, sin marca"
+ },
+ "prod-radio": {
+  "autor": "Imagen generada para Modo Refugio",
+  "fuente": "Modo Refugio",
+  "licencia": "Uso propio del sitio (tipo de producto genérico, sin marca)",
+  "alt": "Radio de emergencia de manivela genérica, sin marca"
+ },
+ "prod-linterna": {
+  "autor": "Imagen generada para Modo Refugio",
+  "fuente": "Modo Refugio",
+  "licencia": "Uso propio del sitio (tipo de producto genérico, sin marca)",
+  "alt": "Linterna frontal genérica, sin marca"
+ },
+ "prod-bidon": {
+  "autor": "Imagen generada para Modo Refugio",
+  "fuente": "Modo Refugio",
+  "licencia": "Uso propio del sitio (tipo de producto genérico, sin marca)",
+  "alt": "Bidón de agua de uso alimentario con grifo, genérico"
+ },
+ "prod-agua": {
+  "autor": "Imagen generada para Modo Refugio",
+  "fuente": "Modo Refugio",
+  "licencia": "Uso propio del sitio (tipo de producto genérico, sin marca)",
+  "alt": "Agua envasada de emergencia, envases genéricos"
+ },
+ "prod-filtro": {
+  "autor": "Imagen generada para Modo Refugio",
+  "fuente": "Modo Refugio",
+  "licencia": "Uso propio del sitio (tipo de producto genérico, sin marca)",
+  "alt": "Filtro de agua portátil genérico, sin marca"
+ },
+ "prod-powerbank": {
+  "autor": "Imagen generada para Modo Refugio",
+  "fuente": "Modo Refugio",
+  "licencia": "Uso propio del sitio (tipo de producto genérico, sin marca)",
+  "alt": "Batería externa o powerbank genérica, sin marca"
+ },
+ "prod-comida": {
+  "autor": "Imagen generada para Modo Refugio",
+  "fuente": "Modo Refugio",
+  "licencia": "Uso propio del sitio (tipo de producto genérico, sin marca)",
+  "alt": "Raciones de comida de emergencia en envase genérico"
  }
 }

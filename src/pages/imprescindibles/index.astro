@@ -16,7 +16,6 @@ const crumbs = [{ name: 'Imprescindibles', href: '/imprescindibles/' }];
     <p class="eyebrow"><Icon name="star" size={16} /> Imprescindibles</p>
     <h1>Imprescindibles</h1>
     <p class="lead">Lo que de verdad usarás en una emergencia, explicado sin humo. Empieza por lo básico (luz, radio, batería, agua) y amplía cuando lo tengas.</p>
-    <AffiliateNote />
     <div class="grid grid--3 eq">
       {eq.map((e) => (
         <a class="card" href={`/imprescindibles/${e.id}/`}>
@@ -39,6 +38,7 @@ const crumbs = [{ name: 'Imprescindibles', href: '/imprescindibles/' }];
         <ProductBox id="midland-er300" compact />
         <ProductBox id="anker-zolo-20000" compact />
       </div>
+      <AffiliateNote />
     </div>
   </section>
 </Base>

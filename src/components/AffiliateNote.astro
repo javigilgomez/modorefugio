@@ -1,9 +1,11 @@
 ---
-import Icon from './Icon.astro';
 import { AFFILIATE } from '../data/site';
 ---
-<p class="affnote"><Icon name="badge-info" size={16} /> <span><strong>Transparencia:</strong> esta página contiene enlaces de afiliado. Si compras a través de ellos, Modo Refugio recibe una comisión sin coste extra para ti. No mostramos precios porque cambian a diario: consulta el actual en la tienda. {AFFILIATE.amazonDisclosure} <a href="/divulgacion-afiliados/">Cómo elegimos los productos</a>.</span></p>
+{AFFILIATE.enabled && (
+  <p class="affline">Productos seleccionados por nosotros. Algunos enlaces son de afiliado: si compras, Modo Refugio gana una pequeña comisión sin coste extra para ti. En calidad de Afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables. <a href="/divulgacion-afiliados/">Más info</a>.</p>
+)}
 <style>
-  .affnote{display:flex;gap:.6em;align-items:flex-start;font-size:var(--size-xs);color:var(--color-text-muted);background:var(--color-bg-subtle);border-radius:var(--radius-sm);padding:.75em 1em;margin:var(--space-4) 0}
-  .affnote :global(.icon){margin-top:2px;flex:none}
+  .affline{font-size:var(--size-xs);color:var(--color-text-muted);line-height:1.55;margin:var(--space-8) 0 0;max-width:70ch}
+  .affline a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+  .affline a:hover{color:var(--color-link)}
 </style>

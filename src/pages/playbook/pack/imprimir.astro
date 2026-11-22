@@ -5,6 +5,7 @@ import PrintHeader from '../../../components/PrintHeader.astro';
 import { TELEFONOS } from '../../../data/emergencias';
 import { SITE } from '../../../data/site';
 import { stepText } from '../../../lib/util';
+import { findRec } from '../../../data/recomendados';
 const pbs = (await getCollection('playbooks')).sort((a, b) => a.data.orden - b.data.orden);
 ---
 <Print title="The Playbook completo">
@@ -26,6 +27,10 @@ const pbs = (await getCollection('playbooks')).sort((a, b) => a.data.orden - b.d
         </div>
       ))}
       <div class="dont"><h2>NO hagas</h2><ul>{pb.data.noHagas.map((x) => <li set:html={x} />)}</ul></div>
+      <div class="kitp"><h2>Qué tener</h2>
+        <p><strong>Básico.</strong> {pb.data.prepara.basico.map((x, i) => <><span set:html={x} />{findRec(x) && ' (Recomendado)'}{i < pb.data.prepara.basico.length - 1 && ' · '}</>)}</p>
+        <p><strong>Avanzado.</strong> {pb.data.prepara.avanzado.map((x, i) => <><span set:html={x} />{findRec(x) && ' (Recomendado)'}{i < pb.data.prepara.avanzado.length - 1 && ' · '}</>)}</p>
+      </div>
     </section>
   ))}
 </Print>
@@ -49,4 +54,5 @@ const pbs = (await getCollection('playbooks')).sort((a, b) => a.data.orden - b.d
   .dont{background:#FBE4E1;color:#8F1D14;border-radius:2.5mm;padding:2.5mm 4mm;margin-top:3mm;break-inside:avoid}
   .dont h2{color:#8F1D14}
   .dont li{font-size:9pt;margin-bottom:.8mm}
+  .kitp{margin-top:3mm;font-size:8.5pt}.kitp p{margin:1mm 0}
 </style>

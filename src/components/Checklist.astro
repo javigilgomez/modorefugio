@@ -1,20 +1,26 @@
 ---
+import { findRec } from '../data/recomendados';
+import RecBadge from './RecBadge.astro';
 interface Item { item: string; cantidad?: string; nota?: string }
-interface Props { id: string; items: (Item | string)[] }
-const { id, items } = Astro.props;
+interface Props { id: string; items: (Item | string)[]; recommend?: boolean }
+const { id, items, recommend = false } = Astro.props;
 const norm = items.map((x) => (typeof x === 'string' ? { item: x } : x));
 ---
 <ul class="checklist" data-checklist={id}>
-  {norm.map((it, i) => (
-    <li>
-      <input type="checkbox" id={`${id}-${i}`} aria-label={it.item} />
-      <label for={`${id}-${i}`} class="checklist__text">
-        {it.cantidad && <span class="checklist__qty">{it.cantidad} · </span>}
-        <span set:html={it.item} />
-        {it.nota && <span class="checklist__note">{it.nota}</span>}
-      </label>
-    </li>
-  ))}
+  {norm.map((it, i) => {
+    const rec = recommend ? findRec(it.item) : undefined;
+    return (
+      <li>
+        <input type="checkbox" id={`${id}-${i}`} aria-label={it.item} />
+        <label for={`${id}-${i}`} class="checklist__text">
+          {it.cantidad && <span class="checklist__qty">{it.cantidad} · </span>}
+          <span set:html={it.item} />
+          {it.nota && <span class="checklist__note">{it.nota}</span>}
+          {rec && <RecBadge rec={rec} />}
+        </label>
+      </li>
+    );
+  })}
 </ul>
 <script>
   document.querySelectorAll<HTMLElement>('[data-checklist]').forEach((ul) => {

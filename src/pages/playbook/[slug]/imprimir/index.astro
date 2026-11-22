@@ -5,6 +5,7 @@ import PrintHeader from '../../../../components/PrintHeader.astro';
 import { TELEFONOS } from '../../../../data/emergencias';
 import { SITE } from '../../../../data/site';
 import { stepText, fmtDate } from '../../../../lib/util';
+import { findRec } from '../../../../data/recomendados';
 export async function getStaticPaths() {
   return (await getCollection('playbooks')).map((pb) => ({ params: { slug: pb.id }, props: { pb } }));
 }
@@ -36,6 +37,19 @@ const url = `${SITE.url}/playbook/${pb.id}/`;
       <p class="mine">Mis contactos: ______________________<br />Punto de encuentro: ________________</p>
     </section>
   </div>
+  <section class="kit">
+    <h2>Qué tener a mano</h2>
+    <div class="kit__g">
+      <div>
+        <h3>Básico</h3>
+        <ul>{d.prepara.basico.map((x) => { const rec = findRec(x); return <li><span class="box" /><span><span set:html={x} />{rec && <em class="rec"> Recomendado</em>}</span></li>; })}</ul>
+      </div>
+      <div>
+        <h3>Avanzado</h3>
+        <ul>{d.prepara.avanzado.map((x) => { const rec = findRec(x); return <li><span class="box" /><span><span set:html={x} />{rec && <em class="rec"> Recomendado</em>}</span></li>; })}</ul>
+      </div>
+    </div>
+  </section>
   {d.despues && (<section class="phase after"><h2>Después</h2><ul>{d.despues.map((x) => <li><span class="box" /> <span set:html={x} /></li>)}</ul></section>)}
   <footer class="pf">
     <span>modorefugio.com/playbook/{pb.id}/ · Revisado el {fmtDate(d.actualizado)}</span>
@@ -69,4 +83,10 @@ const url = `${SITE.url}/playbook/${pb.id}/`;
   .scene{background:#14352F;color:#F4EFE3;border-radius:2.5mm;padding:3mm 4.5mm;margin:0 0 4mm;font:9pt/1.45 var(--font-scene,var(--font-heading))}
   .scene__s{font:700 7pt/1 var(--font-scene,ui-monospace),ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:#F5C451;font-style:normal;margin-right:1.5mm}
   .scene strong{color:#fff;font-style:normal}
+  .kit{margin-top:4mm;break-inside:avoid}
+  .kit__g{display:grid;grid-template-columns:1fr 1fr;gap:4mm}
+  .kit h3{font-size:10pt;margin:0 0 1.5mm}
+  .kit li{display:flex;gap:2.2mm;padding:.8mm 0;font-size:9pt;border-bottom:.25mm solid #E5DDCB}
+  .kit .box{flex:none;width:3.3mm;height:3.3mm;border:.4mm solid #14352F;border-radius:.7mm;margin-top:.6mm}
+  .rec{font-style:normal;font-weight:700;font-size:7.5pt;letter-spacing:.06em;text-transform:uppercase;color:#C2410C;margin-left:1.5mm}
 </style>

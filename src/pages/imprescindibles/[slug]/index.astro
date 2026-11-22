@@ -41,7 +41,6 @@ const href = (p: ReturnType<typeof prodById>) => (p.asin ? amazonAsinUrl(p.asin)
     </div>
   </section>
   <div class="container container--narrow section--tight">
-    <AffiliateNote />
     <h2>De un vistazo</h2>
     <div class="table-wrap">
       <table class="cmp">
@@ -57,7 +56,7 @@ const href = (p: ReturnType<typeof prodById>) => (p.asin ? amazonAsinUrl(p.asin)
         </tbody>
       </table>
     </div>
-    <p class="xs muted">Especificaciones publicadas por cada fabricante (enlace en cada ficha). No mostramos precios porque cambian a diario.</p>
+    <p class="xs muted">Especificaciones publicadas por cada fabricante (enlace en cada ficha).</p>
 
     <article class="prose"><Content /></article>
 
@@ -73,6 +72,7 @@ const href = (p: ReturnType<typeof prodById>) => (p.asin ? amazonAsinUrl(p.asin)
     </div>
     <Faq items={d.faq} />
     <Sources items={d.fuentes} updated={d.actualizado} />
+    <AffiliateNote />
     <p><a class="btn btn--ghost" href={`/preparate/${cat.id}/`}><Icon name="arrow-left" size={16} /> Volver a Prepárate: {cat.nombre}</a></p>
   </div>
   <Newsletter />

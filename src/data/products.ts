@@ -234,3 +234,22 @@ export const prodById = (id: string) => {
   if (!p) throw new Error(`Producto desconocido: ${id}`);
   return p;
 };
+
+
+/** Foto genérica del TIPO de producto (no de un modelo concreto).
+ *  TODO: cuando la cuenta de Amazon Afiliados tenga 3 ventas y acceso a PA-API o SiteStripe,
+ *  sustituir estas imágenes por las oficiales del fabricante/Amazon.
+ *  No copiar ni hacer hotlink de fotos de Amazon hasta entonces (política de Amazon). */
+export const TIPO_PHOTO: Record<string, { key: string; alt: string }> = {
+  'Estación de energía portátil': { key: 'prod-estacion', alt: 'Estación de energía portátil genérica, sin marca' },
+  'Radio de emergencia': { key: 'prod-radio', alt: 'Radio de emergencia de manivela genérica, sin marca' },
+  'Linterna frontal': { key: 'prod-linterna', alt: 'Linterna frontal genérica, sin marca' },
+  'Almacenaje de agua': { key: 'prod-bidon', alt: 'Bidón de agua de uso alimentario con grifo, genérico' },
+  'Agua envasada de larga duración': { key: 'prod-agua', alt: 'Agua envasada de emergencia, envases genéricos' },
+  'Filtro de agua portátil': { key: 'prod-filtro', alt: 'Filtro de agua portátil genérico, sin marca' },
+  'Batería externa': { key: 'prod-powerbank', alt: 'Batería externa o powerbank genérica, sin marca' },
+  'Comida de emergencia': { key: 'prod-comida', alt: 'Raciones de comida de emergencia en envase genérico' },
+};
+export function tipoPhoto(tipo: string) {
+  return TIPO_PHOTO[tipo] ?? { key: 'energia2', alt: tipo };
+}

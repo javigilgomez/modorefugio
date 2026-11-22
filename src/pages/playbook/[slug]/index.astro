@@ -9,6 +9,8 @@ import Sources from '../../../components/Sources.astro';
 import PlaybookCard from '../../../components/PlaybookCard.astro';
 import Newsletter from '../../../components/Newsletter.astro';
 import AdSlot from '../../../components/AdSlot.astro';
+import Checklist from '../../../components/Checklist.astro';
+import AffiliateNote from '../../../components/AffiliateNote.astro';
 import { catById } from '../../../data/categorias';
 import { TELEFONOS } from '../../../data/emergencias';
 import { SITE } from '../../../data/site';
@@ -110,6 +112,22 @@ if (d.faq.length) schema.push({ '@context': 'https://schema.org', '@type': 'FAQP
           </section>
         )}
 
+        <section class="kit" id="que-tener">
+          <h2><Icon name="backpack" size={22} /> Qué tener a mano</h2>
+          <p class="muted small">Lo que conviene tener <strong>antes</strong>. Lo marcado como recomendado es material que detallamos en Imprescindibles.</p>
+          <div class="kit__grid">
+            <div>
+              <p class="badge badge--basic">Básico</p>
+              <Checklist id={`pb-${pb.id}-kit-b`} items={d.prepara.basico} recommend />
+            </div>
+            <div>
+              <p class="badge badge--advanced">Avanzado</p>
+              <Checklist id={`pb-${pb.id}-kit-a`} items={d.prepara.avanzado} recommend />
+            </div>
+          </div>
+          <p class="small"><a href={`/preparate/riesgo/${pb.id}/`}>Ver la lista completa de preparación →</a></p>
+        </section>
+
         <AdSlot slot="inArticle" />
 
         <article class="prose context">
@@ -119,6 +137,7 @@ if (d.faq.length) schema.push({ '@context': 'https://schema.org', '@type': 'FAQP
 
         <Faq items={d.faq} />
         <Sources items={d.fuentes} updated={d.actualizado} />
+        <AffiliateNote />
       </div>
 
       <aside>
@@ -215,4 +234,7 @@ if (d.faq.length) schema.push({ '@context': 'https://schema.org', '@type': 'FAQP
   .scene__go{display:inline-flex;gap:.5em;align-items:center;margin-top:2rem;font:700 .85rem/1 var(--font-scene,ui-monospace),ui-monospace,Menlo,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-300);text-decoration:none}
   .scene__go:hover{color:#fff}
   .hook{font-family:var(--font-heading);font-size:clamp(1.35rem,3vw,2.1rem);color:var(--amber-300);font-weight:650;margin:0 0 .8rem;letter-spacing:-.015em;line-height:1.15}
+  .kit{margin:var(--space-10) 0}
+  .kit__grid{display:grid;gap:var(--space-6);grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));margin-top:var(--space-4)}
+  .kit__grid > div{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--space-5)}
 </style>

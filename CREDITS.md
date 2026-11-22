@@ -34,6 +34,11 @@ Se descargaron a través de Openverse (fuentes StockSnap y rawpixel). La resoluc
 - **nuclear** — Torres de refrigeración de una central. Autor desconocido · [rawpixel](https://www.rawpixel.com/image/5961244/free-public-domain-cc0-photo) · [CC0 1.0 (dominio público)](https://creativecommons.org/publicdomain/zero/1.0/deed.es)
 - **ia** — Portátil con código en una pantalla a oscuras. Autor desconocido · [rawpixel](https://www.rawpixel.com/image/5944502/free-public-domain-cc0-photo) · [CC0 1.0 (dominio público)](https://creativecommons.org/publicdomain/zero/1.0/deed.es)
 
+
+## Fotos de tipo de producto (Imprescindibles)
+
+Imágenes de estudio generadas para Modo Refugio. Representan el *tipo* de producto (sin marca ni modelo concreto). No son fotos de Amazon ni de un fabricante. Cuando la cuenta de afiliados tenga 3 ventas y acceso a PA-API o SiteStripe, se sustituirán por las imágenes oficiales.
+
 ## Otros recursos
 
 - Iconos: [Lucide](https://lucide.dev) (licencia ISC).

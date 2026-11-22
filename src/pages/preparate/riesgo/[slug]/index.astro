@@ -7,6 +7,7 @@ import Icon from '../../../../components/Icon.astro';
 import Checklist from '../../../../components/Checklist.astro';
 import CategoryCard from '../../../../components/CategoryCard.astro';
 import Newsletter from '../../../../components/Newsletter.astro';
+import AffiliateNote from '../../../../components/AffiliateNote.astro';
 import { catById } from '../../../../data/categorias';
 import { SITE } from '../../../../data/site';
 import { PARA } from '../../../../lib/util';
@@ -36,12 +37,12 @@ const crumbs = [{ name: 'Prepárate', href: '/preparate/' }, { name: `Por riesgo
       <section class="lvl lvl--b">
         <span class="badge badge--basic"><Icon name="circle-dot" size={12} /> Básico · para todos</span>
         <h2>Lo imprescindible</h2>
-        <Checklist id={`riesgo-${pb.id}-b`} items={d.prepara.basico} />
+        <Checklist id={`riesgo-${pb.id}-b`} items={d.prepara.basico} recommend />
       </section>
       <section class="lvl lvl--a">
         <span class="badge badge--advanced"><Icon name="layers" size={12} /> Avanzado · si quieres ir más allá</span>
         <h2>Para más autonomía</h2>
-        <Checklist id={`riesgo-${pb.id}-a`} items={d.prepara.avanzado} />
+        <Checklist id={`riesgo-${pb.id}-a`} items={d.prepara.avanzado} recommend />
       </section>
     </div>
     <div class="pbcta">
@@ -53,6 +54,7 @@ const crumbs = [{ name: 'Prepárate', href: '/preparate/' }, { name: `Por riesgo
     <div class="grid grid--4">{d.categorias.map((c) => <CategoryCard c={catById(c)} />)}</div>
     {equipo.length > 0 && (<><h2 style="margin-top:3rem">Imprescindibles</h2><div class="chips">{equipo.map((e) => <a class="chip" href={`/imprescindibles/${e.id}/`}><Icon name="star" size={16} /> {e.data.title}</a>)}</div></>)}
   </div>
+  <div class="container container--narrow"><AffiliateNote /></div>
   <Newsletter />
 </Base>
 <style>
