@@ -1,6 +1,6 @@
 ---
-title: "Mejores powerbanks para emergencias: 20.000 mAh"
-description: "Qué batería externa tener para un apagón: comparativa de powerbanks de 20.000 mAh (Anker Zolo y Xiaomi Redmi) y cómo calcular cuántas cargas te dan."
+title: "Powerbank"
+description: "Qué batería externa tener para un apagón: powerbanks de 20.000 mAh (Anker Zolo y Xiaomi Redmi) y cómo calcular cuántas cargas te dan."
 photo: internet
 nivel: basico
 categoria: energia-y-luz

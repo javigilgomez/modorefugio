@@ -1,6 +1,7 @@
 ---
-title: "Qué hacer en un incendio forestal: el playbook"
+title: "Incendio forestal: el humo llega ya"
 nombre: Incendio forestal
+subtitle: "El humo llega ya"
 description: "Humo cerca de casa, orden de evacuación o fuego en carretera: qué hacer paso a paso ante un incendio forestal y cómo protegerte si no puedes salir."
 icon: flame
 photo: incendio

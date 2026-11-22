@@ -1,6 +1,7 @@
 ---
-title: "Qué hacer en una ola de frío o gran nevada: el playbook"
+title: "Ola de frío y nevada: se va la calefacción"
 nombre: Ola de frío y nevada
+subtitle: "Se va la calefacción"
 description: "Temperaturas bajo cero, nevada o temporal: cómo mantener el calor en casa sin riesgos de monóxido, cuándo no coger el coche y cómo reconocer la hipotermia."
 icon: snowflake
 photo: frio

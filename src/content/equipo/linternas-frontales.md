@@ -1,6 +1,6 @@
 ---
-title: "Mejores linternas frontales para emergencias y apagones"
-description: "Comparativa de linternas frontales para tu kit de emergencia: Petzl ACTIK CORE, Black Diamond Spot 400 y Ledlenser MH5. Lúmenes, autonomía, pilas y resistencia al agua."
+title: "Linterna frontal"
+description: "Qué linterna frontal tener en tu kit de emergencia: Petzl ACTIK CORE, Black Diamond Spot 400 y Ledlenser MH5. Lúmenes, autonomía, pilas y resistencia al agua."
 photo: energia2
 nivel: basico
 categoria: energia-y-luz
@@ -23,8 +23,8 @@ actualizado: 2026-11-22
 
 ## Nuestra recomendación rápida
 
-- **Mejor en general:** Petzl ACTIK CORE, recargable y compatible con pilas AAA.
-- **Mejor calidad-precio y para guardar:** Black Diamond Spot 400 con pilas de litio.
+- **Buena para casi todo:** Petzl ACTIK CORE, recargable y compatible con pilas AAA.
+- **Buena relación calidad-precio y para guardar:** Black Diamond Spot 400 con pilas de litio.
 - **Una para todo:** Ledlenser MH5, frontal y linterna de mano.
 
 ## Un consejo de guardado

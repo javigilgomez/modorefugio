@@ -12,13 +12,13 @@ const pbs = (await getCollection('playbooks')).sort((a, b) => a.data.orden - b.d
     <img src="/brand/logo-stacked.svg" alt="Modo Refugio" width="260" />
     <h1>The Playbook</h1>
     <p>Qué hacer cuando pasa. {pbs.length} planes paso a paso para tenerlos impresos junto a tu kit de emergencia.</p>
-    <ol class="toc">{pbs.map((p) => <li>{p.data.nombre}</li>)}</ol>
+    <ol class="toc">{pbs.map((p) => <li><strong>{p.data.nombre}</strong>{p.data.subtitle && <> — {p.data.subtitle}</>}</li>)}</ol>
     <div class="tels"><strong>Emergencias:</strong> {TELEFONOS.filter((t) => t.pais !== 'Unión Europea').map((t) => `${t.pais} ${t.principal}`).join(' · ')}</div>
     <p class="small">modorefugio.com · Información divulgativa: sigue siempre las indicaciones oficiales.</p>
   </section>
   {pbs.map((pb) => (
     <section class="pb">
-      <PrintHeader kicker="The Playbook" title={pb.data.title} subtitle={pb.data.resumen} url={`${SITE.url}/playbook/${pb.id}/`} />
+      <PrintHeader kicker="The Playbook" title={pb.data.nombre} subtitle={pb.data.subtitle ?? pb.data.resumen} url={`${SITE.url}/playbook/${pb.id}/`} />
       <div class="first"><h2>Lo primero</h2><ol>{pb.data.primero.map((x) => <li set:html={x} />)}</ol></div>
       {pb.data.fases.map((f, i) => (
         <div class="phase"><h2>{i + 1}. {f.titulo} <small>{f.cuando}</small></h2>

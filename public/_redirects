@@ -2,3 +2,5 @@
 /playbook/sin-internet /playbook/caida-mundial-de-internet/ 301
 /preparate/riesgo/sin-internet/ /preparate/riesgo/caida-mundial-de-internet/ 301
 /pdf/playbook-sin-internet.pdf /pdf/playbook-caida-mundial-de-internet.pdf 301
+/equipo/ /imprescindibles/ 301
+/equipo/* /imprescindibles/:splat 301

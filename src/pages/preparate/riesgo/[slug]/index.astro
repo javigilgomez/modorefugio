@@ -51,7 +51,7 @@ const crumbs = [{ name: 'Prepárate', href: '/preparate/' }, { name: `Por riesgo
     <h2>Prepárate por categoría</h2>
     <p class="muted">Cada categoría tiene su lista básica y su nivel avanzado.</p>
     <div class="grid grid--4">{d.categorias.map((c) => <CategoryCard c={catById(c)} />)}</div>
-    {equipo.length > 0 && (<><h2 style="margin-top:3rem">Comparativas de equipo</h2><div class="chips">{equipo.map((e) => <a class="chip" href={`/equipo/${e.id}/`}><Icon name="star" size={16} /> {e.data.title}</a>)}</div></>)}
+    {equipo.length > 0 && (<><h2 style="margin-top:3rem">Imprescindibles</h2><div class="chips">{equipo.map((e) => <a class="chip" href={`/imprescindibles/${e.id}/`}><Icon name="star" size={16} /> {e.data.title}</a>)}</div></>)}
   </div>
   <Newsletter />
 </Base>

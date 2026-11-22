@@ -13,7 +13,7 @@ checklist:
   - { item: "Opcional: licencia de radioaficionado o nodo LoRa (Meshtastic)" }
 productos: [kaito-ka500, midland-er300]
 comparativas: [radios-de-emergencia]
-playbooks: [caida-mundial-de-internet, apagon, terremoto]
+playbooks: [caida-mundial-de-internet, apagon, terremoto, ia-toma-el-control]
 faq:
   - q: "¿Necesito licencia para usar walkie-talkies?"
     a: "Los equipos PMR446 homologados son de uso libre en la Unión Europea, sin licencia. Para equipos de radioaficionado sí necesitas una licencia, que en España se obtiene tras un examen."

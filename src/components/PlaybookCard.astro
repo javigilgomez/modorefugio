@@ -11,7 +11,8 @@ const d = pb.data;
   <div class="pbcard__body">
     <span class="pbcard__icon"><Icon name={d.icon} size={size === 'sm' ? 18 : 22} /></span>
     <h3>{d.nombre}</h3>
-    {size !== 'sm' && <p>{d.resumen}</p>}
+    {d.subtitle && <p class="pbcard__sub">{d.subtitle}</p>}
+    {size !== 'sm' && !d.subtitle && <p>{d.resumen}</p>}
     <span class="pbcard__go">Abrir playbook <Icon name="arrow-right" size={16} /></span>
   </div>
 </a>

@@ -18,7 +18,7 @@ export interface Producto {
   amazonQuery: string;
   asin?: string;
   fuente: string;
-  destacado?: string; // etiqueta: "Mejor para empezar", etc.
+  destacado?: string; // etiqueta corta: "Para empezar", etc.
 }
 
 export const PRODUCTOS: Producto[] = [
@@ -30,7 +30,7 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Carga muy rápida desde la red', 'Química LiFePO4 de larga vida', 'Ligera y compacta'],
     contras: ['300 W no mueven una nevera con arranque exigente', '256 Wh dan para router y móviles, no para cocinar'],
     idealPara: 'Router, móviles, luces LED y un portátil durante un apagón de un día.',
-    amazonQuery: 'EcoFlow RIVER 2 256Wh', fuente: 'https://www.ecoflow.com/es/river-2-portable-power-station', destacado: 'Mejor para empezar',
+    amazonQuery: 'EcoFlow RIVER 2 256Wh', fuente: 'https://www.ecoflow.com/es/river-2-portable-power-station', destacado: 'Para empezar',
   },
   {
     id: 'bluetti-eb3a', nombre: 'BLUETTI EB3A', marca: 'BLUETTI', tipo: 'Estación de energía portátil', nivel: 'avanzado',
@@ -76,7 +76,7 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Funciona con pilas AA normales si todo lo demás falla', 'Pensada para el mercado europeo', 'Puede dar algo de carga al móvil'],
     contras: ['Sin onda corta', 'La manivela da poca carga por minuto (es normal en todas)'],
     idealPara: 'El kit básico de cualquier casa en España.',
-    amazonQuery: 'Midland ER300 radio emergencia', fuente: 'https://support.midlandeurope.com/media/manual/c/9/d/6/c9d6f5fbf891d741b0e6db652064edcad6ddab15_MANUAL_ER300.pdf', destacado: 'Mejor opción en España',
+    amazonQuery: 'Midland ER300 radio emergencia', fuente: 'https://support.midlandeurope.com/media/manual/c/9/d/6/c9d6f5fbf891d741b0e6db652064edcad6ddab15_MANUAL_ER300.pdf', destacado: 'Fácil de encontrar en España',
   },
   {
     id: 'sangean-mmr-88', nombre: 'Sangean MMR-88', marca: 'Sangean', tipo: 'Radio de emergencia', nivel: 'basico',
@@ -113,7 +113,7 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Sistema híbrido batería/pilas', 'Luz roja para no deslumbrar', 'Muy buena autonomía en modo bajo'],
     contras: ['Cable de carga no incluido', 'Precio superior a frontales de pilas'],
     idealPara: 'La frontal de casa y de la mochila de evacuación.',
-    amazonQuery: 'Petzl Actik Core', fuente: 'https://www.petzl.com/es/es/sport/productos/linternas-frontales-multisport/actik-core/ACTIK-CORE_SPO_a2mTx000000o12YIAQ.html', destacado: 'Mejor en general',
+    amazonQuery: 'Petzl Actik Core', fuente: 'https://www.petzl.com/es/es/sport/productos/linternas-frontales-multisport/actik-core/ACTIK-CORE_SPO_a2mTx000000o12YIAQ.html', destacado: 'Buena para casi todo',
   },
   {
     id: 'bd-spot-400', nombre: 'Black Diamond Spot 400', marca: 'Black Diamond', tipo: 'Linterna frontal', nivel: 'basico',
@@ -122,7 +122,7 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Resistente al agua de verdad', 'Funciona con pilas comunes', 'Bloqueo para que no se encienda en la mochila'],
     contras: ['Con pilas alcalinas pierde brillo según se gastan'],
     idealPara: 'Kits que se guardan mucho tiempo: pon pilas de litio y olvídate.',
-    amazonQuery: 'Black Diamond Spot 400 frontal', fuente: 'https://peakgearguide.com/es/mejor-equipo/linternas-frontales', destacado: 'Mejor calidad-precio',
+    amazonQuery: 'Black Diamond Spot 400 frontal', fuente: 'https://peakgearguide.com/es/mejor-equipo/linternas-frontales', destacado: 'Buena relación calidad-precio',
   },
   {
     id: 'ledlenser-mh5', nombre: 'Ledlenser MH5', marca: 'Ledlenser', tipo: 'Linterna frontal', nivel: 'basico',
@@ -169,7 +169,7 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Ligerísimo', 'Se rosca a botellas comunes', 'Vida útil enorme si se limpia'],
     contras: ['No elimina virus ni químicos', 'Se daña si se congela con agua dentro'],
     idealPara: 'Mochila de evacuación y senderismo.',
-    amazonQuery: 'Sawyer Mini filtro agua', fuente: 'https://www.sawyer.com.co/sp128.html', destacado: 'Mejor para la mochila',
+    amazonQuery: 'Sawyer Mini filtro agua', fuente: 'https://www.sawyer.com.co/sp128.html', destacado: 'Para la mochila',
   },
   {
     id: 'katadyn-befree', nombre: 'Katadyn BeFree 1 L', marca: 'Katadyn', tipo: 'Filtro de agua portátil', nivel: 'avanzado',
@@ -197,7 +197,7 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Cable integrado', 'Carga varios móviles completos', 'Puede viajar en avión (menos de 100 Wh)'],
     contras: ['Pesada para el bolsillo'],
     idealPara: 'Tener 3-4 cargas de móvil en cualquier apagón.',
-    amazonQuery: 'Anker Zolo power bank 20000 22.5W cable integrado', fuente: 'https://www.mrmicro.es/tablets-smartphones/baterias-externas/powerbank-anker-20000-mah-22-5w-con-cable-usb-c-integrado_84439/especificaciones/', destacado: 'Mejor en general',
+    amazonQuery: 'Anker Zolo power bank 20000 22.5W cable integrado', fuente: 'https://www.mrmicro.es/tablets-smartphones/baterias-externas/powerbank-anker-20000-mah-22-5w-con-cable-usb-c-integrado_84439/especificaciones/', destacado: 'Buena para casi todo',
   },
   {
     id: 'redmi-20000-18w', nombre: 'Xiaomi Redmi Power Bank 20.000 mAh 18 W', marca: 'Xiaomi', tipo: 'Batería externa', nivel: 'basico',

@@ -1,6 +1,7 @@
 ---
-title: "Qué hacer en un apagón: el playbook paso a paso"
+title: "Apagón: la ciudad se queda a oscuras"
 nombre: Apagón
+subtitle: "La ciudad se queda a oscuras"
 description: "Se ha ido la luz en toda la zona. Qué hacer en los primeros 15 minutos, en las primeras horas y si el apagón dura días. Checklist descargable en PDF."
 icon: plug-zap
 photo: apagon

@@ -1,6 +1,7 @@
 ---
-title: "Qué hacer en una pandemia o brote epidémico: el playbook"
+title: "Pandemia: empieza otra vez"
 nombre: Pandemia
+subtitle: "Empieza otra vez"
 description: "Brote de una enfermedad contagiosa: cómo protegerte y proteger a los tuyos, cuidar a un enfermo en casa y prepararte para un posible confinamiento."
 icon: biohazard
 photo: pandemia

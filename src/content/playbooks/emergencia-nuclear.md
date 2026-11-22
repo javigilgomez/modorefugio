@@ -1,6 +1,7 @@
 ---
-title: "Qué hacer en una emergencia nuclear o radiológica: el playbook"
+title: "Emergencia nuclear: quédate dentro, ahora"
 nombre: Emergencia nuclear
+subtitle: "Quédate dentro, ahora"
 description: "Accidente en una central, incidente radiológico o alerta nuclear: entra, quédate dentro y sintoniza. Cómo confinarte, cuándo tomar yoduro potásico (solo si lo indican) y qué hacer si estabas fuera."
 icon: radiation
 photo: nuclear

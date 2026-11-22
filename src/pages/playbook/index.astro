@@ -13,7 +13,7 @@ const pbs = (await getCollection('playbooks')).sort((a, b) => a.data.orden - b.d
 const crumbs = [{ name: 'The Playbook', href: '/playbook/' }];
 const schema = [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'The Playbook', url: `${SITE.url}/playbook/`, hasPart: pbs.map((p) => ({ '@type': 'Article', name: p.data.title, url: `${SITE.url}/playbook/${p.id}/` })) }];
 ---
-<Base title="The Playbook: qué hacer cuando pasa una emergencia" description="Planes paso a paso para el momento en que ocurre: apagón, DANA, terremoto, ciberataque, ola de calor, emergencia nuclear y más. Descargables en PDF para tenerlos sin conexión." crumbs={crumbs} image="/og/playbook.png" schema={schema}>
+<Base title="The Playbook: qué hacer cuando pasa una emergencia" description="Planes paso a paso para el momento en que ocurre: apagón, DANA, terremoto, ciberataque, ola de calor, emergencia nuclear, IA y más. Descargables en PDF para tenerlos sin conexión." crumbs={crumbs} image="/og/playbook.png" schema={schema}>
   <section class="phero phero--playbook pbhero">
     <div class="phero__img"><Photo k="incendio" eager sizes="100vw" /></div>
     <div class="container phero__inner">

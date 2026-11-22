@@ -1,6 +1,7 @@
 ---
-title: "Qué hacer en una crisis de abastecimiento: el playbook"
+title: "Desabastecimiento: los lineales están vacíos"
 nombre: Desabastecimiento
+subtitle: "Los lineales están vacíos"
 description: "Estanterías vacías, huelga de transporte o compras de pánico: cómo gestionar tu despensa, comprar con cabeza y ayudar sin acaparar."
 icon: shopping-basket
 photo: abastecimiento

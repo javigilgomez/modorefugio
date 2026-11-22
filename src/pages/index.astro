@@ -116,14 +116,14 @@ const schema = [
   <section class="section section--subtle">
     <div class="container">
       <div class="section-head">
-        <div><p class="eyebrow"><Icon name="star" size={16} /> Equipo</p><h2>Comparativas sin humo</h2></div>
-        <a href="/equipo/" class="btn btn--ghost">Todas <Icon name="arrow-right" size={16} /></a>
+        <div><p class="eyebrow"><Icon name="star" size={16} /> Imprescindibles</p><h2>Qué necesitas (y cuál)</h2></div>
+        <a href="/imprescindibles/" class="btn btn--ghost">Todas <Icon name="arrow-right" size={16} /></a>
       </div>
       <div class="grid grid--4 eq">
         {eq.slice(0, 4).map((e) => (
-          <a class="card" href={`/equipo/${e.id}/`}>
+          <a class="card" href={`/imprescindibles/${e.id}/`}>
             <Photo k={e.data.photo} widths={[400, 600]} sizes="(min-width:1000px) 25vw, 100vw" ratio="16/10" />
-            <div class="card__body"><h3>{e.data.title}</h3><p class="small muted">{e.data.productos.length} modelos comparados</p></div>
+            <div class="card__body"><h3>{e.data.title}</h3><p class="small muted">{e.data.productos.length} opciones</p></div>
           </a>
         ))}
       </div>

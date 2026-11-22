@@ -1,6 +1,7 @@
 ---
-title: "Caída mundial de internet: qué hacer, paso a paso"
+title: "Caída mundial de internet: la pantalla se apaga"
 nombre: Caída mundial de internet
+subtitle: "La pantalla se apaga"
 description: "Qué hacer si se cae internet a gran escala (o tu operador y la red móvil): cómo informarte, contactar con tu familia, pagar y moverte cuando la red desaparece."
 icon: globe-lock
 photo: internet

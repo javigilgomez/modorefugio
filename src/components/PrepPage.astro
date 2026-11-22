@@ -72,10 +72,10 @@ const schema = [
 
         {d.productos.length > 0 && (
           <section class="prods">
-            <h2>Equipo que recomendamos</h2>
+            <h2>Imprescindibles</h2>
             <AffiliateNote />
             <div class="grid grid--2">{d.productos.map((p) => <ProductBox id={p} compact />)}</div>
-            {equipo.length > 0 && <p class="small">Comparativas completas: {equipo.map((e, i) => <>{i > 0 && ' · '}<a href={`/equipo/${e.id}/`}>{e.data.title}</a></>)}</p>}
+            {equipo.length > 0 && <p class="small">Para completar el kit: {equipo.map((e, i) => <>{i > 0 && ' · '}<a href={`/imprescindibles/${e.id}/`}>{e.data.title}</a></>)}</p>}
           </section>
         )}
         <AdSlot slot="inArticle" />

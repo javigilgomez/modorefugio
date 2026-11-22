@@ -9,11 +9,13 @@ export default defineConfig({
   redirects: {
     '/playbook/sin-internet/': '/playbook/caida-mundial-de-internet/',
     '/preparate/riesgo/sin-internet/': '/preparate/riesgo/caida-mundial-de-internet/',
+    '/equipo/': '/imprescindibles/',
+    '/equipo/[slug]': '/imprescindibles/[slug]',
   },
   integrations: [
     mdx(),
     sitemap({
-      filter: (page) => !page.includes('/imprimir/') && !page.includes('/og/') && !page.includes('sin-internet'),
+      filter: (page) => !page.includes('/imprimir/') && !page.includes('/og/') && !page.includes('sin-internet') && !page.includes('/equipo/'),
       i18n: { defaultLocale: 'es', locales: { es: 'es-ES' } },
     }),
   ],

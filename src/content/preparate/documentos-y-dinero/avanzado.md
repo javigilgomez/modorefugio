@@ -13,7 +13,7 @@ checklist:
   - { item: "Testamento, poderes y voluntades anticipadas actualizados" }
   - { item: "Códigos de recuperación de cuentas impresos y guardados" }
 comparativas: []
-playbooks: [ciberataque, evacuacion, dana-inundacion, incendio-forestal]
+playbooks: [ciberataque, evacuacion, dana-inundacion, incendio-forestal, ia-toma-el-control]
 faq:
   - q: "¿Es seguro guardar documentos en la nube?"
     a: "Sí, si están cifrados y la cuenta tiene verificación en dos pasos. Lo ideal es combinar una copia digital cifrada y una copia física fuera de casa."

@@ -5,7 +5,7 @@ const BASE = process.env.BASE || 'http://localhost:4321';
 const THEME = process.env.THEME === 'dark' ? 'dark' : 'light';
 const OUT = process.env.OUT || '/workspace/modorefugio/screenshots';
 const pages = process.argv.slice(2).length ? process.argv.slice(2) : [
-  '/', '/playbook/', '/playbook/apagon/', '/playbook/caida-mundial-de-internet/', '/preparate/agua/', '/preparate/agua/avanzado/', '/equipo/estaciones-de-energia-portatiles/',
+  '/', '/playbook/', '/playbook/apagon/', '/playbook/caida-mundial-de-internet/', '/preparate/agua/', '/preparate/agua/avanzado/', '/imprescindibles/estaciones-de-energia-portatiles/',
 ];
 fs.mkdirSync(OUT, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome' }).catch(() => chromium.launch());

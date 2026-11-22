@@ -1,6 +1,7 @@
 ---
-title: "Qué hacer en un corte de agua: el playbook"
+title: "Corte de agua: el grifo se queda mudo"
 nombre: Corte de agua
+subtitle: "El grifo se queda mudo"
 description: "Sin agua en el grifo o con aviso de agua no potable: cómo racionar, potabilizar con seguridad, mantener la higiene y usar el WC sin agua."
 icon: droplet-off
 photo: agua2

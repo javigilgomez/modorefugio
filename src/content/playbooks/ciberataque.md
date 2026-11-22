@@ -1,6 +1,7 @@
 ---
-title: "Qué hacer ante un ciberataque: el playbook"
+title: "Ciberataque: tus archivos, rehenes"
 nombre: Ciberataque
+subtitle: "Tus archivos, rehenes"
 description: "Ciberataque masivo a bancos o servicios, o un ataque contra ti (cuenta robada, ransomware, estafa): qué hacer en los primeros minutos y cómo recuperarte. Con la línea 017 de INCIBE."
 icon: shield-alert
 photo: ciber

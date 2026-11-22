@@ -13,7 +13,7 @@ checklist:
   - { item: "Lista de contactos y teléfonos del banco en papel" }
   - { item: "Funda o bolsa estanca para guardarlo todo" }
 comparativas: []
-playbooks: [evacuacion, apagon, ciberataque, dana-inundacion]
+playbooks: [evacuacion, apagon, ciberataque, dana-inundacion, ia-toma-el-control]
 faq:
   - q: "¿Cuánto efectivo debo tener en casa para emergencias?"
     a: "No hay una cifra oficial única. La recomendación europea es tener algo de efectivo para cubrir lo básico durante unos días. Calcula lo que gastarías en comida, farmacia y transporte en 3 días y guárdalo en billetes pequeños."

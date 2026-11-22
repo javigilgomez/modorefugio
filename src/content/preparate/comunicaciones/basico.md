@@ -13,7 +13,7 @@ checklist:
   - { item: "Emisoras apuntadas: RNE y la emisora local de tu zona" }
 productos: [midland-er300, sangean-mmr-88, anker-zolo-20000]
 comparativas: [radios-de-emergencia, powerbanks]
-playbooks: [caida-mundial-de-internet, apagon, ciberataque, dana-inundacion]
+playbooks: [caida-mundial-de-internet, apagon, ciberataque, dana-inundacion, ia-toma-el-control]
 faq:
   - q: "¿Qué emisora escucho en una emergencia en España?"
     a: "Radio Nacional de España (RNE) tiene la obligación de servicio público y suele ser la referencia, junto con las emisoras regionales y locales. Apunta sus frecuencias en tu zona."

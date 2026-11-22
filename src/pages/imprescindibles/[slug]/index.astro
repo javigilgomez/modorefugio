@@ -22,10 +22,10 @@ const { Content } = await render(e);
 const prods = d.productos.map(prodById);
 const cols = [...new Set(prods.flatMap((p) => p.specs.map(([k]) => k)))];
 const cat = catById(d.categoria);
-const crumbs = [{ name: 'Equipo', href: '/equipo/' }, { name: d.title, href: `/equipo/${e.id}/` }];
+const crumbs = [{ name: 'Imprescindibles', href: '/imprescindibles/' }, { name: d.title, href: `/imprescindibles/${e.id}/` }];
 const schema = [
-  { '@context': 'https://schema.org', '@type': 'Article', headline: d.title, description: d.description, inLanguage: 'es', dateModified: d.actualizado.toISOString(), mainEntityOfPage: `${SITE.url}/equipo/${e.id}/`, author: { '@type': 'Organization', name: SITE.name, url: SITE.url } },
-  { '@context': 'https://schema.org', '@type': 'ItemList', name: d.title, itemListElement: prods.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.nombre, url: `${SITE.url}/equipo/${e.id}/#p-${p.id}` })) },
+  { '@context': 'https://schema.org', '@type': 'Article', headline: d.title, description: d.description, inLanguage: 'es', dateModified: d.actualizado.toISOString(), mainEntityOfPage: `${SITE.url}/imprescindibles/${e.id}/`, author: { '@type': 'Organization', name: SITE.name, url: SITE.url } },
+  { '@context': 'https://schema.org', '@type': 'ItemList', name: d.title, itemListElement: prods.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.nombre, url: `${SITE.url}/imprescindibles/${e.id}/#p-${p.id}` })) },
   ...(d.faq.length ? [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: d.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }] : []),
 ];
 const href = (p: ReturnType<typeof prodById>) => (p.asin ? amazonAsinUrl(p.asin) : amazonSearchUrl(p.amazonQuery));
@@ -35,14 +35,14 @@ const href = (p: ReturnType<typeof prodById>) => (p.asin ? amazonAsinUrl(p.asin)
     <div class="phero__img"><Photo k={d.photo} eager sizes="100vw" /></div>
     <div class="container phero__inner">
       <Breadcrumbs items={crumbs} />
-      <p class="eyebrow"><Icon name="star" size={16} /> Comparativa · {cat.nombre} · <span class={`badge ${d.nivel === 'basico' ? 'badge--basic' : 'badge--advanced'}`}>{d.nivel === 'basico' ? 'Básico' : 'Avanzado'}</span></p>
+      <p class="eyebrow"><Icon name="star" size={16} /> Imprescindibles · {cat.nombre} · <span class={`badge ${d.nivel === 'basico' ? 'badge--basic' : 'badge--advanced'}`}>{d.nivel === 'basico' ? 'Básico' : 'Avanzado'}</span></p>
       <h1>{d.title}</h1>
       <p class="lead">{d.intro}</p>
     </div>
   </section>
   <div class="container container--narrow section--tight">
     <AffiliateNote />
-    <h2>Comparativa rápida</h2>
+    <h2>De un vistazo</h2>
     <div class="table-wrap">
       <table class="cmp">
         <thead><tr><th>Modelo</th>{cols.map((c) => <th>{c}</th>)}<th></th></tr></thead>
@@ -65,11 +65,11 @@ const href = (p: ReturnType<typeof prodById>) => (p.asin ? amazonAsinUrl(p.asin)
     <dl class="crit">{d.criterios.map((c) => <div><dt>{c.nombre}</dt><dd>{c.detalle}</dd></div>)}</dl>
 
     <h2>Los modelos, uno a uno</h2>
-    {prods.map((p, i) => <ProductBox id={p.id} rank={i + 1} />)}
+    {prods.map((p) => <ProductBox id={p.id} />)}
     <AdSlot slot="inArticle" />
     <div class="method">
       <Icon name="microscope" size={22} />
-      <p><strong>Cómo hacemos esta comparativa.</strong> Seleccionamos modelos disponibles en España con buena reputación y especificaciones publicadas. Aún no hemos hecho pruebas de laboratorio propias de estos modelos: cuando las hagamos, lo indicaremos claramente con los resultados medidos. Las comisiones de afiliado no influyen en el orden. <a href="/divulgacion-afiliados/">Más sobre nuestro método</a>.</p>
+      <p><strong>Cómo elegimos este equipo.</strong> Seleccionamos modelos disponibles en España con buena reputación y especificaciones publicadas. Aún no hemos hecho pruebas de laboratorio propias: cuando las hagamos, lo indicaremos claramente con los resultados medidos. Las comisiones de afiliado no influyen en qué modelos mostramos ni en el orden. <a href="/divulgacion-afiliados/">Más sobre nuestro método</a>.</p>
     </div>
     <Faq items={d.faq} />
     <Sources items={d.fuentes} updated={d.actualizado} />

@@ -1,6 +1,7 @@
 ---
-title: "Qué hacer en una ola de calor: el playbook"
+title: "Ola de calor: el termómetro no baja"
 nombre: Ola de calor
+subtitle: "El termómetro no baja"
 description: "Aviso por calor extremo: cómo mantener la casa fresca, proteger a mayores, bebés y mascotas, y reconocer un golpe de calor a tiempo."
 icon: thermometer-sun
 photo: calor

@@ -1,6 +1,7 @@
 ---
-title: "Qué hacer en un terremoto: el playbook"
+title: "Terremoto: el suelo se mueve"
 nombre: Terremoto
+subtitle: "El suelo se mueve"
 description: "Agáchate, cúbrete y agárrate. Qué hacer durante la sacudida, en los minutos siguientes y en los días de réplicas, en España y Latinoamérica."
 icon: activity
 photo: terremoto

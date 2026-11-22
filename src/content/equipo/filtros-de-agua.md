@@ -1,6 +1,6 @@
 ---
-title: "Mejores filtros de agua portátiles para emergencias"
-description: "Comparativa de filtros de agua portátiles: Sawyer Mini, Katadyn BeFree y LifeStraw Personal. Qué eliminan, cuánto duran y cuándo hay que hervir además."
+title: "Filtro de agua"
+description: "Qué filtro de agua portátil tener: Sawyer Mini, Katadyn BeFree y LifeStraw Personal. Qué eliminan, cuánto duran y cuándo hay que hervir además."
 photo: agua
 nivel: avanzado
 categoria: agua
@@ -25,4 +25,4 @@ actualizado: 2026-11-22
 
 ## Filtrar no es potabilizar del todo
 
-Los filtros de esta comparativa son excelentes frente a bacterias (como *E. coli*) y protozoos (como *Giardia* o *Cryptosporidium*), que son la mayoría de los problemas en aguas naturales. Pero no eliminan virus ni contaminantes químicos. Por eso en tu reserva de casa el filtro complementa, no sustituye, a [hervir o desinfectar](/preparate/agua/avanzado/).
+Estos filtros son excelentes frente a bacterias (como *E. coli*) y protozoos (como *Giardia* o *Cryptosporidium*), que son la mayoría de los problemas en aguas naturales. Pero no eliminan virus ni contaminantes químicos. Por eso en tu reserva de casa el filtro complementa, no sustituye, a [hervir o desinfectar](/preparate/agua/avanzado/).

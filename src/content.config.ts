@@ -12,7 +12,8 @@ const playbooks = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/playbooks' }),
   schema: z.object({
     title: z.string(), // H1 / SEO title
-    nombre: z.string(), // nombre corto: "Apagón"
+    nombre: z.string(), // nombre corto (H1 / tarjetas / nav): "Apagón"
+    subtitle: z.string(), // gancho de 4–6 palabras bajo el H1
     description: z.string(),
     icon: z.string(),
     photo: z.string(),

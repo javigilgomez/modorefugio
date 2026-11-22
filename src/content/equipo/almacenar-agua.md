@@ -1,5 +1,5 @@
 ---
-title: "Bidones y garrafas para almacenar agua de emergencia"
+title: "Agua almacenada"
 description: "Cómo almacenar agua en casa para emergencias: bidones alimentarios de 20 L con grifo, Aqua-Tainer de 26,5 L y agua envasada de larga duración para mochila y coche."
 photo: agua2
 nivel: basico

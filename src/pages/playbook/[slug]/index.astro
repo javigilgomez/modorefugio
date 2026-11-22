@@ -39,7 +39,8 @@ if (d.faq.length) schema.push({ '@context': 'https://schema.org', '@type': 'FAQP
     <div class="container phero__inner">
       <Breadcrumbs items={crumbs} />
       <p class="eyebrow"><span class="badge badge--playbook"><Icon name="siren" size={14} /> The Playbook</span> Qué hacer cuando pasa</p>
-      <h1>{d.title}</h1>
+      <h1>{d.nombre}</h1>
+      {d.subtitle && <p class="hook">{d.subtitle}</p>}
       <p class="lead">{d.resumen}</p>
       <div class="hero-cta">
         <a href={pdf} class="btn btn--accent btn--lg" download><Icon name="file-down" size={20} /> Descargar PDF (A4)</a>
@@ -137,8 +138,8 @@ if (d.faq.length) schema.push({ '@context': 'https://schema.org', '@type': 'FAQP
           </div>
           {comps.length > 0 && (
             <div class="aside-box">
-              <h3>Equipo que ayuda</h3>
-              <ul>{comps.map((c) => <li><a href={`/equipo/${c!.id}/`}><Icon name="star" size={18} /> {c!.data.title}</a></li>)}</ul>
+              <h3>Imprescindibles</h3>
+              <ul>{comps.map((c) => <li><a href={`/imprescindibles/${c!.id}/`}><Icon name="star" size={18} /> {c!.data.title}</a></li>)}</ul>
             </div>
           )}
           <div class="aside-box phones">
@@ -213,4 +214,5 @@ if (d.faq.length) schema.push({ '@context': 'https://schema.org', '@type': 'FAQP
   .scene__hook{font:700 clamp(1.2rem,2.4vw,1.5rem)/1.4 var(--font-heading);color:#fff;margin:1.4rem 0 0;padding-left:1rem;border-left:4px solid var(--color-playbook)}
   .scene__go{display:inline-flex;gap:.5em;align-items:center;margin-top:2rem;font:700 .85rem/1 var(--font-scene,ui-monospace),ui-monospace,Menlo,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-300);text-decoration:none}
   .scene__go:hover{color:#fff}
+  .hook{font-family:var(--font-heading);font-size:clamp(1.35rem,3vw,2.1rem);color:var(--amber-300);font-weight:650;margin:0 0 .8rem;letter-spacing:-.015em;line-height:1.15}
 </style>

@@ -1,6 +1,7 @@
 ---
-title: "Qué hacer en disturbios o una crisis de orden público: el playbook"
+title: "Disturbios: la calle no es segura"
 nombre: Disturbios
+subtitle: "La calle no es segura"
 description: "Altercados en la calle, manifestaciones que se descontrolan o una crisis de seguridad: cómo alejarte, refugiarte y mantener a tu familia a salvo."
 icon: megaphone
 photo: disturbios

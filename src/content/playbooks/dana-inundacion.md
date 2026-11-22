@@ -1,6 +1,7 @@
 ---
-title: "Qué hacer en una DANA o inundación: el playbook"
+title: "DANA e inundación: el agua entra en casa"
 nombre: DANA e inundación
+subtitle: "El agua entra en casa"
 description: "Aviso rojo, ES-Alert o agua en la calle: qué hacer en los primeros minutos de una DANA o inundación, cómo protegerte en casa y en el coche, y qué no hacer nunca."
 icon: waves
 photo: dana

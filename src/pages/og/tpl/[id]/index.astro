@@ -9,7 +9,7 @@ export async function getStaticPaths() {
   return [
     { params: { id: 'default' }, props: { kicker: 'La guía de preparación en español', title: 'Prepárate sin miedo. Actúa con un plan.', ph: 'hero', pb: false } },
     { params: { id: 'playbook' }, props: { kicker: 'The Playbook', title: 'Qué hacer cuando pasa', ph: 'incendio', pb: true } },
-    ...pbs.map((p) => ({ params: { id: `playbook-${p.id}` }, props: { kicker: 'The Playbook', title: p.data.nombre, sub: p.data.resumen, ph: p.data.photo, pb: true } })),
+    ...pbs.map((p) => ({ params: { id: `playbook-${p.id}` }, props: { kicker: 'The Playbook', title: p.data.nombre, sub: p.data.subtitle ?? p.data.resumen, ph: p.data.photo, pb: true } })),
     ...CATEGORIAS.map((c) => ({ params: { id: `preparate-${c.id}` }, props: { kicker: 'Prepárate · Básico y avanzado', title: c.nombre, sub: c.claim, ph: c.photo, pb: false } })),
   ];
 }
@@ -19,7 +19,7 @@ const img = await getImage({ src: photo(ph).src, width: 1200, format: 'jpeg', qu
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8" /><meta name="robots" content="noindex" /><title>OG {title}</title>
 <style is:global>
-  @font-face{font-family:'Fraunces';font-weight:100 900;src:url('/fonts/Fraunces-Variable.woff2') format('woff2')}
+  @font-face{font-family:'Bricolage Grotesque';font-weight:200 800;src:url('/fonts/BricolageGrotesque-Variable.woff2') format('woff2')}
   @font-face{font-family:'Inter';font-weight:100 900;src:url('/fonts/Inter-Variable.woff2') format('woff2')}
   html,body{margin:0;width:1200px;height:630px;overflow:hidden}
   .og{position:relative;width:1200px;height:630px;color:#fff;font-family:var(--font-body);display:flex;flex-direction:column;justify-content:space-between;padding:56px 64px;box-sizing:border-box;background:#0F2A25 center/cover no-repeat}

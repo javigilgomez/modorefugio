@@ -1,6 +1,6 @@
 ---
-title: "Mejor radio de emergencia: comparativa de radios de manivela y solares"
-description: "Comparativa de radios de emergencia para apagones: Midland ER300, Sangean MMR-88, Kaito KA500 y Eton FRX3. Bandas, baterías y cuál conviene en España."
+title: "Radio de emergencia"
+description: "Qué radio de emergencia tener en un apagón: Midland ER300, Sangean MMR-88, Kaito KA500 y Eton FRX3. Bandas, baterías y cuál conviene en España."
 photo: radio
 nivel: basico
 categoria: comunicaciones
@@ -19,7 +19,7 @@ faq:
 fuentes:
   - { nombre: "Midland: manual ER300 (PDF)", url: "https://support.midlandeurope.com/media/manual/c/9/d/6/c9d6f5fbf891d741b0e6db652064edcad6ddab15_MANUAL_ER300.pdf" }
   - { nombre: "Sangean: MMR-88", url: "https://us.sangean.com/es/product/mmr-88-fcc-yellow" }
-  - { nombre: "Comparativa Kaito KA500 vs Eton FRX3", url: "https://deal.ai/compare/kaito-ka500-vs-eton-frx3" }
+  - { nombre: "Fichas Kaito KA500 y Eton FRX3", url: "https://deal.ai/compare/kaito-ka500-vs-eton-frx3" }
 actualizado: 2026-11-22
 ---
 

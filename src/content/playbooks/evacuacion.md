@@ -1,6 +1,7 @@
 ---
-title: "Qué hacer si te ordenan evacuar: el playbook"
+title: "Evacuación: solo tienes diez minutos"
 nombre: Evacuación
+subtitle: "Solo tienes diez minutos"
 description: "Orden de evacuación por incendio, inundación, accidente químico o cualquier riesgo: qué coger en 10 minutos, cómo dejar la casa y adónde ir."
 icon: route
 photo: evacuacion

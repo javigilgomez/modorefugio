@@ -1,6 +1,6 @@
 ---
-title: "Mejores estaciones de energía portátiles para apagones"
-description: "Comparativa de estaciones de energía portátiles para un apagón: EcoFlow RIVER 2, BLUETTI EB3A, Jackery Explorer 300 Plus, RIVER 2 Pro y Anker SOLIX C1000. Capacidad, potencia y para quién es cada una."
+title: "Estación de energía portátil"
+description: "Qué estación de energía portátil tener para un apagón: EcoFlow RIVER 2, BLUETTI EB3A, Jackery Explorer 300 Plus, RIVER 2 Pro y Anker SOLIX C1000. Capacidad, potencia y para quién es cada una."
 photo: energia
 nivel: avanzado
 categoria: energia-y-luz

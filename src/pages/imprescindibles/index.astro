@@ -8,23 +8,23 @@ import AffiliateNote from '../../components/AffiliateNote.astro';
 import ProductBox from '../../components/ProductBox.astro';
 import { catById } from '../../data/categorias';
 const eq = await getCollection('equipo');
-const crumbs = [{ name: 'Equipo', href: '/equipo/' }];
+const crumbs = [{ name: 'Imprescindibles', href: '/imprescindibles/' }];
 ---
-<Base title="Equipo de emergencia recomendado: comparativas" description="Comparativas de equipo de emergencia: estaciones de energía, radios, linternas frontales, powerbanks, filtros y almacenaje de agua, y comida de larga duración." crumbs={crumbs}>
+<Base title="Imprescindibles: el equipo de emergencia que de verdad usarás" description="Qué estación de energía, radio, linterna frontal, powerbank, filtro o reserva de agua y comida tiene sentido en casa. Sin rankings: qué necesitas y cuál elegir." crumbs={crumbs}>
   <section class="container section--tight">
     <Breadcrumbs items={crumbs} />
-    <p class="eyebrow"><Icon name="star" size={16} /> Equipo</p>
-    <h1>Equipo recomendado</h1>
+    <p class="eyebrow"><Icon name="star" size={16} /> Imprescindibles</p>
+    <h1>Imprescindibles</h1>
     <p class="lead">Lo que de verdad usarás en una emergencia, explicado sin humo. Empieza por lo básico (luz, radio, batería, agua) y amplía cuando lo tengas.</p>
     <AffiliateNote />
     <div class="grid grid--3 eq">
       {eq.map((e) => (
-        <a class="card" href={`/equipo/${e.id}/`}>
+        <a class="card" href={`/imprescindibles/${e.id}/`}>
           <Photo k={e.data.photo} widths={[400, 700]} sizes="(min-width:1000px) 33vw, 100vw" ratio="16/9" />
           <div class="card__body">
             <span class={`badge ${e.data.nivel === 'basico' ? 'badge--basic' : 'badge--advanced'}`}>{e.data.nivel === 'basico' ? 'Básico' : 'Avanzado'}</span>
             <h2 class="h3">{e.data.title}</h2>
-            <p class="small muted">{catById(e.data.categoria).nombre} · {e.data.productos.length} modelos</p>
+            <p class="small muted">{catById(e.data.categoria).nombre} · {e.data.productos.length} opciones</p>
           </div>
         </a>
       ))}

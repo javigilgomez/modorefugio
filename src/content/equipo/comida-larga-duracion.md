@@ -1,6 +1,6 @@
 ---
-title: "Comida de emergencia de larga duración: raciones y opciones"
-description: "Qué comida de emergencia de larga duración merece la pena: raciones compactas tipo Datrex, Convar-7 y alternativas de supermercado, con ventajas e inconvenientes."
+title: "Comida de larga duración"
+description: "Qué comida de larga duración tiene sentido: raciones compactas tipo Datrex, Convar-7 y alternativas de supermercado, con ventajas e inconvenientes."
 photo: alimentos
 nivel: avanzado
 categoria: alimentos

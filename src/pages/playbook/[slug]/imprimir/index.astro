@@ -13,7 +13,7 @@ const d = pb.data;
 const url = `${SITE.url}/playbook/${pb.id}/`;
 ---
 <Print title={d.title}>
-  <PrintHeader kicker="The Playbook" title={d.title} subtitle={d.resumen} url={url} />
+  <PrintHeader kicker="The Playbook" title={d.nombre} subtitle={d.subtitle ?? d.resumen} url={url} />
   {d.escena && <div class="scene"><span class="scene__s">{d.escena.hora} · {d.escena.lugar}</span> {d.escena.texto} <strong>{d.escena.gancho}</strong></div>}
   <section class="first">
     <h2>Lo primero</h2>

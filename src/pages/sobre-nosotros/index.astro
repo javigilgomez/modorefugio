@@ -23,7 +23,7 @@ const credits = allCredits();
         <li><strong>No sustituimos a las autoridades.</strong> Si hay una emergencia, sigue siempre sus indicaciones y llama al 112.</li>
       </ul>
       <h2 id="financiacion">Cómo nos financiamos</h2>
-      <p>El contenido es gratuito. Algunos enlaces a productos son de afiliado (Amazon): si compras, recibimos una pequeña comisión sin coste para ti. Nunca aceptamos pagos por aparecer en una comparativa. Más detalles en <a href="/divulgacion-afiliados/">Divulgación de afiliados</a>.</p>
+      <p>El contenido es gratuito. Algunos enlaces a productos son de afiliado (Amazon): si compras, recibimos una pequeña comisión sin coste para ti. Nunca aceptamos pagos por aparecer en Imprescindibles. Más detalles en <a href="/divulgacion-afiliados/">Divulgación de afiliados</a>.</p>
       <h2 id="contacto">Contacto</h2>
       <p>¿Has visto un error, un enlace roto o un dato desactualizado? Escríbenos a <strong>{OWNER.email}</strong>. Corregimos rápido.</p>
       <h2 id="creditos">Créditos de las fotografías</h2>
@@ -31,7 +31,7 @@ const credits = allCredits();
       <ul class="credits">
         {credits.map(([k, c]) => <li><a href={c.url} rel="nofollow noopener" target="_blank">{c.alt || k}</a> — {c.autorUrl ? <a href={c.autorUrl} rel="nofollow noopener" target="_blank">{c.autor}</a> : c.autor} · {c.fuente} · {c.licenciaUrl ? <a href={c.licenciaUrl} rel="nofollow noopener" target="_blank">{c.licencia}</a> : c.licencia}</li>)}
       </ul>
-      <p>Iconos: <a href="https://lucide.dev" rel="noopener" target="_blank">Lucide</a> (licencia ISC). Tipografías: Fraunces e Inter (SIL Open Font License).</p>
+      <p>Iconos: <a href="https://lucide.dev" rel="noopener" target="_blank">Lucide</a> (licencia ISC). Tipografías: Bricolage Grotesque, Inter y Special Elite (SIL Open Font License).</p>
     </div>
   </article>
 </Base>
