@@ -39,6 +39,12 @@ export const ADS = {
   slots: { inArticle: '0000000000', sidebar: '0000000000', footer: '0000000000' },
 };
 
+/** Google Analytics 4. El script gtag solo se carga tras el consentimiento de analítica. */
+export const ANALYTICS = {
+  enabled: true,
+  measurementId: 'G-PB2ZFNC5SW',
+};
+
 /** Newsletter: proveedor pendiente (MailerLite o Brevo). */
 export const NEWSLETTER = {
   enabled: false, // cuando haya proveedor, poner true y rellenar action

@@ -1,5 +1,5 @@
 ---
-import { ADS } from '../data/site';
+import { ADS, ANALYTICS } from '../data/site';
 ---
 <div class="cookie" id="cookie" hidden role="dialog" aria-labelledby="cookie-title" aria-live="polite">
   <div class="cookie__in">
@@ -19,13 +19,33 @@ import { ADS } from '../data/site';
     </div>
   </div>
 </div>
-<script is:inline define:vars={{ ads: ADS }}>
+<script is:inline define:vars={{ ads: ADS, analytics: ANALYTICS }}>
 (function(){
   var KEY='mr-consent-v1', box=document.getElementById('cookie'), opts=document.getElementById('cookie-opts');
   function read(){try{return JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){return null}}
+  function consentUpdate(c){
+    if(typeof gtag!=='function')return;
+    var adsOn=!!(c&&c.ads), anOn=!!(c&&c.analytics);
+    gtag('consent','update',{
+      analytics_storage:anOn?'granted':'denied',
+      ad_storage:adsOn?'granted':'denied',
+      ad_user_data:adsOn?'granted':'denied',
+      ad_personalization:adsOn?'granted':'denied'
+    });
+  }
+  function loadGtag(){
+    if(!analytics.enabled||!analytics.measurementId||document.getElementById('gtag-js'))return;
+    var s=document.createElement('script');s.async=true;s.id='gtag-js';
+    s.src='https://www.googletagmanager.com/gtag/js?id='+analytics.measurementId;
+    document.head.appendChild(s);
+    gtag('js',new Date());
+    gtag('config',analytics.measurementId);
+  }
   function apply(c){
     window.mrConsent=c;
     document.dispatchEvent(new CustomEvent('mr:consent',{detail:c}));
+    consentUpdate(c);
+    if(c&&c.analytics)loadGtag();
     if(ads.enabled && c && c.ads && !document.getElementById('adsbygoogle-js')){
       var s=document.createElement('script');s.async=true;s.id='adsbygoogle-js';s.crossOrigin='anonymous';
       s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client='+ads.client;document.head.appendChild(s);
