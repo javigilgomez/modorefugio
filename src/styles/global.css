@@ -101,6 +101,11 @@ a.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);color:inheri
 .checklist li:has(input:checked) .checklist__text{text-decoration:line-through;color:var(--color-text-muted)}
 .checklist__qty{font-weight:600;color:var(--color-heading);white-space:nowrap}
 .checklist__note{display:block;font-size:var(--size-sm);color:var(--color-text-muted)}
+.checklist__body{flex:1;min-width:0}
+@media (max-width: 520px){
+  .checklist li{padding:var(--space-3)}
+  .checklist__recs{gap:.25rem .55rem}
+}
 
 /* Breadcrumbs */
 .crumbs{font-size:var(--size-xs);color:var(--color-text-muted);margin-bottom:var(--space-4)}

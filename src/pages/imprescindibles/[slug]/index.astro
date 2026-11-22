@@ -20,7 +20,6 @@ const { e } = Astro.props;
 const d = e.data;
 const { Content } = await render(e);
 const prods = d.productos.map(prodById);
-const cols = [...new Set(prods.flatMap((p) => p.specs.map(([k]) => k)))];
 const cat = catById(d.categoria);
 const crumbs = [{ name: 'Imprescindibles', href: '/imprescindibles/' }, { name: d.title, href: `/imprescindibles/${e.id}/` }];
 const schema = [
@@ -42,21 +41,27 @@ const href = (p: ReturnType<typeof prodById>) => (p.asin ? amazonAsinUrl(p.asin)
   </section>
   <div class="container container--narrow section--tight">
     <h2>De un vistazo</h2>
-    <div class="table-wrap">
+    <div class="cmp-wrap">
       <table class="cmp">
-        <thead><tr><th>Modelo</th>{cols.map((c) => <th>{c}</th>)}<th></th></tr></thead>
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Para quién / punto clave</th>
+            <th></th>
+          </tr>
+        </thead>
         <tbody>
           {prods.map((p) => (
             <tr>
               <th scope="row"><a href={`#p-${p.id}`}>{p.nombre}</a>{p.destacado && <span class="tag">{p.destacado}</span>}</th>
-              {cols.map((c) => <td>{p.specs.find(([k]) => k === c)?.[1] ?? '—'}</td>)}
-              <td>{AFFILIATE.enabled && <a class="btn btn--accent btn--sm" href={href(p)} rel={AFFILIATE.rel} target="_blank">Ver precio</a>}</td>
+              <td>{p.idealPara}</td>
+              <td class="cmp__buy">{AFFILIATE.enabled && <a class="btn btn--accent btn--sm" href={href(p)} rel={AFFILIATE.rel} target="_blank">Ver en Amazon</a>}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
-    <p class="xs muted">Especificaciones publicadas por cada fabricante (enlace en cada ficha).</p>
+    <p class="xs muted">El detalle de cada modelo (especificaciones del fabricante) está más abajo, en las fichas.</p>
 
     <article class="prose"><Content /></article>
 
@@ -78,11 +83,25 @@ const href = (p: ReturnType<typeof prodById>) => (p.asin ? amazonAsinUrl(p.asin)
   <Newsletter />
 </Base>
 <style>
-  .cmp{width:100%;border-collapse:collapse;font-size:var(--size-sm);background:var(--color-surface);border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm)}
-  .cmp th,.cmp td{padding:.7em .8em;border-bottom:1px solid var(--color-border);text-align:left;vertical-align:middle}
-  .cmp thead th{background:var(--color-primary);color:var(--color-on-primary);font-weight:600;font-size:var(--size-xs);white-space:nowrap}
+  .cmp-wrap{overflow:visible;margin:0 0 var(--space-4)}
+  .cmp{width:100%;border-collapse:collapse;table-layout:fixed;font-size:var(--size-sm);background:var(--color-surface);border-radius:var(--radius-md);box-shadow:var(--shadow-sm)}
+  .cmp th,.cmp td{padding:.7em .8em;border-bottom:1px solid var(--color-border);text-align:left;vertical-align:middle;white-space:normal;overflow-wrap:break-word}
+  .cmp thead th{background:var(--color-primary);color:var(--color-on-primary);font-weight:600;font-size:var(--size-xs)}
+  .cmp th:nth-child(1){width:32%}
+  .cmp th:nth-child(3),.cmp .cmp__buy{width:9.5rem;text-align:right}
   .cmp tbody th a{color:var(--color-heading);font-weight:700;text-decoration:none}
   .tag{display:block;font-size:10px;font-weight:700;color:var(--amber-700);text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+  @media (max-width:640px){
+    .cmp,.cmp thead,.cmp tbody,.cmp th,.cmp td,.cmp tr{display:block;width:auto}
+    .cmp{table-layout:auto;box-shadow:none;background:transparent}
+    .cmp thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+    .cmp tbody{display:grid;gap:var(--space-3)}
+    .cmp tr{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);box-shadow:var(--shadow-sm);padding:var(--space-4)}
+    .cmp tbody th,.cmp td{border:0;padding:0 0 .4em}
+    .cmp th:nth-child(1),.cmp th:nth-child(3),.cmp .cmp__buy{width:auto;text-align:left}
+    .cmp .cmp__buy{padding:var(--space-2) 0 0}
+    .cmp .cmp__buy .btn{width:100%;justify-content:center}
+  }
   .crit{display:grid;gap:var(--space-3)}
   .crit div{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--space-4) var(--space-5)}
   .crit dt{font-weight:700;color:var(--color-heading)}

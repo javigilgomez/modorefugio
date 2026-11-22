@@ -5,7 +5,7 @@ import PrintHeader from '../../../../components/PrintHeader.astro';
 import { TELEFONOS } from '../../../../data/emergencias';
 import { SITE } from '../../../../data/site';
 import { stepText, fmtDate } from '../../../../lib/util';
-import { findRec } from '../../../../data/recomendados';
+import { findRecs } from '../../../../data/recomendados';
 export async function getStaticPaths() {
   return (await getCollection('playbooks')).map((pb) => ({ params: { slug: pb.id }, props: { pb } }));
 }
@@ -42,11 +42,11 @@ const url = `${SITE.url}/playbook/${pb.id}/`;
     <div class="kit__g">
       <div>
         <h3>Básico</h3>
-        <ul>{d.prepara.basico.map((x) => { const rec = findRec(x); return <li><span class="box" /><span><span set:html={x} />{rec && <em class="rec"> Recomendado</em>}</span></li>; })}</ul>
+        <ul>{d.prepara.basico.map((x) => <li><span class="box" /><span><span set:html={x} />{findRecs(x).length > 0 && <em class="rec"> Recomendado</em>}</span></li>)}</ul>
       </div>
       <div>
         <h3>Avanzado</h3>
-        <ul>{d.prepara.avanzado.map((x) => { const rec = findRec(x); return <li><span class="box" /><span><span set:html={x} />{rec && <em class="rec"> Recomendado</em>}</span></li>; })}</ul>
+        <ul>{d.prepara.avanzado.map((x) => <li><span class="box" /><span><span set:html={x} />{findRecs(x).length > 0 && <em class="rec"> Recomendado</em>}</span></li>)}</ul>
       </div>
     </div>
   </section>

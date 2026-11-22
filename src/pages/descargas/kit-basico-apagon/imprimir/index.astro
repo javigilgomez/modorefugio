@@ -2,6 +2,7 @@
 import Print from '../../../../layouts/Print.astro';
 import PrintHeader from '../../../../components/PrintHeader.astro';
 import { SITE } from '../../../../data/site';
+import { findRecs } from '../../../../data/recomendados';
 const kit = [
   ['Linterna LED por persona (mejor frontal)', 'y pilas de repuesto'],
   ['Radio a pilas o de dinamo', 'para oír a las autoridades'],
@@ -29,7 +30,7 @@ const pasos = [
   <div class="cols">
     <section class="kit">
       <h2>Ten en casa</h2>
-      <ul>{kit.map(([a, b]) => <li><span class="box" /><span><strong>{a}</strong><br /><small>{b}</small></span></li>)}</ul>
+      <ul>{kit.map(([a, b]) => <li><span class="box" /><span><strong>{a}</strong>{findRecs(a + " " + b).length > 0 && <em class="rec"> Recomendado</em>}<br /><small>{b}</small></span></li>)}</ul>
     </section>
     <section class="now">
       <h2>Cuando se va la luz</h2>
@@ -61,4 +62,5 @@ const pasos = [
   .mine h3{font-size:11pt;margin-bottom:2mm}
   .mine p{margin:0 0 2.6mm;font-size:9.5pt;color:#43443C}
   .pf{display:flex;justify-content:space-between;margin-top:6mm;padding-top:2mm;border-top:.3mm solid #E5DDCB;font-size:7.5pt;color:#7D7767}
+  .rec{font-style:normal;font-weight:700;font-size:8.5pt;letter-spacing:.04em;text-transform:uppercase}
 </style>

@@ -6,15 +6,26 @@ interface Props { rec: Rec }
 const { rec } = Astro.props;
 ---
 <span class="rec">
-  <span class="rec__pill">Recomendado</span>
-  {rec.page && <a class="rec__a" href={rec.page}>Ver ficha</a>}
-  {AFFILIATE.enabled && (
-    <a class="rec__a rec__amz" href={recAmazonHref(rec)} rel={AFFILIATE.rel} target="_blank">Ver en Amazon</a>
+  {AFFILIATE.enabled ? (
+    <a class="rec__amz" href={recAmazonHref(rec)} rel={AFFILIATE.rel} target="_blank" aria-label={`Ver ${rec.nombre} en Amazon`}>
+      {rec.nombre} →
+    </a>
+  ) : (
+    <span class="rec__pill">Recomendado</span>
   )}
+  {rec.page && <a class="rec__a" href={rec.page}>Ficha</a>}
+  <span class="rec__print">Recomendado</span>
 </span>
 <style>
-  .rec{display:inline-flex;flex-wrap:wrap;align-items:center;gap:.35em .55em;margin:.25em 0 0;font-size:var(--size-xs)}
+  .rec{display:inline-flex;flex-wrap:wrap;align-items:center;gap:.3em .45em;margin:.25em 0 0;font-size:var(--size-xs)}
   .rec__pill{display:inline-block;padding:.12em .55em;border-radius:var(--radius-pill);background:var(--color-playbook-bg);color:var(--color-playbook-text);font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:10px;line-height:1.4}
-  .rec__a{color:var(--color-text-muted);text-decoration:underline;text-underline-offset:2px;font-weight:600}
+  .rec__amz{display:inline-flex;align-items:center;padding:.2em .65em;border-radius:var(--radius-pill);background:var(--color-accent);color:var(--color-on-accent);text-decoration:none;font-weight:700;font-size:11px;line-height:1.3;white-space:nowrap}
+  .rec__amz:hover{background:var(--color-accent-hover);color:var(--color-on-accent)}
+  .rec__a{color:var(--color-text-muted);text-decoration:underline;text-underline-offset:2px;font-weight:600;font-size:11px}
   .rec__a:hover{color:var(--color-link)}
+  .rec__print{display:none}
+  @media print{
+    .rec__amz,.rec__a{display:none!important}
+    .rec__print{display:inline;font-style:italic;font-weight:600}
+  }
 </style>

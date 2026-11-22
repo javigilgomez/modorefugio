@@ -5,7 +5,7 @@ import PrintHeader from '../../../components/PrintHeader.astro';
 import { TELEFONOS } from '../../../data/emergencias';
 import { SITE } from '../../../data/site';
 import { stepText } from '../../../lib/util';
-import { findRec } from '../../../data/recomendados';
+import { findRecs } from '../../../data/recomendados';
 const pbs = (await getCollection('playbooks')).sort((a, b) => a.data.orden - b.data.orden);
 ---
 <Print title="The Playbook completo">
@@ -28,8 +28,8 @@ const pbs = (await getCollection('playbooks')).sort((a, b) => a.data.orden - b.d
       ))}
       <div class="dont"><h2>NO hagas</h2><ul>{pb.data.noHagas.map((x) => <li set:html={x} />)}</ul></div>
       <div class="kitp"><h2>Qué tener</h2>
-        <p><strong>Básico.</strong> {pb.data.prepara.basico.map((x, i) => <><span set:html={x} />{findRec(x) && ' (Recomendado)'}{i < pb.data.prepara.basico.length - 1 && ' · '}</>)}</p>
-        <p><strong>Avanzado.</strong> {pb.data.prepara.avanzado.map((x, i) => <><span set:html={x} />{findRec(x) && ' (Recomendado)'}{i < pb.data.prepara.avanzado.length - 1 && ' · '}</>)}</p>
+        <p><strong>Básico.</strong> {pb.data.prepara.basico.map((x, i) => <><span set:html={x} />{findRecs(x).length > 0 && ' (Recomendado)'}{i < pb.data.prepara.basico.length - 1 && ' · '}</>)}</p>
+        <p><strong>Avanzado.</strong> {pb.data.prepara.avanzado.map((x, i) => <><span set:html={x} />{findRecs(x).length > 0 && ' (Recomendado)'}{i < pb.data.prepara.avanzado.length - 1 && ' · '}</>)}</p>
       </div>
     </section>
   ))}

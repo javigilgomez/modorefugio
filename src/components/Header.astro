@@ -7,8 +7,8 @@ const is = (p: string) => path.startsWith(p);
 <header class="site">
   <div class="container container--wide bar">
     <a href="/" class="logo" aria-label="Modo Refugio, inicio">
-      <img src="/brand/logo-horizontal.svg" alt="Modo Refugio" width="138" height="44" class="logo-light" />
-      <img src="/brand/logo-horizontal-dark.svg" alt="" width="138" height="44" class="logo-dark" aria-hidden="true" />
+      <img src="/brand/logo-horizontal-simple.svg" alt="Modo Refugio" width="193" height="40" class="logo-light" />
+      <img src="/brand/logo-horizontal-simple-dark.svg" alt="" width="193" height="40" class="logo-dark" aria-hidden="true" />
     </a>
     <nav class="nav" aria-label="Principal" id="nav">
       <a href="/playbook/" class="nav__pb" aria-current={is('/playbook') ? 'page' : undefined}><Icon name="siren" size={18} /> The Playbook</a>
@@ -62,10 +62,10 @@ const is = (p: string) => path.startsWith(p);
   syncThemeBtn();
 </script>
 <style>
-  header.site{position:sticky;top:0;z-index:var(--z-header);background:color-mix(in srgb,var(--color-bg) 88%,transparent);backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--color-border)}
-  .bar{display:flex;align-items:center;gap:var(--space-6);height:var(--header-height)}
-  .logo{flex:none;display:block}
-  .logo img{height:44px;width:auto}
+  header.site{position:sticky;top:0;z-index:var(--z-header);background:color-mix(in srgb,var(--color-bg) 88%,transparent);backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--color-border);overflow:visible}
+  .bar{display:flex;align-items:center;gap:var(--space-6);height:var(--header-height);overflow:visible}
+  .logo{flex:none;display:flex;align-items:center;line-height:0;overflow:visible}
+  .logo img{display:block;height:40px;width:auto}
   .logo-dark{display:none}
   .t-moon{display:inline-flex}
   .t-sun{display:none}
@@ -100,7 +100,7 @@ const is = (p: string) => path.startsWith(p);
     .nav__pb{border-radius:var(--radius-md)!important;justify-content:center;margin-bottom:var(--space-3)}
     .mega{position:static;width:auto;opacity:1;visibility:visible;transform:none;box-shadow:none;border:0;padding:var(--space-2) 0;background:transparent}
     .mega__foot{display:none}
-    .logo img{height:36px}
+    .logo img{height:32px}
   }
   :global(body.nav-open){overflow:hidden}
 </style>

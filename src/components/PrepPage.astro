@@ -14,6 +14,7 @@ import Newsletter from './Newsletter.astro';
 import AdSlot from './AdSlot.astro';
 import { catById, CATEGORIAS } from '../data/categorias';
 import { SITE } from '../data/site';
+import { findRecs } from '../data/recomendados';
 
 interface Props { entry: CollectionEntry<'preparate'> }
 const { entry } = Astro.props;
@@ -27,6 +28,7 @@ const backlinks = allPbs.filter((p) => p.data.categorias.includes(cat.id) && !d.
 const equipo = (await getCollection('equipo')).filter((e) => d.comparativas.includes(e.id));
 const base = `/preparate/${cat.id}/`;
 const url = isBasic ? base : `${base}avanzado/`;
+const hasRecs = d.checklist.some((it) => findRecs(typeof it === 'string' ? it : it.item).length > 0);
 const crumbs = [{ name: 'Prepárate', href: '/preparate/' }, { name: cat.nombre, href: base }, ...(isBasic ? [] : [{ name: 'Avanzado', href: url }])];
 const idx = CATEGORIAS.findIndex((c) => c.id === cat.id);
 const next = CATEGORIAS[(idx + 1) % CATEGORIAS.length];
@@ -80,7 +82,7 @@ const schema = [
         <AdSlot slot="inArticle" />
         <Faq items={d.faq} />
         <Sources items={d.fuentes} updated={d.actualizado} />
-        {d.productos.length > 0 && <AffiliateNote />}
+        {(d.productos.length > 0 || hasRecs) && <AffiliateNote />}
       </div>
       <aside>
         <div class="aside-sticky">

@@ -7,6 +7,7 @@ import Checklist from '../../../components/Checklist.astro';
 import Faq from '../../../components/Faq.astro';
 import Sources from '../../../components/Sources.astro';
 import Newsletter from '../../../components/Newsletter.astro';
+import AffiliateNote from '../../../components/AffiliateNote.astro';
 const crumbs = [{ name: 'Empieza aquí', href: '/empieza-aqui/' }, { name: 'Kit de 72 horas', href: '/empieza-aqui/kit-72-horas/' }];
 const grupos = [
   { t: 'Agua y comida', icon: 'droplets', cat: 'agua', items: [{ item: 'Agua potable', cantidad: '3 L × persona × día' }, { item: 'Comida que no necesita frío ni cocción', cantidad: '3 días', nota: 'Conservas abre-fácil, legumbres cocidas, atún, frutos secos, barritas, galletas.' }, { item: 'Abrelatas manual, cubiertos y vasos' }, { item: 'Comida y agua para mascotas' }] },
@@ -53,6 +54,7 @@ const faq = [
       { nombre: 'Comisión Europea: Estrategia de Preparación de la Unión (26/03/2025)', url: 'https://spain.representation.ec.europa.eu/noticias-eventos/noticias-0/estrategia-de-preparacion-de-la-union-para-prevenir-amenazas-y-crisis-emergentes-y-reaccionar-frente-2025-03-26_es' },
       { nombre: 'IGN: qué hacer antes de un terremoto (kit de emergencia)', url: 'https://www.ign.es/web/resources/sismologia/qhacer/qhacer.html' },
     ]} updated={new Date('2026-11-22')} />
+    <AffiliateNote />
   </div>
   <Newsletter />
 </Base>

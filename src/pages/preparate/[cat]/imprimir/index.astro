@@ -4,6 +4,7 @@ import Print from '../../../../layouts/Print.astro';
 import PrintHeader from '../../../../components/PrintHeader.astro';
 import { CATEGORIAS } from '../../../../data/categorias';
 import { SITE } from '../../../../data/site';
+import { findRecs } from '../../../../data/recomendados';
 export async function getStaticPaths() {
   const all = await getCollection('preparate');
   return CATEGORIAS.map((c) => ({ params: { cat: c.id }, props: { c, basico: all.find((e) => e.data.categoria === c.id && e.data.nivel === 'basico')!, avanzado: all.find((e) => e.data.categoria === c.id && e.data.nivel === 'avanzado')! } }));
@@ -15,7 +16,7 @@ const { c, basico, avanzado } = Astro.props;
   {[basico, avanzado].map((e) => (
     <section class:list={['lv', e.data.nivel]}>
       <h2>{e.data.nivel === 'basico' ? 'Nivel básico' : 'Nivel avanzado'}</h2>
-      <ul>{e.data.checklist.map((it) => <li><span class="box" /><span><strong>{it.item}</strong>{it.cantidad && <> · {it.cantidad}</>}{it.nota && <em> — {it.nota}</em>}</span></li>)}</ul>
+      <ul>{e.data.checklist.map((it) => <li><span class="box" /><span><strong>{it.item}</strong>{it.cantidad && <> · {it.cantidad}</>}{it.nota && <em> — {it.nota}</em>}{findRecs(it.item).length > 0 && <em class="rec"> Recomendado</em>}</span></li>)}</ul>
     </section>
   ))}
   <p class="rev">Revisado: ____ / ____ / ______ &nbsp;&nbsp; Próxima revisión (6 meses): ____ / ____ / ______</p>
@@ -31,4 +32,5 @@ const { c, basico, avanzado } = Astro.props;
   .box{flex:none;width:3.6mm;height:3.6mm;border:.45mm solid #14352F;border-radius:.8mm;margin-top:.6mm;background:#fff}
   .rev{font-size:9pt;margin:4mm 0}
   .pf{display:flex;justify-content:space-between;border-top:.4mm solid #E5DDCB;padding-top:2mm;font-size:7pt;color:#7D7767}
+  .rec{font-style:normal;font-weight:700;font-size:8.5pt;letter-spacing:.04em;text-transform:uppercase}
 </style>

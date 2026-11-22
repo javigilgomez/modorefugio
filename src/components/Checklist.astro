@@ -1,23 +1,29 @@
 ---
-import { findRec } from '../data/recomendados';
+import { findRecs } from '../data/recomendados';
 import RecBadge from './RecBadge.astro';
 interface Item { item: string; cantidad?: string; nota?: string }
 interface Props { id: string; items: (Item | string)[]; recommend?: boolean }
-const { id, items, recommend = false } = Astro.props;
+const { id, items, recommend = true } = Astro.props;
 const norm = items.map((x) => (typeof x === 'string' ? { item: x } : x));
 ---
 <ul class="checklist" data-checklist={id}>
   {norm.map((it, i) => {
-    const rec = recommend ? findRec(it.item) : undefined;
+    const recs = recommend ? findRecs(it.item) : [];
     return (
       <li>
         <input type="checkbox" id={`${id}-${i}`} aria-label={it.item} />
-        <label for={`${id}-${i}`} class="checklist__text">
-          {it.cantidad && <span class="checklist__qty">{it.cantidad} · </span>}
-          <span set:html={it.item} />
-          {it.nota && <span class="checklist__note">{it.nota}</span>}
-          {rec && <RecBadge rec={rec} />}
-        </label>
+        <div class="checklist__body">
+          <label for={`${id}-${i}`} class="checklist__text">
+            {it.cantidad && <span class="checklist__qty">{it.cantidad} · </span>}
+            <span set:html={it.item} />
+            {it.nota && <span class="checklist__note">{it.nota}</span>}
+          </label>
+          {recs.length > 0 && (
+            <span class="checklist__recs">
+              {recs.map((rec) => <RecBadge rec={rec} />)}
+            </span>
+          )}
+        </div>
       </li>
     );
   })}
@@ -31,8 +37,15 @@ const norm = items.map((x) => (typeof x === 'string' ? { item: x } : x));
       if (saved[cb.id]) cb.checked = true;
       cb.addEventListener('change', () => { saved[cb.id] = cb.checked; try { localStorage.setItem(key, JSON.stringify(saved)); } catch {} });
     });
+    // Los enlaces de afiliado están fuera del <label>; esto evita que un clic los trate como el checkbox.
+    ul.querySelectorAll<HTMLAnchorElement>('.checklist__recs a').forEach((a) => {
+      a.addEventListener('click', (e) => e.stopPropagation());
+    });
   });
 </script>
 <style>
   label{cursor:pointer;flex:1}
+  .checklist__body{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:.2rem}
+  .checklist__recs{display:flex;flex-wrap:wrap;gap:.35rem .7rem;max-width:100%}
+  .checklist__recs :global(.rec){margin:0}
 </style>
