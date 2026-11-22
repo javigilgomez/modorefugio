@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Icon from '../../components/Icon.astro';
+import { CATEGORIAS } from '../../data/categorias';
+const pbs = (await getCollection('playbooks')).sort((a, b) => a.data.orden - b.data.orden);
+const crumbs = [{ name: 'Descargas', href: '/descargas/' }];
+---
+<Base title="PDFs para imprimir: playbooks y checklists de emergencia" description="Descarga gratis en PDF (A4) todos los playbooks de emergencia y las checklists de preparación para tenerlos impresos y sin conexión." crumbs={crumbs}>
+  <section class="container section--tight">
+    <Breadcrumbs items={crumbs} />
+    <p class="eyebrow"><Icon name="printer" size={16} /> Descargas</p>
+    <h1>PDFs para imprimir</h1>
+    <p class="lead">Cuando falla la luz o internet, el papel sigue funcionando. Todos los PDFs son A4, gratis y llevan un código QR a la versión actualizada.</p>
+    <div class="feat">
+      <a class="fcard fcard--pb" href="/pdf/modo-refugio-playbook-completo.pdf" download><Icon name="book-open" size={32} /><div><strong>The Playbook completo</strong><span>Los {pbs.length} playbooks en un solo PDF</span></div><Icon name="download" size={22} /></a>
+      <a class="fcard fcard--lm" href="/pdf/kit-basico-apagon.pdf" download><Icon name="zap-off" size={32} /><div><strong>Kit básico para un apagón</strong><span>1 página · para la puerta de la nevera</span></div><Icon name="download" size={22} /></a>
+    </div>
+    <div class="grid grid--2 lists">
+      <section>
+        <h2><Icon name="siren" size={22} /> Playbooks · qué hacer cuando pasa</h2>
+        <ul class="dl">{pbs.map((p) => <li><a href={`/pdf/playbook-${p.id}.pdf`} download><Icon name={p.data.icon} size={18} /> {p.data.nombre}<span>PDF</span></a></li>)}</ul>
+      </section>
+      <section>
+        <h2><Icon name="shield-check" size={22} /> Checklists · prepárate (básico + avanzado)</h2>
+        <ul class="dl">{CATEGORIAS.map((c) => <li><a href={`/pdf/checklist-${c.id}.pdf`} download><Icon name={c.icon} size={18} /> {c.nombre}<span>PDF</span></a></li>)}</ul>
+      </section>
+    </div>
+  </section>
+</Base>
+<style>
+  .feat{display:grid;gap:var(--space-4);grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));margin:var(--space-8) 0}
+  .fcard{display:flex;gap:var(--space-4);align-items:center;padding:var(--space-6);border-radius:var(--radius-lg);text-decoration:none;color:#fff;box-shadow:var(--shadow-md)}
+  .fcard div{flex:1;display:flex;flex-direction:column}
+  .fcard strong{font:700 var(--size-xl)/1.2 var(--font-heading)}
+  .fcard span{opacity:.85;font-size:var(--size-sm)}
+  .fcard--pb{background:var(--color-playbook)}
+  .fcard--lm{background:var(--color-primary)}
+  .lists h2{font-size:var(--size-xl);display:flex;gap:.4em;align-items:center}
+  .dl{list-style:none;padding:0;margin:0;display:grid;gap:var(--space-2)}
+  .dl a{display:flex;gap:.6em;align-items:center;padding:.75em 1em;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-sm);text-decoration:none;color:var(--color-text);font-weight:600}
+  .dl a:hover{border-color:var(--color-primary)}
+  .dl span{margin-left:auto;font-size:var(--size-xs);color:var(--color-text-muted);font-weight:700}
+</style>

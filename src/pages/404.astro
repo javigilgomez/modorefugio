@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+---
+<Base title="Página no encontrada" noindex>
+  <section class="container container--narrow section" style="text-align:center">
+    <Icon name="compass" size={48} />
+    <h1>Esta página se ha perdido</h1>
+    <p class="lead" style="margin-inline:auto">Pero tú no. Prueba por aquí:</p>
+    <p style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap"><a class="btn btn--playbook" href="/playbook/">The Playbook</a><a class="btn btn--primary" href="/preparate/">Prepárate</a><a class="btn btn--ghost" href="/">Inicio</a></p>
+  </section>
+</Base>

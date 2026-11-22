@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Icon from '../../components/Icon.astro';
+const crumbs = [{ name: 'Herramientas', href: '/herramientas/' }];
+const tools = [
+  { href: '/herramientas/calculadora-agua-comida/', icon: 'calculator', t: 'Calculadora de agua y comida', d: 'Litros y raciones para tu hogar según personas, mascotas y días.' },
+  { href: '/herramientas/calculadora-bateria/', icon: 'battery-charging', t: 'Calculadora de batería', d: 'Cuántas horas te dura una estación de energía o un powerbank con tus aparatos.' },
+  { href: '/empieza-aqui/que-nivel-eres/', icon: 'sparkles', t: 'Test: ¿qué nivel eres?', d: '10 preguntas para saber cómo de preparado está tu hogar.' },
+  { href: '/telefonos-de-emergencia/', icon: 'phone', t: 'Teléfonos de emergencia', d: 'España, UE y Latinoamérica, listos para imprimir.' },
+  { href: '/descargas/', icon: 'file-down', t: 'PDFs para imprimir', d: 'Todos los playbooks y checklists en A4.' },
+];
+---
+<Base title="Herramientas de preparación: calculadoras y test" description="Calculadora de agua y comida de emergencia, calculadora de autonomía de baterías, test de nivel de preparación y teléfonos de emergencia." crumbs={crumbs}>
+  <section class="container section--tight">
+    <Breadcrumbs items={crumbs} />
+    <p class="eyebrow"><Icon name="wrench" size={16} /> Herramientas</p>
+    <h1>Herramientas</h1>
+    <p class="lead">Calcula, comprueba y descarga. Funcionan en el navegador, sin registro.</p>
+    <div class="grid grid--3 tools">
+      {tools.map((t) => <a class="card tool" href={t.href}><span class="tool__i"><Icon name={t.icon} size={26} /></span><h2>{t.t}</h2><p class="muted small">{t.d}</p></a>)}
+    </div>
+  </section>
+</Base>
+<style>
+  .tools{margin-top:var(--space-8)}
+  .tool{padding:var(--space-6);text-decoration:none;color:var(--color-text)}
+  .tool__i{display:grid;place-items:center;width:56px;height:56px;border-radius:16px;background:var(--color-secondary-soft);color:var(--color-primary)}
+  .tool h2{font-size:var(--size-xl);margin:var(--space-4) 0 .3em}
+</style>

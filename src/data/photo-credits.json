@@ -1,0 +1,246 @@
+{
+ "hero": {
+  "autor": "Aneta Ivanova",
+  "autorUrl": "https://stocksnap.io/author/586",
+  "fuente": "StockSnap",
+  "url": "https://stocksnap.io/photo/hiking-hiker-21D9441BD3",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Excursionista con mochila al atardecer"
+ },
+ "apagon": {
+  "autor": "Autor desconocido",
+  "fuente": "rawpixel",
+  "url": "https://www.rawpixel.com/image/3301947/free-photo-image-astronomy-cc0-countryside",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Persona con linterna en la oscuridad bajo un cielo estrellado"
+ },
+ "dana": {
+  "autor": "National Guard of the United States",
+  "fuente": "rawpixel",
+  "url": "https://www.rawpixel.com/image/4032000/photo-image-house-water-car",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Coche dañado por una inundación"
+ },
+ "terremoto": {
+  "autor": "Autor desconocido",
+  "fuente": "rawpixel",
+  "url": "https://www.rawpixel.com/image/4023166/earthquake-damaged-cathedral-christchurch",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Catedral de Christchurch dañada por un terremoto"
+ },
+ "incendio": {
+  "autor": "U.S. Forest Service (source)",
+  "fuente": "rawpixel",
+  "url": "https://www.rawpixel.com/image/4057774/photo-image-public-domain-tree-nature",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Incendio forestal en el bosque nacional de Umpqua"
+ },
+ "calor": {
+  "autor": "Autor desconocido",
+  "fuente": "rawpixel",
+  "url": "https://www.rawpixel.com/image/5952955/free-public-domain-cc0-photo",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Sol abrasador sobre la ciudad"
+ },
+ "frio": {
+  "autor": "Alice Donovan Rouse",
+  "autorUrl": "https://stocksnap.io/author/22412",
+  "fuente": "StockSnap",
+  "url": "https://stocksnap.io/photo/guy-man-ZO1W5T3DXW",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Calle nevada con coches cubiertos de nieve"
+ },
+ "internet": {
+  "autor": "Adrianna Calvo",
+  "autorUrl": "https://stocksnap.io/author/16808",
+  "fuente": "StockSnap",
+  "url": "https://stocksnap.io/photo/iphone-smartphone-ODN23L0AC9",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Smartphone en la mano"
+ },
+ "ciber": {
+  "autor": "Émile Perron",
+  "autorUrl": "https://stocksnap.io/author/41229",
+  "fuente": "StockSnap",
+  "url": "https://stocksnap.io/photo/laptop-computer-W0RUS6FWBJ",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Ordenador portátil en un escritorio"
+ },
+ "agua": {
+  "autor": "Autor desconocido",
+  "fuente": "rawpixel",
+  "url": "https://www.rawpixel.com/image/5913478/image-background-public-domain-food",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Botellas de agua"
+ },
+ "agua2": {
+  "autor": "Autor desconocido",
+  "fuente": "rawpixel",
+  "url": "https://www.rawpixel.com/image/3297121/free-photo-image-water-pipe-dripping-tap",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Grifo goteando"
+ },
+ "alimentos": {
+  "autor": "Autor desconocido",
+  "fuente": "rawpixel",
+  "url": "https://www.rawpixel.com/image/5925514/photo-image-background-public-domain-food",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Latas de conserva vistas desde arriba"
+ },
+ "energia": {
+  "autor": "Autor desconocido",
+  "fuente": "rawpixel",
+  "url": "https://www.rawpixel.com/image/6042752/photo-image-public-domain-blue-green",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Placas solares en el tejado de una casa"
+ },
+ "energia2": {
+  "autor": "Kristin Hardwick",
+  "autorUrl": "https://www.kristinhardwick.com",
+  "fuente": "StockSnap",
+  "url": "https://stocksnap.io/photo/backpacking-hiking-40ZTQ6FVOF",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Mochila, botella y farol de camping"
+ },
+ "radio": {
+  "autor": "Clem Onojeghuo",
+  "autorUrl": "https://stocksnap.io/author/11287",
+  "fuente": "StockSnap",
+  "url": "https://stocksnap.io/photo/still-items-ADZ6ZFYD6Z",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Radio y objetos sobre una mesa"
+ },
+ "salud": {
+  "autor": "Autor desconocido",
+  "fuente": "rawpixel",
+  "url": "https://www.rawpixel.com/image/5942883/free-public-domain-cc0-photo",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Material sanitario"
+ },
+ "refugio": {
+  "autor": "Beauty and Fashion",
+  "autorUrl": "https://stocksnap.io",
+  "fuente": "StockSnap",
+  "url": "https://stocksnap.io/photo/coffee-cozy-SC7APHV0JX",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Taza caliente y manta en casa"
+ },
+ "higiene": {
+  "autor": "Autor desconocido",
+  "fuente": "rawpixel",
+  "url": "https://www.rawpixel.com/image/5927984/photo-image-public-domain-hands-bubble",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Manos con jabón"
+ },
+ "documentos": {
+  "autor": "Autor desconocido",
+  "fuente": "rawpixel",
+  "url": "https://www.rawpixel.com/image/3284103/free-photo-image-passport-identity-cc0",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Pasaporte y documentos sobre un escritorio"
+ },
+ "dinero": {
+  "autor": "Autor desconocido",
+  "fuente": "rawpixel",
+  "url": "https://www.rawpixel.com/image/6034808/photo-image-public-domain-money-free",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Billetes de euro"
+ },
+ "seguridad": {
+  "autor": "Autor desconocido",
+  "fuente": "rawpixel",
+  "url": "https://www.rawpixel.com/image/5927178/fire-extinguisher-free-public-domain-cc0-image",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Extintor"
+ },
+ "mochila": {
+  "autor": "Jake Melara",
+  "autorUrl": "https://stocksnap.io/author/665",
+  "fuente": "StockSnap",
+  "url": "https://stocksnap.io/photo/girl-woman-CWQCTSJK0D",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Mujer con mochila en el bosque"
+ },
+ "mascotas": {
+  "autor": "Pawel Kadysz",
+  "autorUrl": "https://stocksnap.io/author/63",
+  "fuente": "StockSnap",
+  "url": "https://stocksnap.io/photo/dog-pet-S2QPBLPTL5",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Perro"
+ },
+ "familia": {
+  "autor": "Direct Media",
+  "autorUrl": "https://stocksnap.io/author/145556",
+  "fuente": "StockSnap",
+  "url": "https://stocksnap.io/photo/family-kitchen-CQWWN6LEJZ",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Familia en la cocina"
+ },
+ "pandemia": {
+  "autor": "Direct Media",
+  "autorUrl": "https://stocksnap.io/author/145556",
+  "fuente": "StockSnap",
+  "url": "https://stocksnap.io/photo/face-mask-NE9PWHADIN",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Mascarilla"
+ },
+ "abastecimiento": {
+  "autor": "Autor desconocido",
+  "fuente": "rawpixel",
+  "url": "https://www.rawpixel.com/image/6075192/photo-image-public-domain-wood-covid-19",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Estanterías vacías en un supermercado"
+ },
+ "disturbios": {
+  "autor": "Autor desconocido",
+  "fuente": "rawpixel",
+  "url": "https://www.rawpixel.com/image/5922826/photo-image-public-domain-people-free",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Multitud caminando por la calle"
+ },
+ "evacuacion": {
+  "autor": "Nabeel Syed",
+  "autorUrl": "https://stocksnap.io/author/4847",
+  "fuente": "StockSnap",
+  "url": "https://stocksnap.io/photo/cars-traffic-OEP6DXZE7T",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Coches en un atasco"
+ },
+ "nuclear": {
+  "autor": "Autor desconocido",
+  "fuente": "rawpixel",
+  "url": "https://www.rawpixel.com/image/5961244/free-public-domain-cc0-photo",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Torres de refrigeración de una central"
+ }
+}

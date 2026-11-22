@@ -1,0 +1,69 @@
+---
+import Icon from './Icon.astro';
+import { CATEGORIAS } from '../data/categorias';
+import { SITE, AFFILIATE } from '../data/site';
+import { getCollection } from 'astro:content';
+const pbs = (await getCollection('playbooks')).sort((a, b) => a.data.orden - b.data.orden);
+---
+<footer class="site">
+  <div class="container container--wide">
+    <div class="top">
+      <div class="brand">
+        <img src="/brand/logo-horizontal-dark.svg" alt="Modo Refugio" width="151" height="48" loading="lazy" />
+        <p>{SITE.tagline} Guías claras para España y Latinoamérica, basadas en fuentes oficiales y sin alarmismo.</p>
+        <p class="sos"><Icon name="phone" size={18} /> En una emergencia real llama al <strong>112</strong> (España y UE). <a href="/telefonos-de-emergencia/">Otros países →</a></p>
+      </div>
+      <div>
+        <h3>The Playbook</h3>
+        <ul>{pbs.slice(0, 8).map((p) => <li><a href={`/playbook/${p.id}/`}>{p.data.nombre}</a></li>)}<li><a href="/playbook/">Ver todos →</a></li></ul>
+      </div>
+      <div>
+        <h3>Prepárate</h3>
+        <ul>{CATEGORIAS.slice(0, 8).map((c) => <li><a href={`/preparate/${c.id}/`}>{c.nombre}</a></li>)}<li><a href="/preparate/">Ver todo →</a></li></ul>
+      </div>
+      <div>
+        <h3>Modo Refugio</h3>
+        <ul>
+          <li><a href="/empieza-aqui/">Empieza aquí</a></li>
+          <li><a href="/equipo/">Equipo recomendado</a></li>
+          <li><a href="/herramientas/">Herramientas</a></li>
+          <li><a href="/descargas/">Descargas PDF</a></li>
+          <li><a href="/sobre-nosotros/">Quiénes somos y método</a></li>
+          <li><a href="/telefonos-de-emergencia/">Teléfonos de emergencia</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="disclosure"><Icon name="info" size={16} /> {AFFILIATE.amazonDisclosure} Algunos enlaces de esta web son de afiliado: si compras a través de ellos, recibimos una pequeña comisión sin coste para ti. <a href="/divulgacion-afiliados/">Más información</a>.</p>
+    <p class="disclaimer">La información de Modo Refugio es divulgativa y no sustituye las indicaciones de Protección Civil, el 112, las autoridades sanitarias ni de tu médico. Ante una emergencia, sigue siempre las instrucciones oficiales.</p>
+    <div class="bottom">
+      <span>© {new Date().getFullYear()} Modo Refugio</span>
+      <nav aria-label="Legal">
+        <a href="/aviso-legal/">Aviso legal</a>
+        <a href="/privacidad/">Privacidad</a>
+        <a href="/cookies/">Cookies</a>
+        <a href="/divulgacion-afiliados/">Afiliados</a>
+        <button type="button" class="linkbtn" data-cookie-open>Preferencias de cookies</button>
+      </nav>
+    </div>
+  </div>
+</footer>
+<style>
+  footer.site{background:var(--pine-900);color:var(--pine-100);padding:var(--space-16) 0 var(--space-8);margin-top:0;font-size:var(--size-sm)}
+  .top{display:grid;gap:var(--space-10);grid-template-columns:1fr}
+  @media (min-width:800px){.top{grid-template-columns:1.6fr 1fr 1fr 1fr}}
+  .brand img{height:40px;width:auto;margin-bottom:var(--space-4)}
+  .brand p{max-width:38ch;color:var(--pine-200)}
+  .sos{display:flex;gap:.5em;align-items:center;flex-wrap:wrap;color:var(--amber-200)!important}
+  .sos strong{color:#fff}
+  h3{color:#fff;font-size:var(--size-base);font-family:var(--font-body);letter-spacing:var(--tracking-wide);text-transform:uppercase;font-size:var(--size-xs)}
+  ul{list-style:none;padding:0;margin:0;display:grid;gap:.45em}
+  a{color:var(--pine-100);text-decoration:none}
+  a:hover{color:var(--amber-300)}
+  .disclosure,.disclaimer{margin-top:var(--space-10);color:var(--pine-300);font-size:var(--size-xs);max-width:110ch}
+  .disclosure{display:block}
+  .disclaimer{margin-top:var(--space-3)}
+  .bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--space-4);border-top:1px solid rgba(255,255,255,.12);padding-top:var(--space-6);margin-top:var(--space-6);font-size:var(--size-xs);color:var(--pine-300)}
+  .bottom nav{display:flex;gap:var(--space-4);flex-wrap:wrap}
+  .linkbtn{background:none;border:0;padding:0;color:var(--pine-100);font:inherit;cursor:pointer}
+  .linkbtn:hover{color:var(--amber-300)}
+</style>

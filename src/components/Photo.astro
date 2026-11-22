@@ -1,0 +1,8 @@
+---
+import { Image } from 'astro:assets';
+import { photo } from '../data/photos';
+interface Props { k: string; widths?: number[]; sizes?: string; class?: string; eager?: boolean; alt?: string; ratio?: string }
+const { k, widths = [480, 800, 1200, 1600], sizes = '100vw', class: cls, eager = false, alt, ratio } = Astro.props;
+const p = photo(k);
+---
+<Image src={p.src} alt={alt ?? p.alt} widths={widths} sizes={sizes} class={cls} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} format="webp" quality={72} style={ratio ? `aspect-ratio:${ratio};object-fit:cover;width:100%;height:auto` : undefined} />

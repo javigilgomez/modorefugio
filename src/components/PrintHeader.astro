@@ -1,0 +1,30 @@
+---
+import QRCode from 'qrcode';
+interface Props { kicker: string; title: string; subtitle?: string; url: string; color?: string }
+const { kicker, title, subtitle, url, color = '#C2410C' } = Astro.props;
+const qr = await QRCode.toString(url, { type: 'svg', margin: 0, color: { dark: '#14352F', light: '#0000' } });
+---
+<header class="ph" style={`--k:${color}`}>
+  <div class="ph__top">
+    <img src="/brand/logo-horizontal.svg" alt="Modo Refugio" width="107" height="34" />
+    <span class="ph__k">{kicker}</span>
+  </div>
+  <div class="ph__main">
+    <div>
+      <h1>{title}</h1>
+      {subtitle && <p class="ph__sub">{subtitle}</p>}
+    </div>
+    <div class="ph__qr"><Fragment set:html={qr} /><span>Versión online y actualizada</span></div>
+  </div>
+</header>
+<style>
+  .ph{border-bottom:3px solid var(--k);padding-bottom:4mm;margin-bottom:5mm}
+  .ph__top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4mm}
+  .ph__top img{height:9mm;width:auto}
+  .ph__k{background:var(--k);color:#fff;font:800 8pt/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;padding:2mm 3mm;border-radius:2mm}
+  .ph__main{display:flex;justify-content:space-between;gap:6mm;align-items:flex-end}
+  h1{font-size:24pt}
+  .ph__sub{margin:2mm 0 0;font-size:10.5pt;color:#43443C;max-width:125mm}
+  .ph__qr{flex:none;width:22mm;text-align:center;font-size:6pt;color:#5C5A50}
+  .ph__qr :global(svg){width:22mm;height:22mm;display:block;margin-bottom:1mm}
+</style>

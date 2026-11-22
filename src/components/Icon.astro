@@ -1,0 +1,17 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+interface Props { name: string; size?: number; class?: string; label?: string; strokeWidth?: number }
+const { name, size = 20, class: cls = '', label, strokeWidth = 2 } = Astro.props;
+const dir = path.resolve('node_modules/lucide-static/icons');
+let svg = '';
+try { svg = fs.readFileSync(path.join(dir, `${name}.svg`), 'utf8'); }
+catch { console.warn(`[Icon] no existe lucide icon: ${name}`); svg = fs.readFileSync(path.join(dir, 'circle.svg'), 'utf8'); }
+svg = svg
+  .replace(/<!--.*?-->/gs, '')
+  .replace(/width="24"/, `width="${size}"`).replace(/height="24"/, `height="${size}"`)
+  .replace(/stroke-width="2"/, `stroke-width="${strokeWidth}"`)
+  .replace(/class="[^"]*"/, `class="icon ${cls}"`)
+  .replace('<svg', label ? `<svg role="img" aria-label="${label}"` : '<svg aria-hidden="true" focusable="false"');
+---
+<Fragment set:html={svg} />

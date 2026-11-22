@@ -1,0 +1,75 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Icon from '../../components/Icon.astro';
+import Photo from '../../components/Photo.astro';
+import CategoryCard from '../../components/CategoryCard.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import { CATEGORIAS } from '../../data/categorias';
+const pbs = (await getCollection('playbooks')).sort((a, b) => a.data.orden - b.data.orden);
+const crumbs = [{ name: 'Prepárate', href: '/preparate/' }];
+---
+<Base title="Prepárate: listas básicas y avanzadas para cualquier emergencia" description="Cómo prepararte paso a paso en 12 categorías (agua, alimentos, energía, botiquín, mochila 72 h…) con nivel básico para todos y nivel avanzado para quien quiera más autonomía." crumbs={crumbs}>
+  <section class="phero">
+    <div class="phero__img"><Photo k="mochila" eager sizes="100vw" /></div>
+    <div class="container phero__inner">
+      <Breadcrumbs items={crumbs} />
+      <p class="eyebrow"><Icon name="shield-check" size={16} /> Prepárate</p>
+      <h1>Prepararse es para antes</h1>
+      <p class="lead">Doce áreas, dos niveles. Empieza por el <strong>Básico</strong>: es lo que recomiendan Protección Civil y la UE para que cualquier hogar aguante 72 horas. Cuando lo tengas, sube al <strong>Avanzado</strong>.</p>
+    </div>
+  </section>
+  <section class="container section--tight">
+    <div class="legend">
+      <div class="legend__b"><span class="badge badge--basic"><Icon name="circle-dot" size={12} /> Básico</span><p>Para todos. Barato, rápido y suficiente para un apagón o una DANA de 3 días. Sin obsesiones.</p></div>
+      <div class="legend__a"><span class="badge badge--advanced"><Icon name="layers" size={12} /> Avanzado</span><p>Para quien quiere autonomía de 1–2 semanas o más: energía solar, potabilización, radio, redundancia.</p></div>
+    </div>
+    <h2 class="t">Por categoría</h2>
+    <div class="grid grid--4">{CATEGORIAS.map((c) => <CategoryCard c={c} />)}</div>
+  </section>
+  <section class="section section--subtle" id="por-riesgo">
+    <div class="container">
+      <p class="eyebrow"><Icon name="target" size={16} /> Por riesgo</p>
+      <h2>Prepárate para algo concreto</h2>
+      <p class="muted">Qué tener antes de cada tipo de emergencia, en básico y avanzado. Cada página enlaza a su playbook.</p>
+      <div class="risks">
+        {pbs.map((p) => (
+          <a class="risk" href={`/preparate/riesgo/${p.id}/`}>
+            <span class="risk__i"><Icon name={p.data.icon} size={22} /></span>
+            <span><strong>{p.data.nombre}</strong><small>{p.data.prepara.basico.length} básicos · {p.data.prepara.avanzado.length} avanzados</small></span>
+            <Icon name="arrow-right" size={18} class="risk__go" />
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container start">
+      <div>
+        <h2>¿No sabes por dónde empezar?</h2>
+        <p class="muted">Hazlo en una tarde: una lista de compra corta, un plan familiar y una mochila. Te lo damos todo hecho.</p>
+        <div class="row"><a class="btn btn--primary btn--lg" href="/empieza-aqui/">Empieza aquí</a><a class="btn btn--ghost btn--lg" href="/empieza-aqui/que-nivel-eres/">Test: ¿qué nivel eres?</a></div>
+      </div>
+      <Photo k="familia" widths={[500, 900]} sizes="(min-width:900px) 45vw, 100vw" ratio="4/3" class="rounded" />
+    </div>
+  </section>
+  <Newsletter />
+</Base>
+<style>
+  .legend{display:grid;gap:var(--space-4);grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));margin:var(--space-2) 0 var(--space-10)}
+  .legend > div{background:var(--color-surface);border-radius:var(--radius-md);padding:var(--space-5);border:1px solid var(--color-border)}
+  .legend__b{border-left:5px solid var(--color-basic)!important}
+  .legend__a{border-left:5px solid var(--color-advanced)!important}
+  .legend p{margin:.6em 0 0;color:var(--color-text-muted);font-size:var(--size-sm)}
+  .t{margin-bottom:var(--space-6)}
+  .risks{display:grid;gap:var(--space-3);grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-top:var(--space-6)}
+  .risk{display:flex;gap:var(--space-3);align-items:center;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--space-4);text-decoration:none;color:var(--color-text);transition:border-color var(--motion-fast),transform var(--motion-fast)}
+  .risk:hover{border-color:var(--color-primary);transform:translateY(-2px)}
+  .risk__i{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--color-secondary-soft);color:var(--color-primary);flex:none}
+  .risk small{display:block;color:var(--color-text-muted);font-size:var(--size-xs)}
+  .risk :global(.risk__go){margin-left:auto;color:var(--color-text-muted)}
+  .start{display:grid;gap:var(--space-10);grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));align-items:center}
+  .row{display:flex;gap:var(--space-3);flex-wrap:wrap;margin-top:var(--space-6)}
+  .start :global(.rounded){border-radius:var(--radius-lg)}
+</style>

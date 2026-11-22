@@ -1,0 +1,71 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import Icon from '../../../components/Icon.astro';
+import Sources from '../../../components/Sources.astro';
+const crumbs = [{ name: 'Herramientas', href: '/herramientas/' }, { name: 'Calculadora de agua y comida', href: '/herramientas/calculadora-agua-comida/' }];
+---
+<Base title="Calculadora de agua y comida de emergencia" description="Calcula cuánta agua y comida guardar para una emergencia según las personas de tu casa, mascotas y días de autonomía." crumbs={crumbs}>
+  <section class="container container--narrow section--tight">
+    <Breadcrumbs items={crumbs} />
+    <p class="eyebrow"><Icon name="calculator" size={16} /> Herramienta</p>
+    <h1>¿Cuánta agua y comida necesito?</h1>
+    <p class="lead">Calcula tu reserva de emergencia. Usamos 3 litros por persona y día (beber, cocinar e higiene mínima) y unas 2.000 kcal por adulto y día.</p>
+    <form class="calc" id="calc">
+      <label>Adultos <input type="number" name="adultos" min="0" max="20" value="2" /></label>
+      <label>Niños (menores de 12) <input type="number" name="ninos" min="0" max="20" value="1" /></label>
+      <label>Perros o gatos <input type="number" name="mascotas" min="0" max="10" value="0" /></label>
+      <label>Peso medio mascota (kg) <input type="number" name="peso" min="1" max="80" value="10" /></label>
+      <label class="full">Días de autonomía
+        <select name="dias"><option value="3" selected>3 días (básico, recomendación UE)</option><option value="7">7 días</option><option value="14">14 días (avanzado)</option></select>
+      </label>
+      <label class="full chk"><input type="checkbox" name="calor" /> Ola de calor o zona muy calurosa (+30 % de agua)</label>
+    </form>
+    <div class="out" aria-live="polite">
+      <div class="out__c"><Icon name="droplets" size={28} /><strong id="o-agua">–</strong><span>litros de agua</span><small id="o-agua2"></small></div>
+      <div class="out__c"><Icon name="wheat" size={28} /><strong id="o-kcal">–</strong><span>kcal en total</span><small id="o-kcal2"></small></div>
+      <div class="out__c"><Icon name="paw-print" size={28} /><strong id="o-mas">–</strong><span>litros para mascotas</span><small>Incluidos en el total</small></div>
+    </div>
+    <div class="prose">
+      <h2>Cómo traducirlo a la compra</h2>
+      <ul>
+        <li><strong>Agua:</strong> garrafas de 5–8 L son lo más práctico. Rota: bebe la más antigua y repón.</li>
+        <li><strong>Comida:</strong> una lata de legumbres cocidas de 400 g aporta unas 300–400 kcal; un puñado de frutos secos (30 g), unas 180 kcal. Mira las etiquetas de lo que compras.</li>
+        <li>Los niños necesitan menos calorías pero igual de agua; embarazadas, lactantes y personas que hacen esfuerzo, más.</li>
+      </ul>
+      <p>Siguiente: <a href="/preparate/agua/">Agua</a> · <a href="/preparate/alimentos/">Alimentos</a> · <a href="/empieza-aqui/kit-72-horas/">Kit de 72 horas</a></p>
+    </div>
+    <Sources items={[{ nombre: 'Comisión Europea: Estrategia de Preparación (72 horas)', url: 'https://spain.representation.ec.europa.eu/noticias-eventos/noticias-0/estrategia-de-preparacion-de-la-union-para-prevenir-amenazas-y-crisis-emergentes-y-reaccionar-frente-2025-03-26_es' }, { nombre: 'EFSA: valores dietéticos de referencia (energía)', url: 'https://www.efsa.europa.eu/es/topics/topic/dietary-reference-values' }]} updated={new Date('2026-11-22')} />
+  </section>
+</Base>
+<script>
+  const f = document.getElementById('calc') as HTMLFormElement;
+  const $ = (id: string) => document.getElementById(id)!;
+  const fmt = (n: number) => Math.round(n).toLocaleString('es-ES');
+  function calc() {
+    const v = (n: string) => Math.max(0, Number((f.elements.namedItem(n) as HTMLInputElement).value) || 0);
+    const dias = v('dias'); const calor = (f.elements.namedItem('calor') as HTMLInputElement).checked ? 1.3 : 1;
+    const personas = v('adultos') + v('ninos');
+    const masc = v('mascotas') * v('peso') * 0.06 * dias * calor;
+    const agua = personas * 3 * dias * calor + masc;
+    const kcal = (v('adultos') * 2000 + v('ninos') * 1500) * dias;
+    $('o-agua').textContent = fmt(agua);
+    $('o-agua2').textContent = `≈ ${Math.ceil(agua / 8)} garrafas de 8 L`;
+    $('o-kcal').textContent = fmt(kcal);
+    $('o-kcal2').textContent = `≈ ${Math.ceil(kcal / 350)} latas de legumbres (o equivalente)`;
+    $('o-mas').textContent = fmt(masc);
+  }
+  f.addEventListener('input', calc); calc();
+</script>
+<style>
+  .calc{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);background:var(--color-surface);padding:var(--space-6);border-radius:var(--radius-lg);border:1px solid var(--color-border);margin-top:var(--space-6)}
+  .calc label{display:flex;flex-direction:column;gap:.35em;font-weight:600;font-size:var(--size-sm)}
+  .calc .full{grid-column:1/-1}
+  .calc .chk{flex-direction:row;align-items:center;font-weight:500}
+  .calc input[type=number],.calc select{font:inherit;font-size:var(--size-base);padding:.6em .8em;border-radius:var(--radius-sm);border:1.5px solid var(--color-border-strong);background:var(--color-bg);color:var(--color-text)}
+  .out{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-3);margin:var(--space-6) 0}
+  .out__c{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.2em;padding:var(--space-5);border-radius:var(--radius-lg);background:var(--color-primary);color:var(--color-on-primary)}
+  .out__c strong{font:700 var(--size-3xl)/1.1 var(--font-heading)}
+  .out__c small{opacity:.8;font-size:var(--size-xs)}
+  @media (max-width:640px){.calc,.out{grid-template-columns:1fr}}
+</style>

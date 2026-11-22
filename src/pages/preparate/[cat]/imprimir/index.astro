@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import Print from '../../../../layouts/Print.astro';
+import PrintHeader from '../../../../components/PrintHeader.astro';
+import { CATEGORIAS } from '../../../../data/categorias';
+import { SITE } from '../../../../data/site';
+export async function getStaticPaths() {
+  const all = await getCollection('preparate');
+  return CATEGORIAS.map((c) => ({ params: { cat: c.id }, props: { c, basico: all.find((e) => e.data.categoria === c.id && e.data.nivel === 'basico')!, avanzado: all.find((e) => e.data.categoria === c.id && e.data.nivel === 'avanzado')! } }));
+}
+const { c, basico, avanzado } = Astro.props;
+---
+<Print title={`Checklist ${c.nombre}`}>
+  <PrintHeader kicker="Prepárate · Checklist" title={c.nombre} subtitle={basico.data.resumen} url={`${SITE.url}/preparate/${c.id}/`} color="#1A648C" />
+  {[basico, avanzado].map((e) => (
+    <section class:list={['lv', e.data.nivel]}>
+      <h2>{e.data.nivel === 'basico' ? 'Nivel básico' : 'Nivel avanzado'}</h2>
+      <ul>{e.data.checklist.map((it) => <li><span class="box" /><span><strong>{it.item}</strong>{it.cantidad && <> · {it.cantidad}</>}{it.nota && <em> — {it.nota}</em>}</span></li>)}</ul>
+    </section>
+  ))}
+  <p class="rev">Revisado: ____ / ____ / ______ &nbsp;&nbsp; Próxima revisión (6 meses): ____ / ____ / ______</p>
+  <footer class="pf"><span>modorefugio.com/preparate/{c.id}/</span><span>Información divulgativa. Sigue las indicaciones de Protección Civil.</span></footer>
+</Print>
+<style>
+  .lv{border-radius:3mm;padding:3.5mm 4.5mm;margin-bottom:4mm;break-inside:avoid}
+  .basico{background:#EAF4FA;border-left:2mm solid #1A648C}
+  .avanzado{background:#F2EEF9;border-left:2mm solid #6B4C9A}
+  h2{font-size:13pt;margin-bottom:2mm}
+  li{display:flex;gap:2.4mm;padding:1.2mm 0;border-bottom:.3mm solid rgba(0,0,0,.08);break-inside:avoid}
+  li em{font-style:normal;color:#5C5A50;font-size:9pt}
+  .box{flex:none;width:3.6mm;height:3.6mm;border:.45mm solid #14352F;border-radius:.8mm;margin-top:.6mm;background:#fff}
+  .rev{font-size:9pt;margin:4mm 0}
+  .pf{display:flex;justify-content:space-between;border-top:.4mm solid #E5DDCB;padding-top:2mm;font-size:7pt;color:#7D7767}
+</style>

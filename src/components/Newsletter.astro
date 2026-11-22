@@ -1,0 +1,48 @@
+---
+import Icon from './Icon.astro';
+import { NEWSLETTER } from '../data/site';
+interface Props { variant?: 'band' | 'box' }
+const { variant = 'band' } = Astro.props;
+---
+<section class:list={['newsletter', `newsletter--${variant}`]} id="newsletter">
+  <div class="nl__in">
+    <div class="nl__copy">
+      <p class="eyebrow"><Icon name="gift" size={16} /> Gratis · PDF imprimible</p>
+      <h2>Tu kit básico para un apagón, en una hoja</h2>
+      <p>Descarga la checklist que cabe en la puerta de la nevera y recibe un recordatorio cada 6 meses para revisar tu kit (lo que recomienda Protección Civil). Nada de spam.</p>
+    </div>
+    <form class="nl__form" action={NEWSLETTER.action} method="post" data-enabled={String(NEWSLETTER.enabled)}>
+      <label class="sr-only" for={`nl-email-${variant}`}>Tu email</label>
+      <input id={`nl-email-${variant}`} type="email" name="email" placeholder="tu@email.com" required autocomplete="email" />
+      <button class="btn btn--accent" type="submit"><Icon name="download" size={18} /> Quiero la checklist</button>
+      <p class="nl__legal">Al suscribirte aceptas la <a href="/privacidad/">política de privacidad</a>. Puedes darte de baja en cualquier momento.</p>
+      <p class="nl__direct"><a href={NEWSLETTER.leadMagnet} download>O descárgala directamente sin suscribirte →</a></p>
+    </form>
+  </div>
+</section>
+<script>
+  document.querySelectorAll<HTMLFormElement>('.nl__form[data-enabled="false"]').forEach((f) => {
+    f.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const a = f.querySelector<HTMLAnchorElement>('.nl__direct a');
+      f.innerHTML = '<p class="nl__ok">¡Gracias! La newsletter abre muy pronto. Mientras tanto, aquí tienes tu PDF.</p>';
+      if (a) { f.appendChild(a); a.className = 'btn btn--accent'; a.textContent = 'Descargar Kit básico apagón (PDF)'; }
+    });
+  });
+</script>
+<style>
+  .newsletter--band{background:radial-gradient(1200px 400px at 90% -20%,rgba(242,163,58,.25),transparent),var(--pine-800);color:var(--pine-50);padding:clamp(3rem,6vw,5rem) var(--gutter)}
+  .newsletter--box{background:var(--pine-800);color:var(--pine-50);border-radius:var(--radius-lg);padding:var(--space-8);margin:var(--space-10) 0}
+  .nl__in{max-width:var(--container);margin:0 auto;display:grid;gap:var(--space-8);align-items:center}
+  @media (min-width:860px){.newsletter--band .nl__in{grid-template-columns:1.2fr 1fr}}
+  .newsletter h2{color:#fff;font-size:var(--size-3xl)}
+  .newsletter--box h2{font-size:var(--size-2xl)}
+  .newsletter .eyebrow{color:var(--amber-300)}
+  .nl__copy p{color:var(--pine-100)}
+  .nl__form{display:flex;flex-wrap:wrap;gap:var(--space-3)}
+  .nl__form input{flex:1 1 220px;padding:.9em 1.1em;border-radius:var(--radius-pill);border:2px solid transparent;font:inherit;background:#fff;color:var(--sand-900)}
+  .nl__form input:focus{outline:none;border-color:var(--color-accent)}
+  .nl__legal,.nl__direct{flex-basis:100%;font-size:var(--size-xs);color:var(--pine-200);margin:0}
+  .nl__legal a,.nl__direct a{color:var(--amber-200)}
+  :global(.nl__ok){flex-basis:100%;font-weight:600;color:#fff}
+</style>

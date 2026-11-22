@@ -1,0 +1,9 @@
+---
+interface Props { items: { nombre: string; url: string }[]; updated?: Date }
+const { items, updated } = Astro.props;
+const fmt = (d: Date) => d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<section class="sources">
+  {items.length > 0 && (<><h3>Fuentes oficiales y referencias</h3><ul>{items.map((s) => <li><a href={s.url} rel="noopener" target="_blank">{s.nombre}</a></li>)}</ul></>)}
+  {updated && <p>Última revisión: <time datetime={updated.toISOString().slice(0, 10)}>{fmt(updated)}</time>. Si ves algo desactualizado, <a href="/sobre-nosotros/#contacto">avísanos</a>.</p>}
+</section>

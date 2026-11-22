@@ -1,0 +1,53 @@
+---
+import { ADS } from '../data/site';
+---
+<div class="cookie" id="cookie" hidden role="dialog" aria-labelledby="cookie-title" aria-live="polite">
+  <div class="cookie__in">
+    <div>
+      <p id="cookie-title" class="cookie__t">Tu privacidad, tus reglas</p>
+      <p class="cookie__d">Usamos cookies técnicas imprescindibles. Con tu permiso, también usaremos cookies de medición y de publicidad. Puedes cambiar de opinión cuando quieras. <a href="/cookies/">Política de cookies</a></p>
+      <form class="cookie__opts" id="cookie-opts" hidden>
+        <label><input type="checkbox" checked disabled /> Técnicas (siempre activas)</label>
+        <label><input type="checkbox" name="analytics" /> Medición (analítica)</label>
+        <label><input type="checkbox" name="ads" /> Publicidad personalizada</label>
+      </form>
+    </div>
+    <div class="cookie__btns">
+      <button type="button" class="btn btn--ghost btn--sm" data-c="config">Configurar</button>
+      <button type="button" class="btn btn--ghost btn--sm" data-c="reject">Rechazar</button>
+      <button type="button" class="btn btn--primary btn--sm" data-c="accept">Aceptar todo</button>
+    </div>
+  </div>
+</div>
+<script is:inline define:vars={{ ads: ADS }}>
+(function(){
+  var KEY='mr-consent-v1', box=document.getElementById('cookie'), opts=document.getElementById('cookie-opts');
+  function read(){try{return JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){return null}}
+  function apply(c){
+    window.mrConsent=c;
+    document.dispatchEvent(new CustomEvent('mr:consent',{detail:c}));
+    if(ads.enabled && c && c.ads && !document.getElementById('adsbygoogle-js')){
+      var s=document.createElement('script');s.async=true;s.id='adsbygoogle-js';s.crossOrigin='anonymous';
+      s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client='+ads.client;document.head.appendChild(s);
+    }
+  }
+  function save(c){c.ts=Date.now();try{localStorage.setItem(KEY,JSON.stringify(c))}catch(e){};box.hidden=true;apply(c)}
+  var cur=read(); if(cur){apply(cur)}else{box.hidden=false}
+  box.addEventListener('click',function(e){var b=e.target.closest('[data-c]');if(!b)return;var a=b.dataset.c;
+    if(a==='accept')save({analytics:true,ads:true});
+    else if(a==='reject')save({analytics:false,ads:false});
+    else if(a==='config'){ if(opts.hidden){opts.hidden=false;b.textContent='Guardar selección'} else save({analytics:opts.analytics.checked,ads:opts.ads.checked}) }
+  });
+  document.addEventListener('click',function(e){if(e.target.closest('[data-cookie-open]')){var c=read()||{};opts.analytics.checked=!!c.analytics;opts.ads.checked=!!c.ads;opts.hidden=false;box.hidden=false}});
+})();
+</script>
+<style>
+  .cookie{position:fixed;inset:auto 0 0 0;z-index:var(--z-modal);padding:var(--space-4)}
+  .cookie__in{max-width:980px;margin:0 auto;background:var(--color-surface);color:var(--color-text);border:1px solid var(--color-border);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);padding:var(--space-5) var(--space-6);display:flex;gap:var(--space-6);align-items:center;flex-wrap:wrap}
+  .cookie__in > div:first-child{flex:1 1 420px}
+  .cookie__t{font-weight:700;color:var(--color-heading);margin:0 0 .25em}
+  .cookie__d{font-size:var(--size-sm);margin:0;color:var(--color-text-muted)}
+  .cookie__btns{display:flex;gap:var(--space-2);flex-wrap:wrap}
+  .cookie__opts{display:flex;flex-wrap:wrap;gap:var(--space-4);margin-top:var(--space-3);font-size:var(--size-sm)}
+  .cookie__opts label{display:flex;gap:.4em;align-items:center}
+</style>

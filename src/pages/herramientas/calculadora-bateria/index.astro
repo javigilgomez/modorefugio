@@ -1,0 +1,71 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import Icon from '../../../components/Icon.astro';
+const crumbs = [{ name: 'Herramientas', href: '/herramientas/' }, { name: 'Calculadora de batería', href: '/herramientas/calculadora-bateria/' }];
+const devs = [
+  { id: 'movil', n: 'Cargar un móvil (carga completa)', wh: 15, unit: 'cargas' },
+  { id: 'router', n: 'Router wifi + ONT de fibra', w: 15 },
+  { id: 'led', n: 'Bombilla o lámpara LED', w: 8 },
+  { id: 'portatil', n: 'Portátil', w: 50 },
+  { id: 'nevera', n: 'Nevera doméstica (media real)', w: 60 },
+  { id: 'cpap', n: 'CPAP sin humidificador', w: 40 },
+  { id: 'ventilador', n: 'Ventilador', w: 40 },
+];
+---
+<Base title="Calculadora de autonomía de batería: ¿cuánto dura mi estación de energía?" description="Calcula cuántas horas aguanta una estación de energía portátil o un powerbank con tu router, nevera, luces, portátil o CPAP durante un apagón." crumbs={crumbs}>
+  <section class="container container--narrow section--tight">
+    <Breadcrumbs items={crumbs} />
+    <p class="eyebrow"><Icon name="battery-charging" size={16} /> Herramienta</p>
+    <h1>¿Cuánto me dura la batería?</h1>
+    <p class="lead">Elige la capacidad y lo que quieres conectar. Aplicamos un 85 % de eficiencia real (las pérdidas del inversor son normales). Los consumos son orientativos: mira la etiqueta de tus aparatos.</p>
+    <form id="bat" class="bat">
+      <label class="cap">Capacidad de la batería (Wh)
+        <input type="number" name="wh" min="20" max="10000" value="1024" />
+        <small>Un powerbank de 20.000 mAh ≈ 74 Wh. Mira la capacidad en Wh en la ficha del fabricante.</small>
+      </label>
+      <fieldset>
+        <legend>Aparatos conectados a la vez</legend>
+        {devs.filter((d) => d.w).map((d) => (
+          <label class="dev"><span>{d.n}</span><span class="w"><input type="number" name={`w-${d.id}`} value={d.w} min="0" max="3000" aria-label={`Vatios ${d.n}`} /> W</span><span class="qty"><input type="number" name={`q-${d.id}`} value={d.id === 'router' || d.id === 'led' ? 1 : 0} min="0" max="10" aria-label={`Cantidad ${d.n}`} /> uds.</span></label>
+        ))}
+      </fieldset>
+    </form>
+    <div class="res" aria-live="polite">
+      <div><strong id="h">–</strong><span>horas de autonomía</span></div>
+      <div><strong id="w">–</strong><span>W de consumo total</span></div>
+      <div><strong id="m">–</strong><span>cargas de móvil (si solo cargas móviles)</span></div>
+    </div>
+    <p class="muted small">Una nevera no consume de forma continua: el compresor arranca y para. Por eso usamos una media de 60 W, pero el pico de arranque puede ser de varios cientos de vatios: comprueba que tu estación lo soporta.</p>
+    <p><a class="btn btn--primary" href="/equipo/estaciones-de-energia-portatiles/">Comparativa de estaciones de energía</a> <a class="btn btn--ghost" href="/equipo/powerbanks/">Powerbanks</a></p>
+  </section>
+</Base>
+<script>
+  const f = document.getElementById('bat') as HTMLFormElement;
+  const g = (n: string) => Math.max(0, Number((f.elements.namedItem(n) as HTMLInputElement)?.value) || 0);
+  function run() {
+    const wh = g('wh') * 0.85;
+    let w = 0;
+    f.querySelectorAll<HTMLInputElement>('input[name^="w-"]').forEach((i) => { w += g(i.name) * g('q-' + i.name.slice(2)); });
+    document.getElementById('w')!.textContent = String(Math.round(w));
+    document.getElementById('h')!.textContent = w ? (wh / w).toLocaleString('es-ES', { maximumFractionDigits: 1 }) : '—';
+    document.getElementById('m')!.textContent = String(Math.floor(wh / 15));
+  }
+  f.addEventListener('input', run); run();
+</script>
+<style>
+  .bat{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-6);margin-top:var(--space-6);display:grid;gap:var(--space-5)}
+  .cap{display:flex;flex-direction:column;gap:.35em;font-weight:600}
+  .cap small{font-weight:400;color:var(--color-text-muted)}
+  input[type=number]{font:inherit;padding:.5em .7em;border-radius:var(--radius-sm);border:1.5px solid var(--color-border-strong);background:var(--color-bg);color:var(--color-text);width:100%;max-width:9em}
+  fieldset{border:0;padding:0;margin:0;display:grid;gap:var(--space-2)}
+  legend{font-weight:700;margin-bottom:var(--space-2)}
+  .dev{display:grid;grid-template-columns:1fr auto auto;gap:var(--space-3);align-items:center;font-size:var(--size-sm);padding:.4em 0;border-bottom:1px solid var(--color-border)}
+  .dev input{width:5em}
+  .w,.qty{display:flex;gap:.3em;align-items:center;color:var(--color-text-muted)}
+  .res{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-3);margin:var(--space-6) 0}
+  .res div{display:flex;flex-direction:column;align-items:center;text-align:center;padding:var(--space-5);border-radius:var(--radius-lg);background:var(--color-primary);color:var(--color-on-primary)}
+  .res strong{font:700 var(--size-3xl)/1.1 var(--font-heading)}
+  .res span{font-size:var(--size-xs);opacity:.85}
+  @media (max-width:640px){.res{grid-template-columns:1fr}.dev{grid-template-columns:1fr auto}.dev .w{display:none}}
+</style>

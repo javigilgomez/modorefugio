@@ -1,0 +1,46 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Icon from '../../components/Icon.astro';
+import Sources from '../../components/Sources.astro';
+import { TELEFONOS } from '../../data/emergencias';
+const crumbs = [{ name: 'Teléfonos de emergencia', href: '/telefonos-de-emergencia/' }];
+---
+<Base title="Teléfonos de emergencia en España, Europa y Latinoamérica" description="112 en España y la UE, y los números de emergencia de México, Colombia, Chile, Argentina y Perú. Qué decir cuando llamas y cómo recibir alertas en el móvil." crumbs={crumbs}>
+  <section class="container container--narrow section--tight">
+    <Breadcrumbs items={crumbs} />
+    <p class="eyebrow"><Icon name="phone" size={16} /> Teléfonos</p>
+    <h1>Teléfonos de emergencia</h1>
+    <p class="lead">Apúntalos en papel y guárdalos con tu kit. Si no hay cobertura de tu operador, el 112 puede funcionar a través de otra red disponible.</p>
+    <div class="big"><a href="tel:112"><strong>112</strong><span>Emergencias en España y en toda la Unión Europea. Gratuito, 24 horas.</span></a></div>
+    <div class="tels">
+      {TELEFONOS.map((t) => (
+        <div class="tel"><span class="flag" aria-hidden="true">{t.flag}</span><div><h2>{t.pais}</h2><p class="num">{t.principal}</p><p class="muted small">{t.otros}</p></div></div>
+      ))}
+    </div>
+    <div class="prose">
+      <h2>Qué decir cuando llamas al 112</h2>
+      <ol>
+        <li><strong>Dónde estás:</strong> dirección, kilómetro o referencias visibles.</li>
+        <li><strong>Qué pasa:</strong> incendio, inundación, accidente, persona inconsciente…</li>
+        <li><strong>Cuántas personas</strong> y si hay heridos o atrapados.</li>
+        <li><strong>No cuelgues</strong> hasta que te lo indiquen.</li>
+      </ol>
+      <h2>Alertas en el móvil (ES-Alert)</h2>
+      <p>En España, Protección Civil puede enviar avisos a todos los móviles de una zona mediante ES-Alert. Aparecen en pantalla con un sonido fuerte aunque el móvil esté en silencio. Comprueba en los ajustes de notificaciones de tu móvil que las alertas de emergencia están activadas y, si te llega una, <strong>lee y sigue las instrucciones</strong>.</p>
+      <p>Para personas sordas o con dificultades del habla existen apps oficiales de acceso al 112 en varias comunidades autónomas. Consulta la de la tuya.</p>
+      <p class="muted small">Los números pueden cambiar. Verifica siempre con las autoridades de tu país. Si encuentras un error, <a href="/sobre-nosotros/#contacto">avísanos</a>.</p>
+    </div>
+    <Sources items={[{ nombre: 'Comisión Europea: el número europeo de emergencia 112', url: 'https://digital-strategy.ec.europa.eu/es/policies/112' }, { nombre: 'Protección Civil: ES-Alert', url: 'https://www.proteccioncivil.es/' }]} updated={new Date('2026-11-22')} />
+  </section>
+</Base>
+<style>
+  .big a{display:flex;gap:var(--space-5);align-items:center;background:var(--color-playbook);color:#fff;border-radius:var(--radius-lg);padding:var(--space-6);text-decoration:none;margin:var(--space-6) 0}
+  .big strong{font:800 clamp(3rem,8vw,4.5rem)/1 var(--font-heading)}
+  .tels{display:grid;gap:var(--space-3);grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));margin-bottom:var(--space-10)}
+  .tel{display:flex;gap:var(--space-4);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--space-5)}
+  .flag{font-size:2rem;line-height:1}
+  .tel h2{font-size:var(--size-lg);margin:0}
+  .num{font:700 var(--size-2xl)/1.2 var(--font-heading);color:var(--color-playbook-text);margin:.1em 0}
+  .tel p{margin:0}
+</style>

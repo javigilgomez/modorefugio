@@ -1,0 +1,70 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../../layouts/Base.astro';
+import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
+import Photo from '../../../../components/Photo.astro';
+import Icon from '../../../../components/Icon.astro';
+import Checklist from '../../../../components/Checklist.astro';
+import CategoryCard from '../../../../components/CategoryCard.astro';
+import Newsletter from '../../../../components/Newsletter.astro';
+import { catById } from '../../../../data/categorias';
+import { SITE } from '../../../../data/site';
+import { PARA } from '../../../../lib/util';
+export async function getStaticPaths() {
+  return (await getCollection('playbooks')).map((pb) => ({ params: { slug: pb.id }, props: { pb } }));
+}
+const { pb } = Astro.props;
+const d = pb.data;
+const equipo = (await getCollection('equipo')).filter((e) => d.comparativas.includes(e.id));
+const n = d.nombre.toLowerCase();
+const title = `Cómo prepararse para ${PARA[pb.id] ?? n}: lista básica y avanzada`;
+const crumbs = [{ name: 'Prepárate', href: '/preparate/' }, { name: `Por riesgo: ${d.nombre}`, href: `/preparate/riesgo/${pb.id}/` }];
+---
+<Base title={title} description={`Qué tener preparado antes: lista básica para todos y nivel avanzado para ${n}. Con enlaces al playbook de qué hacer cuando pasa.`} crumbs={crumbs} image={`/og/playbook-${pb.id}.png`}
+  schema={[{ '@context': 'https://schema.org', '@type': 'Article', headline: title, inLanguage: 'es', dateModified: d.actualizado.toISOString(), mainEntityOfPage: `${SITE.url}/preparate/riesgo/${pb.id}/`, author: { '@type': 'Organization', name: SITE.name } }]}>
+  <section class="phero">
+    <div class="phero__img"><Photo k={d.photo} eager sizes="100vw" /></div>
+    <div class="container phero__inner">
+      <Breadcrumbs items={crumbs} />
+      <p class="eyebrow"><Icon name={d.icon} size={16} /> Prepárate por riesgo</p>
+      <h1>{title}</h1>
+      <p class="lead">Esto es lo que conviene tener <strong>antes</strong>. Si ya está pasando, ve directo al <a href={`/playbook/${pb.id}/`} style="color:var(--amber-300)">playbook de {n}</a>.</p>
+    </div>
+  </section>
+  <div class="container section--tight">
+    <div class="two">
+      <section class="lvl lvl--b">
+        <span class="badge badge--basic"><Icon name="circle-dot" size={12} /> Básico · para todos</span>
+        <h2>Lo imprescindible</h2>
+        <Checklist id={`riesgo-${pb.id}-b`} items={d.prepara.basico} />
+      </section>
+      <section class="lvl lvl--a">
+        <span class="badge badge--advanced"><Icon name="layers" size={12} /> Avanzado · si quieres ir más allá</span>
+        <h2>Para más autonomía</h2>
+        <Checklist id={`riesgo-${pb.id}-a`} items={d.prepara.avanzado} />
+      </section>
+    </div>
+    <div class="pbcta">
+      <div><p class="eyebrow" style="color:var(--color-playbook)"><Icon name="siren" size={16} /> The Playbook</p><h2>¿Y cuando pase? Ten el plan impreso</h2><p class="muted">Paso a paso para los primeros minutos, horas y días. Descárgalo y guárdalo con tu kit.</p></div>
+      <div class="pbcta__b"><a href={`/playbook/${pb.id}/`} class="btn btn--playbook btn--lg">Abrir playbook</a><a href={`/pdf/playbook-${pb.id}.pdf`} class="btn btn--ghost btn--lg" download><Icon name="file-down" size={18} /> PDF</a></div>
+    </div>
+    <h2>Prepárate por categoría</h2>
+    <p class="muted">Cada categoría tiene su lista básica y su nivel avanzado.</p>
+    <div class="grid grid--4">{d.categorias.map((c) => <CategoryCard c={catById(c)} />)}</div>
+    {equipo.length > 0 && (<><h2 style="margin-top:3rem">Comparativas de equipo</h2><div class="chips">{equipo.map((e) => <a class="chip" href={`/equipo/${e.id}/`}><Icon name="star" size={16} /> {e.data.title}</a>)}</div></>)}
+  </div>
+  <Newsletter />
+</Base>
+<style>
+  .two{display:grid;gap:var(--space-6);grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));margin-top:calc(-1*var(--space-12));position:relative}
+  .lvl{background:var(--color-surface);border-radius:var(--radius-lg);padding:var(--space-6);box-shadow:var(--shadow-md);border:1px solid var(--color-border)}
+  .lvl--b{border-top:6px solid var(--color-basic)}
+  .lvl--a{border-top:6px solid var(--color-advanced)}
+  .lvl h2{margin:.5em 0 .6em;font-size:var(--size-2xl)}
+  .pbcta{display:flex;justify-content:space-between;align-items:center;gap:var(--space-6);flex-wrap:wrap;background:var(--color-playbook-bg);border:1px solid var(--signal-200);border-radius:var(--radius-lg);padding:var(--space-8);margin:var(--space-12) 0}
+  .pbcta h2{margin:0 0 .3em;font-size:var(--size-2xl)}
+  .pbcta p{margin:0}
+  .pbcta__b{display:flex;gap:var(--space-3);flex-wrap:wrap}
+  .pbcta .btn--ghost{color:var(--color-playbook-text)}
+  .phero .phero__inner{padding-bottom:calc(var(--space-16) + var(--space-4))}
+</style>

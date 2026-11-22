@@ -1,0 +1,64 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import Icon from '../../../components/Icon.astro';
+import Photo from '../../../components/Photo.astro';
+import Checklist from '../../../components/Checklist.astro';
+import Faq from '../../../components/Faq.astro';
+import Sources from '../../../components/Sources.astro';
+import Newsletter from '../../../components/Newsletter.astro';
+const crumbs = [{ name: 'Empieza aquí', href: '/empieza-aqui/' }, { name: 'Kit de 72 horas', href: '/empieza-aqui/kit-72-horas/' }];
+const grupos = [
+  { t: 'Agua y comida', icon: 'droplets', cat: 'agua', items: [{ item: 'Agua potable', cantidad: '3 L × persona × día' }, { item: 'Comida que no necesita frío ni cocción', cantidad: '3 días', nota: 'Conservas abre-fácil, legumbres cocidas, atún, frutos secos, barritas, galletas.' }, { item: 'Abrelatas manual, cubiertos y vasos' }, { item: 'Comida y agua para mascotas' }] },
+  { t: 'Luz, energía y radio', icon: 'zap', cat: 'energia-y-luz', items: [{ item: 'Linterna LED (mejor frontal) por persona' }, { item: 'Pilas de repuesto', nota: 'Del tamaño exacto de tus aparatos.' }, { item: 'Radio a pilas, dinamo o solar', nota: 'En un apagón general, la radio es la vía de información oficial.' }, { item: 'Powerbank cargado y cables' }, { item: 'Mechero o cerillas' }] },
+  { t: 'Salud e higiene', icon: 'heart-pulse', cat: 'salud-y-botiquin', items: [{ item: 'Botiquín de primeros auxilios' }, { item: 'Medicación habitual', nota: 'Con copia de las recetas o del informe médico.' }, { item: 'Gel hidroalcohólico, toallitas y papel higiénico' }, { item: 'Bolsas de basura resistentes' }, { item: 'Productos de higiene íntima y pañales si hace falta' }] },
+  { t: 'Documentos y dinero', icon: 'file-lock-2', cat: 'documentos-y-dinero', items: [{ item: 'Copias de DNI/pasaporte, tarjeta sanitaria, seguros', nota: 'En una bolsa estanca.' }, { item: 'Efectivo en billetes pequeños', nota: 'Si cae la red, los datáfonos no funcionan.' }, { item: 'Lista de teléfonos en papel' }, { item: 'Llaves de repuesto de casa y coche' }] },
+  { t: 'Abrigo y herramientas', icon: 'house', cat: 'refugio-y-temperatura', items: [{ item: 'Ropa de abrigo y calzado cómodo' }, { item: 'Mantas o saco de dormir, mantas térmicas' }, { item: 'Navaja multiusos' }, { item: 'Cinta americana' }, { item: 'Silbato para pedir ayuda' }] },
+];
+const faq = [
+  { q: '¿Por qué 72 horas?', a: 'Es el tiempo que, en una gran emergencia, pueden tardar los servicios de ayuda en llegar a todo el mundo. La Comisión Europea pide en su Estrategia de Preparación (marzo de 2025) que la población esté preparada para ser autosuficiente al menos 72 horas.' },
+  { q: '¿Tengo que comprarlo todo nuevo?', a: 'No. La mayoría de cosas ya están en casa. Lo importante es reunirlas en un sitio conocido por todos y comprobar que funcionan.' },
+  { q: '¿Kit en casa o mochila?', a: 'Las dos cosas. El kit de casa es para quedarte (apagón, ola de frío). La mochila es para salir en minutos (inundación, incendio). Mira la categoría Mochila de evacuación 72 h.' },
+];
+---
+<Base title="Kit de emergencia de 72 horas: la lista que pide la UE" description="Qué debe tener un kit de emergencia para 72 horas según las recomendaciones de la Unión Europea y Protección Civil: agua, comida, luz, radio, botiquín, documentos y dinero." crumbs={crumbs} type="article"
+  schema={[{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }]}>
+  <section class="phero">
+    <div class="phero__img"><Photo k="mochila" eager sizes="100vw" /></div>
+    <div class="container phero__inner">
+      <Breadcrumbs items={crumbs} />
+      <p class="eyebrow"><Icon name="backpack" size={16} /> Nivel básico</p>
+      <h1>El kit de 72 horas</h1>
+      <p class="lead">En marzo de 2025 la Comisión Europea pidió a todos los hogares estar preparados para ser autosuficientes durante al menos 72 horas. Esta es la lista práctica, basada en sus recomendaciones y en las de Protección Civil.</p>
+    </div>
+  </section>
+  <div class="container container--narrow section--tight">
+    <div class="grid grid--2 k72">
+      {grupos.map((g, i) => (
+        <section class="card k72__g">
+          <h2><Icon name={g.icon} size={22} /> {g.t}</h2>
+          <Checklist id={`k72-${i}`} items={g.items} />
+          <a class="small" href={`/preparate/${g.cat}/`}>Más en Prepárate →</a>
+        </section>
+      ))}
+      <section class="card k72__g k72__cta">
+        <h2><Icon name="calculator" size={22} /> ¿Cuánto para tu casa?</h2>
+        <p class="muted">Calcula litros de agua y raciones según cuántos sois, mascotas incluidas.</p>
+        <a class="btn btn--accent" href="/herramientas/calculadora-agua-comida/">Abrir la calculadora</a>
+      </section>
+    </div>
+    <div class="callout callout--warning"><Icon name="triangle-alert" size={22} /><div>Adapta el kit a tu casa: bebés, personas mayores, medicación que necesita frío o aparatos médicos eléctricos requieren un plan específico. Mira <a href="/preparate/familia/">Niños, mayores y dependientes</a>.</div></div>
+    <Faq items={faq} />
+    <Sources items={[
+      { nombre: 'Comisión Europea: Estrategia de Preparación de la Unión (26/03/2025)', url: 'https://spain.representation.ec.europa.eu/noticias-eventos/noticias-0/estrategia-de-preparacion-de-la-union-para-prevenir-amenazas-y-crisis-emergentes-y-reaccionar-frente-2025-03-26_es' },
+      { nombre: 'IGN: qué hacer antes de un terremoto (kit de emergencia)', url: 'https://www.ign.es/web/resources/sismologia/qhacer/qhacer.html' },
+    ]} updated={new Date('2026-11-22')} />
+  </div>
+  <Newsletter />
+</Base>
+<style>
+  .k72{margin-bottom:var(--space-8)}
+  .k72__g{padding:var(--space-6)}
+  .k72__g h2{font-size:var(--size-xl);display:flex;gap:.4em;align-items:center;margin:0 0 var(--space-3)}
+  .k72__cta{background:var(--color-secondary-soft)}
+</style>

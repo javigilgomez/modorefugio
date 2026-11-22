@@ -1,0 +1,179 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Photo from '../components/Photo.astro';
+import PlaybookCard from '../components/PlaybookCard.astro';
+import CategoryCard from '../components/CategoryCard.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { CATEGORIAS } from '../data/categorias';
+import { SITE } from '../data/site';
+const pbs = (await getCollection('playbooks')).sort((a, b) => a.data.orden - b.data.orden);
+const top = pbs.slice(0, 7);
+const eq = await getCollection('equipo');
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.url + '/', inLanguage: 'es', description: SITE.description },
+  { '@context': 'https://schema.org', '@type': 'Organization', name: SITE.name, url: SITE.url + '/', logo: SITE.url + '/brand/logo-stacked.png', sameAs: Object.values(SITE.social) },
+];
+---
+<Base title="Modo Refugio · Prepárate para apagones, DANAs y emergencias" description={SITE.description} schema={schema}>
+  <section class="hero">
+    <div class="hero__img"><Photo k="hero" eager sizes="100vw" /></div>
+    <div class="container hero__in">
+      <p class="eyebrow"><Icon name="shield-check" size={16} /> La guía de preparación en español</p>
+      <h1>Prepárate sin miedo.<br /><span>Actúa con un plan.</span></h1>
+      <p class="lead">Apagones, DANAs, olas de calor, ciberataques. Te contamos qué tener en casa <strong>antes</strong> —en versión básica y avanzada— y qué hacer, paso a paso, <strong>cuando pasa</strong>.</p>
+      <div class="hero__cta">
+        <a href="/empieza-aqui/" class="btn btn--accent btn--lg"><Icon name="flag" size={20} /> Empieza aquí</a>
+        <a href="/playbook/" class="btn btn--playbook btn--lg"><Icon name="siren" size={20} /> ¿Está pasando ahora?</a>
+      </div>
+      <div class="hero__now">
+        <span>Abrir playbook:</span>
+        {pbs.slice(0, 6).map((p) => <a href={`/playbook/${p.id}/`}><Icon name={p.data.icon} size={16} /> {p.data.nombre}</a>)}
+        <a href="/playbook/" class="more">Ver los {pbs.length} →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section paths">
+    <div class="container">
+      <div class="grid grid--2">
+        <a class="path path--prep" href="/preparate/">
+          <span class="path__k"><Icon name="calendar-check" size={18} /> Antes</span>
+          <h2>Prepárate</h2>
+          <p>12 categorías —agua, comida, energía, botiquín, mochila…— cada una con nivel <strong>Básico</strong> para todos y <strong>Avanzado</strong> para ir más allá.</p>
+          <ul><li><span class="badge badge--basic">Básico</span> Lo que pide Protección Civil: 72 h de autonomía</li><li><span class="badge badge--advanced">Avanzado</span> 2 semanas, energía solar, potabilizar, radio</li></ul>
+          <span class="path__go">Ver las categorías <Icon name="arrow-right" size={18} /></span>
+        </a>
+        <a class="path path--pb" href="/playbook/">
+          <span class="path__k"><Icon name="zap" size={18} /> Cuando pasa</span>
+          <h2>The Playbook</h2>
+          <p>{pbs.length} planes de acción para el momento: qué hacer en los primeros minutos, horas y días. Checklists que se imprimen en PDF y funcionan sin internet.</p>
+          <ul><li><Icon name="timer" size={16} /> Ordenados por fases y prioridades</li><li><Icon name="file-down" size={16} /> Descargables en A4 para tu kit</li></ul>
+          <span class="path__go">Abrir The Playbook <Icon name="arrow-right" size={18} /></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <div class="section-head">
+        <div><p class="eyebrow" style="color:var(--signal-300)"><Icon name="siren" size={16} /> The Playbook</p><h2>Qué hacer cuando pasa</h2></div>
+        <a href="/playbook/" class="btn btn--ghost-light">Todos los playbooks <Icon name="arrow-right" size={16} /></a>
+      </div>
+      <div class="pbgrid">
+        <PlaybookCard pb={top[0]} size="lg" />
+        {top.slice(1).map((p) => <PlaybookCard pb={p} size="sm" />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div><p class="eyebrow"><Icon name="shield-check" size={16} /> Prepárate</p><h2>Doce áreas. Dos niveles.</h2></div>
+        <a href="/preparate/" class="btn btn--ghost">Ver todo <Icon name="arrow-right" size={16} /></a>
+      </div>
+      <div class="grid grid--4">{CATEGORIAS.map((c) => <CategoryCard c={c} />)}</div>
+    </div>
+  </section>
+
+  <section class="section section--subtle">
+    <div class="container why">
+      <div>
+        <p class="eyebrow"><Icon name="info" size={16} /> Por qué ahora</p>
+        <h2>No es alarmismo. Es lo que ya ha pasado.</h2>
+        <p class="muted">Prepararse no va de búnkeres. Va de que un corte de luz de un día sea una anécdota y no un problema, y de saber qué hacer cuando suena la alerta en el móvil.</p>
+        <a class="btn btn--primary" href="/empieza-aqui/kit-72-horas/">El kit de 72 horas de la UE</a>
+      </div>
+      <ul class="facts">
+        <li><strong>28 abr 2025</strong><span>Apagón general en la Península Ibérica: millones de personas sin luz, metro, datos ni pago con tarjeta durante horas.</span></li>
+        <li><strong>29 oct 2024</strong><span>La DANA de Valencia deja más de 220 fallecidos. Muchos, en garajes, bajos y coches.</span></li>
+        <li><strong>Mar 2025</strong><span>La Comisión Europea pide a cada hogar estar preparado para ser autosuficiente al menos 72 horas.</span></li>
+        <li><strong>Cada verano</strong><span>Las olas de calor son el riesgo natural que más muertes causa en España.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container levels">
+      <div class="levels__img"><Photo k="energia2" widths={[500, 900]} sizes="(min-width:900px) 45vw, 100vw" ratio="4/3" /></div>
+      <div>
+        <p class="eyebrow"><Icon name="sparkles" size={16} /> Test de 2 minutos</p>
+        <h2>¿Qué nivel de preparación tienes?</h2>
+        <p class="muted">10 preguntas rápidas sobre agua, luz, comida y plan familiar. Te decimos tu nivel y por dónde seguir, sin vendernos nada.</p>
+        <a class="btn btn--accent btn--lg" href="/empieza-aqui/que-nivel-eres/">Hacer el test</a>
+        <div class="starts">
+          <a href="/empieza-aqui/kit-basico-en-una-tarde/"><Icon name="clock" size={18} /> Tu kit básico en 1 tarde</a>
+          <a href="/herramientas/calculadora-agua-comida/"><Icon name="calculator" size={18} /> Calculadora de agua y comida</a>
+          <a href="/telefonos-de-emergencia/"><Icon name="phone" size={18} /> Teléfonos de emergencia</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--subtle">
+    <div class="container">
+      <div class="section-head">
+        <div><p class="eyebrow"><Icon name="star" size={16} /> Equipo</p><h2>Comparativas sin humo</h2></div>
+        <a href="/equipo/" class="btn btn--ghost">Todas <Icon name="arrow-right" size={16} /></a>
+      </div>
+      <div class="grid grid--4 eq">
+        {eq.slice(0, 4).map((e) => (
+          <a class="card" href={`/equipo/${e.id}/`}>
+            <Photo k={e.data.photo} widths={[400, 600]} sizes="(min-width:1000px) 25vw, 100vw" ratio="16/10" />
+            <div class="card__body"><h3>{e.data.title}</h3><p class="small muted">{e.data.productos.length} modelos comparados</p></div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <Newsletter />
+</Base>
+<style>
+  .hero{position:relative;color:#fff;background:var(--pine-900);isolation:isolate;overflow:hidden}
+  .hero__img{position:absolute;inset:0;z-index:-1}
+  .hero__img :global(img){width:100%;height:100%;object-fit:cover;opacity:.55}
+  .hero__img::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,rgba(9,28,24,.95) 0%,rgba(9,28,24,.75) 45%,rgba(9,28,24,.25) 100%)}
+  .hero__in{padding-block:clamp(4rem,10vw,8rem)}
+  .hero h1{color:#fff;font-size:clamp(2.6rem,6.5vw,5rem);line-height:1.02;max-width:14ch;margin:0 0 .35em}
+  .hero h1 span{color:var(--amber-300)}
+  .hero .lead{color:rgba(250,247,240,.88);max-width:56ch}
+  .hero .eyebrow{color:var(--amber-300)}
+  .hero__cta{display:flex;gap:var(--space-3);flex-wrap:wrap;margin:var(--space-8) 0}
+  .hero__now{display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center;font-size:var(--size-sm)}
+  .hero__now span{color:rgba(250,247,240,.7);margin-right:var(--space-2)}
+  .hero__now a{display:inline-flex;gap:.4em;align-items:center;padding:.4em .8em;border-radius:var(--radius-pill);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;text-decoration:none}
+  .hero__now a:hover{background:var(--color-playbook);border-color:var(--color-playbook)}
+  .hero__now .more{background:none;border:none;color:var(--amber-300)}
+  .paths{margin-top:calc(-1*var(--space-12));position:relative;padding-top:0}
+  .path{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-8);border-radius:var(--radius-xl,24px);text-decoration:none;color:var(--color-text);background:var(--color-surface);box-shadow:var(--shadow-lg);border-top:6px solid var(--color-primary);transition:transform var(--motion-base)}
+  .path:hover{transform:translateY(-3px)}
+  .path--pb{border-top-color:var(--color-playbook);background:linear-gradient(180deg,var(--color-playbook-bg),var(--color-surface) 70%)}
+  .path h2{margin:0;font-size:var(--size-3xl)}
+  .path p{margin:0;color:var(--color-text-muted)}
+  .path ul{list-style:none;padding:0;margin:var(--space-2) 0;display:grid;gap:var(--space-2);font-size:var(--size-sm)}
+  .path li{display:flex;gap:.6em;align-items:center}
+  .path__k{font:700 var(--size-xs)/1 var(--font-body);text-transform:uppercase;letter-spacing:.1em;color:var(--color-secondary);display:flex;gap:.4em;align-items:center}
+  .path--pb .path__k{color:var(--color-playbook)}
+  .path__go{margin-top:auto;font-weight:700;color:var(--color-primary);display:flex;gap:.4em;align-items:center}
+  .path--pb .path__go{color:var(--color-playbook-text)}
+  .section--dark{background:var(--pine-900);color:#fff}
+  .section--dark h2{color:#fff}
+  .btn--ghost-light{color:#fff;border:1.5px solid rgba(255,255,255,.35);background:transparent}
+  .btn--ghost-light:hover{background:rgba(255,255,255,.1)}
+  .pbgrid{display:grid;gap:var(--space-4);grid-template-columns:repeat(4,1fr)}
+  .pbgrid > :global(:first-child){grid-column:span 2;grid-row:span 2}
+  @media (max-width:900px){.pbgrid{grid-template-columns:1fr 1fr}.pbgrid > :global(:first-child){grid-column:span 2;grid-row:auto}}
+  .why{display:grid;gap:var(--space-10);grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));align-items:center}
+  .facts{list-style:none;padding:0;margin:0;display:grid;gap:var(--space-3)}
+  .facts li{display:grid;grid-template-columns:110px 1fr;gap:var(--space-4);padding:var(--space-4) var(--space-5);background:var(--color-surface);border-radius:var(--radius-md);border-left:4px solid var(--color-accent)}
+  .facts strong{font-family:var(--font-heading);color:var(--color-heading)}
+  .facts span{color:var(--color-text-muted);font-size:var(--size-sm)}
+  .levels{display:grid;gap:var(--space-10);grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));align-items:center}
+  .levels__img :global(img){border-radius:var(--radius-lg)}
+  .starts{display:grid;gap:var(--space-2);margin-top:var(--space-8)}
+  .starts a{display:flex;gap:.6em;align-items:center;font-weight:600;color:var(--color-primary)}
+  .eq h3{font-size:var(--size-lg);margin:0 0 .2em}
+</style>

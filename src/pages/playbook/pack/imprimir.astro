@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import Print from '../../../layouts/Print.astro';
+import PrintHeader from '../../../components/PrintHeader.astro';
+import { TELEFONOS } from '../../../data/emergencias';
+import { SITE } from '../../../data/site';
+import { stepText } from '../../../lib/util';
+const pbs = (await getCollection('playbooks')).sort((a, b) => a.data.orden - b.data.orden);
+---
+<Print title="The Playbook completo">
+  <section class="cover">
+    <img src="/brand/logo-stacked.svg" alt="Modo Refugio" width="260" />
+    <h1>The Playbook</h1>
+    <p>Qué hacer cuando pasa. {pbs.length} planes paso a paso para tenerlos impresos junto a tu kit de emergencia.</p>
+    <ol class="toc">{pbs.map((p) => <li>{p.data.nombre}</li>)}</ol>
+    <div class="tels"><strong>Emergencias:</strong> {TELEFONOS.filter((t) => t.pais !== 'Unión Europea').map((t) => `${t.pais} ${t.principal}`).join(' · ')}</div>
+    <p class="small">modorefugio.com · Información divulgativa: sigue siempre las indicaciones oficiales.</p>
+  </section>
+  {pbs.map((pb) => (
+    <section class="pb">
+      <PrintHeader kicker="The Playbook" title={pb.data.title} subtitle={pb.data.resumen} url={`${SITE.url}/playbook/${pb.id}/`} />
+      <div class="first"><h2>Lo primero</h2><ol>{pb.data.primero.map((x) => <li set:html={x} />)}</ol></div>
+      {pb.data.fases.map((f, i) => (
+        <div class="phase"><h2>{i + 1}. {f.titulo} <small>{f.cuando}</small></h2>
+          <ul>{f.pasos.map((s) => { const st = stepText(s); return <li class:list={{ crit: st.critico }}><span class="box" /><span set:html={st.t} /></li>; })}</ul>
+        </div>
+      ))}
+      <div class="dont"><h2>NO hagas</h2><ul>{pb.data.noHagas.map((x) => <li set:html={x} />)}</ul></div>
+    </section>
+  ))}
+</Print>
+<style>
+  .cover{min-height:265mm;display:flex;flex-direction:column;justify-content:center;gap:5mm;break-after:page}
+  .cover img{width:60mm}
+  .cover h1{font-size:44pt;color:#C2410C}
+  .cover p{font-size:12pt;max-width:140mm}
+  .toc{columns:2;font-size:11pt;line-height:1.8}
+  .tels{font-size:9pt;background:#FDEEE3;padding:3mm 4mm;border-radius:2mm}
+  .small{font-size:8pt;color:#7D7767}
+  .pb{break-before:page}
+  h2{font-size:12pt;margin:3mm 0 1.5mm}
+  h2 small{font:700 7pt/1 var(--font-body);color:#C2410C;letter-spacing:.1em;text-transform:uppercase;margin-left:2mm}
+  .first{background:#FDEEE3;border-radius:2.5mm;padding:2.5mm 4mm}
+  .first ol{margin:0;padding-left:5mm;columns:2;column-gap:6mm;font-weight:600}
+  .phase li{display:flex;gap:2.2mm;padding:.9mm 0;border-bottom:.25mm solid #E5DDCB;break-inside:avoid}
+  .box{flex:none;width:3.3mm;height:3.3mm;border:.4mm solid #14352F;border-radius:.7mm;margin-top:.6mm}
+  .crit{font-weight:650}
+  .crit .box{border-color:#C2410C}
+  .dont{background:#FBE4E1;color:#8F1D14;border-radius:2.5mm;padding:2.5mm 4mm;margin-top:3mm;break-inside:avoid}
+  .dont h2{color:#8F1D14}
+  .dont li{font-size:9pt;margin-bottom:.8mm}
+</style>

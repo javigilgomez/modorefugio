@@ -1,0 +1,8 @@
+---
+import { getCollection } from 'astro:content';
+import PrepPage from '../../../../components/PrepPage.astro';
+export async function getStaticPaths() {
+  return (await getCollection('preparate')).filter((e) => e.data.nivel === 'avanzado').map((entry) => ({ params: { cat: entry.data.categoria }, props: { entry } }));
+}
+---
+<PrepPage entry={Astro.props.entry} />

@@ -1,0 +1,52 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Icon from '../../components/Icon.astro';
+import Photo from '../../components/Photo.astro';
+import Newsletter from '../../components/Newsletter.astro';
+const crumbs = [{ name: 'Empieza aquí', href: '/empieza-aqui/' }];
+const pasos = [
+  { n: 1, icon: 'sparkles', t: 'Haz el test: ¿qué nivel eres?', d: '2 minutos para saber qué te falta. Sin registro.', href: '/empieza-aqui/que-nivel-eres/', cta: 'Hacer el test' },
+  { n: 2, icon: 'clock', t: 'Tu kit básico en una tarde', d: 'Una lista de compra corta, ordenada por tiendas, y un plan de 3 horas para dejarlo todo listo.', href: '/empieza-aqui/kit-basico-en-una-tarde/', cta: 'Ver el plan' },
+  { n: 3, icon: 'backpack', t: 'El kit de 72 horas de la UE', d: 'Qué pide exactamente la Unión Europea a cada hogar y cómo adaptarlo a tu casa.', href: '/empieza-aqui/kit-72-horas/', cta: 'Ver la lista' },
+  { n: 4, icon: 'printer', t: 'Imprime tres playbooks', d: 'Apagón, DANA/inundación y caída mundial de internet. Guárdalos con el kit: cuando pase, no habrá wifi para buscarlo.', href: '/descargas/', cta: 'Ir a descargas' },
+  { n: 5, icon: 'calendar-check', t: 'Revisa cada 6 meses', d: 'Aprovecha el cambio de hora para revisar caducidades, pilas y el plan familiar.', href: '#newsletter', cta: 'Quiero el recordatorio' },
+];
+---
+<Base title="Empieza aquí: cómo prepararte para una emergencia desde cero" description="Guía para empezar a prepararte sin agobios: test de nivel, kit básico en una tarde, el kit de 72 horas que recomienda la UE y los playbooks para imprimir." crumbs={crumbs}>
+  <section class="phero">
+    <div class="phero__img"><Photo k="familia" eager sizes="100vw" /></div>
+    <div class="container phero__inner">
+      <Breadcrumbs items={crumbs} />
+      <p class="eyebrow"><Icon name="flag" size={16} /> Empieza aquí</p>
+      <h1>De cero a preparado, sin agobios</h1>
+      <p class="lead">No necesitas un búnker ni gastar mucho. Necesitas agua, luz, una radio, algo de comida, un plan y saber qué hacer. Estos cinco pasos te llevan ahí.</p>
+    </div>
+  </section>
+  <section class="container container--narrow section--tight">
+    <ol class="steps">
+      {pasos.map((p) => (
+        <li>
+          <span class="steps__n">{p.n}</span>
+          <div class="steps__b">
+            <h2><Icon name={p.icon} size={22} /> {p.t}</h2>
+            <p class="muted">{p.d}</p>
+            <a class="btn btn--primary btn--sm" href={p.href}>{p.cta} <Icon name="arrow-right" size={14} /></a>
+          </div>
+        </li>
+      ))}
+    </ol>
+    <div class="callout callout--info">
+      <Icon name="info" size={22} />
+      <div><strong>Básico y Avanzado, ¿qué significa?</strong> En cada categoría verás dos niveles. El <span class="badge badge--basic">Básico</span> es lo que cualquier hogar debería tener (72 horas de autonomía). El <span class="badge badge--advanced">Avanzado</span> es para quien quiere aguantar una o dos semanas, o vive en zona rural, en una zona inundable o con personas dependientes.</div>
+    </div>
+  </section>
+  <Newsletter />
+</Base>
+<style>
+  .steps{list-style:none;padding:0;margin:0 0 var(--space-10);display:grid;gap:var(--space-4);counter-reset:s}
+  .steps li{display:flex;gap:var(--space-5);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-6);box-shadow:var(--shadow-sm)}
+  .steps__n{flex:none;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--color-accent);color:var(--pine-900);font:800 var(--size-xl)/1 var(--font-heading)}
+  .steps h2{font-size:var(--size-xl);margin:0 0 .3em;display:flex;gap:.4em;align-items:center}
+  .steps p{margin:0 0 var(--space-4)}
+</style>

@@ -1,0 +1,30 @@
+---
+import Icon from './Icon.astro';
+import Photo from './Photo.astro';
+import type { Categoria } from '../data/categorias';
+interface Props { c: Categoria }
+const { c } = Astro.props;
+---
+<article class="ccard card">
+  <a href={`/preparate/${c.id}/`} class="ccard__img" tabindex="-1" aria-hidden="true"><Photo k={c.photo} widths={[400, 700]} sizes="(min-width:1000px) 25vw, 100vw" ratio="16/10" /></a>
+  <div class="card__body">
+    <h3><a href={`/preparate/${c.id}/`}><Icon name={c.icon} size={20} /> {c.nombre}</a></h3>
+    <p class="muted small">{c.claim}</p>
+    <div class="ccard__lv">
+      <a href={`/preparate/${c.id}/`} class="badge badge--basic"><Icon name="circle-dot" size={12} /> Básico</a>
+      <a href={`/preparate/${c.id}/avanzado/`} class="badge badge--advanced"><Icon name="layers" size={12} /> Avanzado</a>
+    </div>
+  </div>
+</article>
+<style>
+  .ccard{display:flex;flex-direction:column}
+  .ccard__img{display:block;overflow:hidden}
+  .ccard__img :global(img){transition:transform var(--motion-slow) var(--motion-ease)}
+  .ccard:hover .ccard__img :global(img){transform:scale(1.04)}
+  .ccard h3{font-size:var(--size-lg)}
+  .ccard h3 a{color:var(--color-heading);text-decoration:none;display:flex;gap:.5em;align-items:center}
+  .ccard h3 a::after{content:'';position:absolute;inset:0}
+  .ccard{position:relative}
+  .ccard h3 :global(.icon){color:var(--color-secondary)}
+  .ccard__lv{display:flex;gap:var(--space-2);position:relative;z-index:1}
+</style>

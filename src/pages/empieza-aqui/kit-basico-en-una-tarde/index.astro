@@ -1,0 +1,66 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import Icon from '../../../components/Icon.astro';
+import Photo from '../../../components/Photo.astro';
+import Checklist from '../../../components/Checklist.astro';
+import ProductBox from '../../../components/ProductBox.astro';
+import AffiliateNote from '../../../components/AffiliateNote.astro';
+import Newsletter from '../../../components/Newsletter.astro';
+import Sources from '../../../components/Sources.astro';
+import { SITE } from '../../../data/site';
+const crumbs = [{ name: 'Empieza aquí', href: '/empieza-aqui/' }, { name: 'Kit básico en una tarde', href: '/empieza-aqui/kit-basico-en-una-tarde/' }];
+const bloques = [
+  { t: 'Mira lo que ya tienes', min: 30, icon: 'search', items: ['Revisa linternas y pilas: ¿funcionan? ¿de qué tamaño son?', 'Cuenta el agua embotellada y la comida que no necesita nevera', 'Revisa el botiquín y las caducidades de los medicamentos', 'Localiza la llave de paso del agua, el cuadro eléctrico y la llave del gas', 'Haz una lista de lo que falta (usa la de abajo)'] },
+  { t: 'Compra lo que falta', min: 90, icon: 'shopping-cart', items: ['Supermercado: agua (3 L por persona y día × 3 días), conservas abre-fácil, frutos secos, galletas y pilas del tamaño de tus linternas', 'Luz: una linterna LED por persona (mejor frontal). Evita las velas: son una causa frecuente de incendios en apagones', 'Farmacia: reposición del botiquín y medicación crónica para al menos una semana (consúltalo con tu médico)', 'Ferretería o bazar: linterna frontal, radio a pilas, mechero, cinta americana, bolsas de basura gruesas', 'Cajero: algo de efectivo en billetes pequeños'] },
+  { t: 'Haz tu plan familiar', min: 30, icon: 'users', items: ['Elige un punto de encuentro cerca de casa y otro fuera del barrio', 'Escribe en papel los teléfonos importantes (sin móvil no los recordarás)', 'Decide quién recoge a los niños y a quién avisar si hay mayores o dependientes', 'Elige un contacto fuera de tu ciudad al que todos avisaréis', 'Activa las alertas de emergencia del móvil (ES-Alert)'] },
+  { t: 'Prepara la mochila', min: 30, icon: 'backpack', items: ['Agua y comida para 1–2 días', 'Linterna, radio, powerbank cargado y cables', 'Copias de documentos en una bolsa estanca', 'Ropa de abrigo, chubasquero, mantas térmicas', 'Botiquín pequeño y medicación', 'Efectivo, llaves de repuesto y libreta con teléfonos'] },
+  { t: 'Imprime y guarda', min: 15, icon: 'printer', items: ['Imprime el playbook de apagón, el de DANA/inundación y el de caída mundial de internet', 'Guárdalos con el kit y la libreta de teléfonos', 'Pon una alarma en el móvil para revisar todo dentro de 6 meses'] },
+];
+const total = bloques.reduce((a, b) => a + b.min, 0);
+const schema = [{ '@context': 'https://schema.org', '@type': 'HowTo', name: 'Cómo preparar un kit básico de emergencia en una tarde', inLanguage: 'es', totalTime: `PT${Math.floor(total / 60)}H${total % 60}M`, step: bloques.map((b, i) => ({ '@type': 'HowToStep', position: i + 1, name: b.t, text: b.items.join('. '), url: `${SITE.url}/empieza-aqui/kit-basico-en-una-tarde/#paso-${i + 1}` })) }];
+---
+<Base title="Kit de emergencia básico en una tarde: plan paso a paso" description={`Prepara tu kit de emergencia básico en unas ${Math.round(total / 60)} horas: qué revisar, qué comprar, el plan familiar y la mochila. Con lista imprimible.`} crumbs={crumbs} schema={schema} type="article">
+  <section class="phero">
+    <div class="phero__img"><Photo k="energia2" eager sizes="100vw" /></div>
+    <div class="container phero__inner">
+      <Breadcrumbs items={crumbs} />
+      <p class="eyebrow"><Icon name="clock" size={16} /> Unas {Math.round(total / 60)} horas · Nivel básico</p>
+      <h1>Tu kit básico en una tarde</h1>
+      <p class="lead">Un sábado por la tarde basta para que un apagón o una alerta te pillen preparado. Cinco bloques, en orden. Marca cada tarea: se guarda en tu navegador.</p>
+    </div>
+  </section>
+  <div class="container container--narrow section--tight">
+    {bloques.map((b, i) => (
+      <section class="blk" id={`paso-${i + 1}`}>
+        <header><span class="blk__n">{i + 1}</span><h2><Icon name={b.icon} size={22} /> {b.t}</h2><span class="blk__t">{b.min} min</span></header>
+        <Checklist id={`tarde-${i + 1}`} items={b.items} />
+      </section>
+    ))}
+    <AffiliateNote />
+    <h2>Si te falta lo básico de luz y radio</h2>
+    <p class="muted">Tres compras que más se notan en un apagón. Mira las comparativas completas en <a href="/equipo/">Equipo</a>.</p>
+    <div class="grid grid--3">
+      <ProductBox id="petzl-actik-core" compact />
+      <ProductBox id="midland-er300" compact />
+      <ProductBox id="anker-zolo-20000" compact />
+    </div>
+    <div class="next">
+      <a class="btn btn--primary btn--lg" href="/empieza-aqui/kit-72-horas/">Siguiente: el kit de 72 horas de la UE</a>
+      <a class="btn btn--ghost btn--lg" href="/pdf/kit-basico-apagon.pdf" download><Icon name="file-down" size={18} /> Checklist en PDF</a>
+    </div>
+    <Sources items={[
+      { nombre: 'Protección Civil: autoprotección y consejos', url: 'https://www.proteccioncivil.es/coordinacion/gestion-de-riesgos' },
+      { nombre: 'Comisión Europea: Estrategia de Preparación de la Unión (2025)', url: 'https://spain.representation.ec.europa.eu/noticias-eventos/noticias-0/estrategia-de-preparacion-de-la-union-para-prevenir-amenazas-y-crisis-emergentes-y-reaccionar-frente-2025-03-26_es' },
+    ]} updated={new Date('2026-11-22')} />
+  </div>
+  <Newsletter />
+</Base>
+<style>
+  .blk{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-6);margin-bottom:var(--space-4)}
+  .blk header{display:flex;gap:var(--space-3);align-items:center;margin-bottom:var(--space-3)}
+  .blk h2{font-size:var(--size-xl);margin:0;display:flex;gap:.4em;align-items:center;flex:1}
+  .blk__n{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--color-basic);color:#fff;font-weight:800;flex:none}
+  .blk__t{font-size:var(--size-xs);font-weight:700;background:var(--color-basic-bg);color:var(--color-basic-text);padding:.35em .7em;border-radius:var(--radius-pill);white-space:nowrap}
+  .next{display:flex;gap:var(--space-3);flex-wrap:wrap;margin:var(--space-10) 0}
+</style>

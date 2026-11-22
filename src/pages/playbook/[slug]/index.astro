@@ -1,0 +1,216 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import Photo from '../../../components/Photo.astro';
+import Icon from '../../../components/Icon.astro';
+import Faq from '../../../components/Faq.astro';
+import Sources from '../../../components/Sources.astro';
+import PlaybookCard from '../../../components/PlaybookCard.astro';
+import Newsletter from '../../../components/Newsletter.astro';
+import AdSlot from '../../../components/AdSlot.astro';
+import { catById } from '../../../data/categorias';
+import { TELEFONOS } from '../../../data/emergencias';
+import { SITE } from '../../../data/site';
+import { stepText, strip } from '../../../lib/util';
+
+export async function getStaticPaths() {
+  const pbs = await getCollection('playbooks');
+  return pbs.map((pb) => ({ params: { slug: pb.id }, props: { pb, all: pbs } }));
+}
+const { pb, all } = Astro.props;
+const d = pb.data;
+const { Content } = await render(pb);
+const equipo = await getCollection('equipo');
+const comps = d.comparativas.map((id) => equipo.find((e) => e.id === id)).filter(Boolean);
+const related = all.filter((p) => p.id !== pb.id && p.data.grupo === d.grupo).sort((a, b) => a.data.orden - b.data.orden).slice(0, 3);
+const pdf = `/pdf/playbook-${pb.id}.pdf`;
+const url = `${SITE.url}/playbook/${pb.id}/`;
+const crumbs = [{ name: 'The Playbook', href: '/playbook/' }, { name: d.nombre, href: `/playbook/${pb.id}/` }];
+const schema: Record<string, unknown>[] = [
+  { '@context': 'https://schema.org', '@type': 'Article', headline: d.title, description: d.description, inLanguage: 'es', dateModified: d.actualizado.toISOString(), mainEntityOfPage: url, image: `${SITE.url}/og/playbook-${pb.id}.png`, author: { '@type': 'Organization', name: SITE.name, url: SITE.url }, publisher: { '@type': 'Organization', name: SITE.name, logo: { '@type': 'ImageObject', url: `${SITE.url}/icon-512.png` } } },
+  { '@context': 'https://schema.org', '@type': 'HowTo', name: d.title, description: d.resumen, step: d.fases.map((f, i) => ({ '@type': 'HowToSection', name: `${f.titulo} (${f.cuando})`, position: i + 1, itemListElement: f.pasos.map((s, j) => ({ '@type': 'HowToStep', position: j + 1, text: strip(stepText(s).t) })) })) },
+];
+if (d.faq.length) schema.push({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: d.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: strip(f.a) } })) });
+---
+<Base title={d.title} description={d.description} type="article" image={`/og/playbook-${pb.id}.png`} schema={schema} crumbs={crumbs}>
+  <section class="phero phero--playbook">
+    <div class="phero__img"><Photo k={d.photo} eager sizes="100vw" /></div>
+    <div class="container phero__inner">
+      <Breadcrumbs items={crumbs} />
+      <p class="eyebrow"><span class="badge badge--playbook"><Icon name="siren" size={14} /> The Playbook</span> Qué hacer cuando pasa</p>
+      <h1>{d.title}</h1>
+      <p class="lead">{d.resumen}</p>
+      <div class="hero-cta">
+        <a href={pdf} class="btn btn--accent btn--lg" download><Icon name="file-down" size={20} /> Descargar PDF (A4)</a>
+        <a href={`/preparate/riesgo/${pb.id}/`} class="btn btn--ghost btn--lg"><Icon name="shield-check" size={20} /> Prepárate antes</a>
+      </div>
+    </div>
+  </section>
+
+  {d.escena && (
+    <section class="scene" aria-label="Escena">
+      <div class="container scene__in">
+        <p class="scene__stamp"><span class="scene__rec" aria-hidden="true"></span>{d.escena.hora} · {d.escena.lugar}</p>
+        <p class="scene__txt">{d.escena.texto}</p>
+        <p class="scene__hook">{d.escena.gancho}</p>
+        <a class="scene__go" href="#lo-primero">Esto es lo que haces ahora <Icon name="arrow-down" size={18} /></a>
+      </div>
+    </section>
+  )}
+
+  <section class="first" id="lo-primero">
+    <div class="container">
+      <h2 class="first__t"><Icon name="zap" size={26} /> Lo primero, ahora mismo</h2>
+      <ol class="first__list">{d.primero.map((x) => <li set:html={x} />)}</ol>
+    </div>
+  </section>
+
+  <div class="container section--tight">
+    <div class="with-aside">
+      <div>
+        <aside class="signals">
+          <h2 class="h4"><Icon name="radar" size={20} /> Activa este playbook si…</h2>
+          <ul>{d.senales.map((s) => <li set:html={s} />)}</ul>
+        </aside>
+
+        <div class="phases">
+          {d.fases.map((f, i) => (
+            <section class="phase" id={`fase-${i + 1}`}>
+              <header class="phase__h">
+                <span class="phase__n">{i + 1}</span>
+                <div><p class="phase__when">{f.cuando}</p><h2>{f.titulo}</h2></div>
+              </header>
+              <ul class="checklist" data-checklist={`pb-${pb.id}-${i}`}>
+                {f.pasos.map((s, j) => { const st = stepText(s); return (
+                  <li class:list={{ crit: st.critico }}>
+                    <input type="checkbox" id={`pb-${pb.id}-${i}-${j}`} />
+                    <label for={`pb-${pb.id}-${i}-${j}`} class="checklist__text">
+                      {st.critico && <span class="crit__tag">Clave</span>}
+                      <span set:html={st.t} />
+                      {st.d && <span class="checklist__note" set:html={st.d} />}
+                    </label>
+                  </li>);
+                })}
+              </ul>
+            </section>
+          ))}
+        </div>
+
+        <section class="dont">
+          <h2><Icon name="ban" size={24} /> Lo que NO debes hacer</h2>
+          <ul>{d.noHagas.map((x) => <li set:html={x} />)}</ul>
+        </section>
+
+        {d.despues && (
+          <section class="after">
+            <h2><Icon name="rotate-ccw" size={22} /> Cuando todo vuelve a la normalidad</h2>
+            <ul class="checklist" data-checklist={`pb-${pb.id}-after`}>{d.despues.map((x, j) => (<li><input type="checkbox" id={`pb-${pb.id}-a-${j}`} /><label class="checklist__text" for={`pb-${pb.id}-a-${j}`} set:html={x} /></li>))}</ul>
+          </section>
+        )}
+
+        <AdSlot slot="inArticle" />
+
+        <article class="prose context">
+          <Content />
+          {d.latam && (<><h2>Si estás en Latinoamérica</h2><p set:html={d.latam} /></>)}
+        </article>
+
+        <Faq items={d.faq} />
+        <Sources items={d.fuentes} updated={d.actualizado} />
+      </div>
+
+      <aside>
+        <div class="aside-sticky">
+          <div class="aside-box pdfbox">
+            <Icon name="file-text" size={28} />
+            <h3>Llévalo offline</h3>
+            <p class="small muted">Imprímelo y guárdalo con tu kit. Sin luz ni internet, el móvil no te servirá de mucho.</p>
+            <a href={pdf} class="btn btn--playbook btn--block" download><Icon name="file-down" size={18} /> PDF · A4</a>
+          </div>
+          <div class="aside-box">
+            <h3>Prepárate antes</h3>
+            <ul>
+              <li><a href={`/preparate/riesgo/${pb.id}/`}><Icon name="list-checks" size={18} /> Kit para {d.nombre.toLowerCase()}: básico y avanzado</a></li>
+              {d.categorias.map((c) => { const cat = catById(c); return <li><a href={`/preparate/${cat.id}/`}><Icon name={cat.icon} size={18} /> {cat.nombre}</a></li>; })}
+            </ul>
+          </div>
+          {comps.length > 0 && (
+            <div class="aside-box">
+              <h3>Equipo que ayuda</h3>
+              <ul>{comps.map((c) => <li><a href={`/equipo/${c!.id}/`}><Icon name="star" size={18} /> {c!.data.title}</a></li>)}</ul>
+            </div>
+          )}
+          <div class="aside-box phones">
+            <h3><Icon name="phone" size={18} /> Emergencias</h3>
+            <ul>{TELEFONOS.slice(0, 1).concat(TELEFONOS.slice(2)).map((t) => <li><span>{t.flag} {t.pais}</span> <strong>{t.principal}</strong></li>)}</ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <section class="section section--subtle">
+    <div class="container">
+      <div class="section-head"><h2>Otros playbooks</h2><a href="/playbook/" class="btn btn--ghost">Ver todos</a></div>
+      <div class="grid grid--3">{related.map((p) => <PlaybookCard pb={p} />)}</div>
+    </div>
+  </section>
+  <Newsletter />
+</Base>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-checklist]').forEach((ul) => {
+    const key = 'mr-check-' + ul.dataset.checklist;
+    let saved: Record<string, boolean> = {};
+    try { saved = JSON.parse(localStorage.getItem(key) || '{}'); } catch {}
+    ul.querySelectorAll<HTMLInputElement>('input[type=checkbox]').forEach((cb) => {
+      if (saved[cb.id]) cb.checked = true;
+      cb.addEventListener('change', () => { saved[cb.id] = cb.checked; try { localStorage.setItem(key, JSON.stringify(saved)); } catch {} });
+    });
+  });
+</script>
+<style>
+  .hero-cta{display:flex;gap:var(--space-3);flex-wrap:wrap;margin-top:var(--space-6)}
+  .hero-cta .btn--ghost{color:#fff}
+  .first{background:var(--color-playbook-bg);border-bottom:1px solid var(--signal-100)}
+  .first .container{padding-block:var(--space-8)}
+  .first__t{display:flex;gap:.4em;align-items:center;font-size:var(--size-2xl);color:var(--color-playbook-text)}
+  .first__list{list-style:none;padding:0;margin:0;display:grid;gap:var(--space-3);grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));counter-reset:f}
+  .first__list li{counter-increment:f;background:var(--color-surface);border-radius:var(--radius-md);padding:var(--space-4) var(--space-5) var(--space-4) 3.6rem;position:relative;font-weight:550;box-shadow:var(--shadow-sm);border-left:4px solid var(--color-playbook)}
+  .first__list li::before{content:counter(f);position:absolute;left:var(--space-4);top:var(--space-4);width:30px;height:30px;border-radius:50%;background:var(--color-playbook);color:#fff;display:grid;place-items:center;font:700 var(--size-sm)/1 var(--font-body)}
+  .h4{font-size:var(--size-lg)}
+  .signals{background:var(--color-surface);border:1px dashed var(--color-border-strong);border-radius:var(--radius-lg);padding:var(--space-5) var(--space-6);margin-bottom:var(--space-10)}
+  .signals h2{display:flex;gap:.5em;align-items:center}
+  .signals ul{margin:0}
+  .phases{display:grid;gap:var(--space-10)}
+  .phase__h{display:flex;gap:var(--space-4);align-items:center;margin-bottom:var(--space-4)}
+  .phase__n{flex:none;width:52px;height:52px;border-radius:16px;background:var(--color-primary);color:var(--color-on-primary);display:grid;place-items:center;font:700 var(--size-xl)/1 var(--font-heading)}
+  .phase__when{margin:0;font-size:var(--size-xs);font-weight:700;letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--color-playbook)}
+  .phase h2{margin:0;font-size:var(--size-2xl)}
+  .crit{border-left:4px solid var(--color-playbook)!important}
+  .crit__tag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--color-playbook);color:#fff;padding:.15em .5em;border-radius:4px;margin-right:.5em;vertical-align:2px}
+  .checklist label{cursor:pointer;flex:1}
+  .dont{margin-top:var(--space-12);background:var(--color-danger-bg);color:var(--color-danger-text);border-radius:var(--radius-lg);padding:var(--space-6) var(--space-8)}
+  .dont h2{color:var(--color-danger-text);display:flex;gap:.4em;align-items:center;font-size:var(--size-2xl)}
+  .dont li{margin-bottom:.5em}
+  .after{margin-top:var(--space-12)}
+  .after h2{display:flex;gap:.4em;align-items:center;font-size:var(--size-2xl)}
+  .context{margin-top:var(--space-12)}
+  .pdfbox{background:var(--color-playbook-bg);border-color:var(--signal-200)}
+  .pdfbox :global(.icon){color:var(--color-playbook)}
+  .pdfbox .btn :global(.icon){color:#fff}
+  .aside-box :global(.icon){color:var(--color-secondary)}
+  .phones li{display:flex;justify-content:space-between;gap:1em;font-size:var(--size-sm);padding:.2em 0;border-bottom:1px solid var(--color-border)}
+
+  .scene{background:var(--pine-900);color:rgba(250,247,240,.92);position:relative;overflow:hidden}
+  .scene::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px);pointer-events:none}
+  .scene__in{position:relative;max-width:calc(46rem + 2*var(--gutter));padding-block:clamp(2.5rem,6vw,4.5rem)}
+  .scene__stamp{font:600 .8rem/1 ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-300);display:flex;align-items:center;gap:.6em;margin:0 0 1.4rem}
+  .scene__rec{width:.6em;height:.6em;border-radius:50%;background:var(--signal-500);box-shadow:0 0 0 4px rgba(234,88,12,.25);animation:rec 1.6s infinite}
+  @keyframes rec{50%{opacity:.25}}
+  @media (prefers-reduced-motion:reduce){.scene__rec{animation:none}}
+  .scene__txt{font:400 clamp(1.15rem,2.2vw,1.4rem)/1.65 var(--font-heading);margin:0;text-wrap:pretty}
+  .scene__hook{font:700 clamp(1.2rem,2.4vw,1.5rem)/1.4 var(--font-heading);color:#fff;margin:1.4rem 0 0;padding-left:1rem;border-left:4px solid var(--color-playbook)}
+  .scene__go{display:inline-flex;gap:.5em;align-items:center;margin-top:2rem;font:700 .85rem/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-300);text-decoration:none}
+  .scene__go:hover{color:#fff}
+</style>

@@ -1,0 +1,26 @@
+---
+import LegalPage from '../../components/LegalPage.astro';
+import { OWNER, SITE } from '../../data/site';
+---
+<LegalPage title="Aviso legal" description="Aviso legal de Modo Refugio (modorefugio.com): datos del titular, condiciones de uso y responsabilidad." href="/aviso-legal/">
+  <h2>1. Datos del titular</h2>
+  <p>En cumplimiento del artículo 10 de la Ley 34/2002, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa de:</p>
+  <ul>
+    <li>Titular: {OWNER.nombre}</li>
+    <li>NIF/CIF: {OWNER.nif}</li>
+    <li>Domicilio: {OWNER.direccion}</li>
+    <li>Correo electrónico: {OWNER.email}</li>
+    <li>{OWNER.registro}</li>
+    <li>Sitio web: {SITE.url}</li>
+  </ul>
+  <h2>2. Objeto</h2>
+  <p>{SITE.name} es un sitio web divulgativo sobre preparación ante emergencias. El acceso es gratuito y no requiere registro.</p>
+  <h2>3. Carácter informativo de los contenidos</h2>
+  <p>La información de este sitio es general y divulgativa. <strong>No sustituye las indicaciones de las autoridades, de los servicios de emergencia ni de profesionales sanitarios.</strong> Ante una emergencia, llama al 112 y sigue las instrucciones oficiales. El titular no se responsabiliza de los daños derivados de un uso inadecuado de la información.</p>
+  <h2>4. Propiedad intelectual</h2>
+  <p>Los textos, el diseño, el logotipo y los PDFs son propiedad del titular, salvo las fotografías y recursos de terceros, que se usan con sus licencias (ver <a href="/sobre-nosotros/#creditos">créditos</a>). Puedes imprimir y compartir los PDFs para uso personal y no comercial citando la fuente.</p>
+  <h2>5. Enlaces</h2>
+  <p>El sitio contiene enlaces a webs de terceros (organismos oficiales y tiendas). El titular no controla ni se responsabiliza de sus contenidos. Algunos enlaces son de afiliado: consulta la <a href="/divulgacion-afiliados/">divulgación de afiliados</a>.</p>
+  <h2>6. Legislación aplicable</h2>
+  <p>Este aviso legal se rige por la legislación española. Para cualquier controversia serán competentes los juzgados y tribunales que correspondan conforme a la normativa aplicable, en particular la de protección de consumidores.</p>
+</LegalPage>

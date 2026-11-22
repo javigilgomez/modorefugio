@@ -1,0 +1,38 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Icon from '../../components/Icon.astro';
+import { allCredits } from '../../data/photos';
+import { OWNER, SITE } from '../../data/site';
+const crumbs = [{ name: 'Sobre Modo Refugio', href: '/sobre-nosotros/' }];
+const credits = allCredits();
+---
+<Base title="Sobre Modo Refugio: quiénes somos y cómo trabajamos" description="Qué es Modo Refugio, cómo elaboramos los contenidos, qué fuentes oficiales usamos, cómo nos financiamos y cómo contactar." crumbs={crumbs}>
+  <article class="container container--narrow section--tight">
+    <Breadcrumbs items={crumbs} />
+    <p class="eyebrow"><Icon name="tent" size={16} /> Sobre nosotros</p>
+    <h1>Prepararse sin miedo</h1>
+    <div class="prose">
+      <p class="lead">Modo Refugio nace después del apagón del 28 de abril de 2025 y de la DANA de Valencia, con una idea sencilla: la información para prepararse existe, pero está dispersa, en inglés o escrita para expertos. Aquí la juntamos, la ordenamos y la contamos claro.</p>
+      <h2 id="metodo">Cómo trabajamos</h2>
+      <ul>
+        <li><strong>Fuentes oficiales primero.</strong> Cada guía se basa en Protección Civil, el 112, AEMET, IGN, el Consejo de Seguridad Nuclear, INCIBE, el Ministerio de Sanidad, la OMS y la Comisión Europea, y las enlaza al final.</li>
+        <li><strong>Dos niveles.</strong> Básico para todos; avanzado para quien quiere más autonomía. Sin alarmismo ni teorías.</li>
+        <li><strong>Antes y durante.</strong> «Prepárate» es para antes; «The Playbook» es para el momento en que pasa.</li>
+        <li><strong>Revisión.</strong> Cada página muestra su fecha de actualización. Revisamos los contenidos al menos una vez al año y tras cada emergencia relevante.</li>
+        <li><strong>No sustituimos a las autoridades.</strong> Si hay una emergencia, sigue siempre sus indicaciones y llama al 112.</li>
+      </ul>
+      <h2 id="financiacion">Cómo nos financiamos</h2>
+      <p>El contenido es gratuito. Algunos enlaces a productos son de afiliado (Amazon): si compras, recibimos una pequeña comisión sin coste para ti. Nunca aceptamos pagos por aparecer en una comparativa. Más detalles en <a href="/divulgacion-afiliados/">Divulgación de afiliados</a>.</p>
+      <h2 id="contacto">Contacto</h2>
+      <p>¿Has visto un error, un enlace roto o un dato desactualizado? Escríbenos a <strong>{OWNER.email}</strong>. Corregimos rápido.</p>
+      <h2 id="creditos">Créditos de las fotografías</h2>
+      <p>Usamos fotografías de dominio público o con licencia libre. Gracias a sus autores:</p>
+      <ul class="credits">
+        {credits.map(([k, c]) => <li><a href={c.url} rel="nofollow noopener" target="_blank">{c.alt || k}</a> — {c.autorUrl ? <a href={c.autorUrl} rel="nofollow noopener" target="_blank">{c.autor}</a> : c.autor} · {c.fuente} · {c.licenciaUrl ? <a href={c.licenciaUrl} rel="nofollow noopener" target="_blank">{c.licencia}</a> : c.licencia}</li>)}
+      </ul>
+      <p>Iconos: <a href="https://lucide.dev" rel="noopener" target="_blank">Lucide</a> (licencia ISC). Tipografías: Fraunces e Inter (SIL Open Font License).</p>
+    </div>
+  </article>
+</Base>
+<style>.credits{font-size:var(--size-sm)}</style>

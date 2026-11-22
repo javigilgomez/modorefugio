@@ -1,0 +1,64 @@
+---
+import Print from '../../../../layouts/Print.astro';
+import PrintHeader from '../../../../components/PrintHeader.astro';
+import { SITE } from '../../../../data/site';
+const kit = [
+  ['Linterna LED por persona (mejor frontal)', 'y pilas de repuesto'],
+  ['Radio a pilas o de dinamo', 'para oír a las autoridades'],
+  ['Powerbank cargado', 'y cables de todos los móviles'],
+  ['Agua: 3 L por persona y día', '× 3 días'],
+  ['Comida sin nevera ni fuego', 'para 3 días + abrelatas'],
+  ['Efectivo en billetes pequeños', 'sin red no hay datáfono'],
+  ['Medicación para 1 semana', '+ botiquín básico'],
+  ['Mantas y ropa de abrigo', 'o ropa fresca en verano'],
+  ['Teléfonos importantes en papel', 'y esta hoja en la nevera'],
+  ['Depósito del coche por encima de la mitad', 'por si hay que moverse'],
+];
+const pasos = [
+  'Comprueba si es solo tu casa (cuadro eléctrico) o todo el barrio.',
+  'Desenchufa aparatos sensibles. Deja una luz encendida para saber cuándo vuelve.',
+  'Enciende la radio. Usa el móvil solo para lo imprescindible.',
+  'No abras la nevera ni el congelador: la nevera aguanta unas 4 h; un congelador lleno, hasta unas 48 h.',
+  'Nada de velas ni generadores o barbacoas dentro de casa (incendio y CO).',
+  'Llama a quien dependa de ti: mayores, personas con aparatos médicos.',
+  'Si hay riesgo para alguien: 112.',
+];
+---
+<Print title="Kit básico para un apagón">
+  <PrintHeader kicker="Checklist gratis" title="Kit básico para un apagón" subtitle="Ponla en la puerta de la nevera. Marca lo que ya tienes y revisa cada 6 meses." url={`${SITE.url}/playbook/apagon/`} color="#E3A008" />
+  <div class="cols">
+    <section class="kit">
+      <h2>Ten en casa</h2>
+      <ul>{kit.map(([a, b]) => <li><span class="box" /><span><strong>{a}</strong><br /><small>{b}</small></span></li>)}</ul>
+    </section>
+    <section class="now">
+      <h2>Cuando se va la luz</h2>
+      <ol>{pasos.map((p) => <li>{p}</li>)}</ol>
+      <div class="tel">
+        <strong>112</strong><span>Emergencias · España y UE</span>
+      </div>
+      <div class="mine">
+        <h3>Mis teléfonos</h3>
+        <p>Familia: ___________________________</p>
+        <p>Contacto fuera de la ciudad: ________</p>
+        <p>Centro de salud: ___________________</p>
+        <p>Punto de encuentro: ________________</p>
+      </div>
+    </section>
+  </div>
+  <footer class="pf"><span>Playbook completo: modorefugio.com/playbook/apagon/</span><span>Información divulgativa. Sigue siempre las indicaciones oficiales.</span></footer>
+</Print>
+<style>
+  .cols{display:grid;grid-template-columns:1.05fr 1fr;gap:6mm}
+  h2{font-size:14pt;margin-bottom:3mm}
+  .kit li{display:flex;gap:3mm;padding:2mm 0;border-bottom:.3mm solid #E5DDCB;font-size:10.5pt}
+  .kit small{color:#5C5A50;font-size:8.5pt}
+  .box{flex:none;width:4.5mm;height:4.5mm;border:.5mm solid #14352F;border-radius:1mm;margin-top:.5mm}
+  .now{background:#FDEEE3;border-radius:3mm;padding:4mm 5mm}
+  .now ol{margin:0;padding-left:5mm;font-size:10pt;display:grid;gap:1.6mm}
+  .tel{display:flex;gap:3mm;align-items:center;background:#C2410C;color:#fff;border-radius:2.5mm;padding:2.5mm 4mm;margin:4mm 0}
+  .tel strong{font:800 22pt/1 var(--font-heading)}
+  .mine h3{font-size:11pt;margin-bottom:2mm}
+  .mine p{margin:0 0 2.6mm;font-size:9.5pt;color:#43443C}
+  .pf{display:flex;justify-content:space-between;margin-top:6mm;padding-top:2mm;border-top:.3mm solid #E5DDCB;font-size:7.5pt;color:#7D7767}
+</style>

@@ -1,0 +1,90 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Icon from '../../components/Icon.astro';
+import Photo from '../../components/Photo.astro';
+import PlaybookCard from '../../components/PlaybookCard.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import { GRUPOS_PLAYBOOK, type GrupoPlaybook } from '../../data/categorias';
+import { TELEFONOS } from '../../data/emergencias';
+import { SITE } from '../../data/site';
+const pbs = (await getCollection('playbooks')).sort((a, b) => a.data.orden - b.data.orden);
+const crumbs = [{ name: 'The Playbook', href: '/playbook/' }];
+const schema = [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'The Playbook', url: `${SITE.url}/playbook/`, hasPart: pbs.map((p) => ({ '@type': 'Article', name: p.data.title, url: `${SITE.url}/playbook/${p.id}/` })) }];
+---
+<Base title="The Playbook: qué hacer cuando pasa una emergencia" description="Planes paso a paso para el momento en que ocurre: apagón, DANA, terremoto, ciberataque, ola de calor, emergencia nuclear y más. Descargables en PDF para tenerlos sin conexión." crumbs={crumbs} image="/og/playbook.png" schema={schema}>
+  <section class="phero phero--playbook pbhero">
+    <div class="phero__img"><Photo k="incendio" eager sizes="100vw" /></div>
+    <div class="container phero__inner">
+      <Breadcrumbs items={crumbs} />
+      <p class="eyebrow"><span class="badge badge--playbook"><Icon name="siren" size={14} /> The Playbook</span></p>
+      <h1>Qué hacer cuando pasa</h1>
+      <p class="lead">Prepararse es para antes. El Playbook es para <strong>el momento</strong>: pasos concretos para los primeros minutos, las primeras horas y los días siguientes. Sin teoría. Imprímelos.</p>
+      <div class="quick" role="list">
+        {pbs.map((p) => <a role="listitem" href={`/playbook/${p.id}/`} class="qchip"><Icon name={p.data.icon} size={18} /> {p.data.nombre}</a>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="sos">
+    <div class="container sos__in">
+      <p><Icon name="phone" size={20} /> <strong>¿Hay peligro para alguien ahora mismo?</strong> Llama al <a href="tel:112">112</a> (España y UE).</p>
+      <p class="small">{TELEFONOS.filter((t) => !['España', 'Unión Europea'].includes(t.pais)).map((t) => `${t.flag} ${t.principal}`).join(' · ')} · <a href="/telefonos-de-emergencia/">Todos los teléfonos</a></p>
+    </div>
+  </section>
+
+  {(Object.keys(GRUPOS_PLAYBOOK) as GrupoPlaybook[]).map((g) => (
+    <section class="section group">
+      <div class="container">
+        <div class="section-head">
+          <div><p class="eyebrow"><Icon name={GRUPOS_PLAYBOOK[g].icon} size={16} /> {GRUPOS_PLAYBOOK[g].nombre}</p><h2>{GRUPOS_PLAYBOOK[g].desc}</h2></div>
+        </div>
+        <div class="grid grid--3">{pbs.filter((p) => p.data.grupo === g).map((p) => <PlaybookCard pb={p} />)}</div>
+      </div>
+    </section>
+  ))}
+
+  <section class="section section--subtle">
+    <div class="container pack">
+      <div>
+        <p class="eyebrow"><Icon name="printer" size={16} /> Offline</p>
+        <h2>Todos los playbooks en un solo PDF</h2>
+        <p class="muted">Imprímelo, grápalo y guárdalo con tu kit de emergencia. Cuando no hay luz ni internet, el papel siempre funciona.</p>
+        <a href="/pdf/modo-refugio-playbook-completo.pdf" class="btn btn--playbook btn--lg" download><Icon name="file-down" size={20} /> Descargar el pack completo</a>
+      </div>
+      <ul class="pdflist">{pbs.map((p) => <li><a href={`/pdf/playbook-${p.id}.pdf`} download><Icon name="file-text" size={16} /> {p.data.nombre}</a></li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container howto">
+      <h2>Cómo están hechos</h2>
+      <div class="grid grid--3">
+        <div><Icon name="timer" size={28} /><h3>Por tiempo</h3><p class="muted">Cada playbook se ordena por fases: primeros minutos, primeras horas y si se alarga. Lo marcado como <strong>Clave</strong> es lo que no puedes saltarte.</p></div>
+        <div><Icon name="badge-check" size={28} /><h3>Con fuentes oficiales</h3><p class="muted">Basados en las recomendaciones de Protección Civil, el 112, AEMET, IGN, CSN, INCIBE, OMS y la Comisión Europea, enlazadas en cada página.</p></div>
+        <div><Icon name="link" size={28} /><h3>Conectados con «Prepárate»</h3><p class="muted">Cada playbook enlaza a lo que conviene tener antes, en nivel básico y avanzado.</p></div>
+      </div>
+    </div>
+  </section>
+  <Newsletter />
+</Base>
+<style>
+  .pbhero .phero__inner{padding-block:clamp(3rem,7vw,6rem)}
+  .pbhero h1{font-size:var(--size-5xl)}
+  .quick{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-8)}
+  .qchip{display:inline-flex;gap:.45em;align-items:center;padding:.6em 1em;border-radius:var(--radius-pill);background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;font-weight:600;font-size:var(--size-sm);backdrop-filter:blur(4px)}
+  .qchip:hover{background:var(--color-playbook);border-color:var(--color-playbook);color:#fff}
+  .sos{background:var(--color-danger-bg);color:var(--color-danger-text)}
+  .sos__in{display:flex;justify-content:space-between;gap:var(--space-4);flex-wrap:wrap;align-items:center;padding-block:var(--space-4)}
+  .sos p{margin:0;display:flex;gap:.5em;align-items:center;flex-wrap:wrap}
+  .sos a{color:inherit;font-weight:800}
+  .group + .group{padding-top:0}
+  .group h2{font-size:var(--size-2xl);max-width:36ch}
+  .pack{display:grid;gap:var(--space-10);grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));align-items:center}
+  .pdflist{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2)}
+  .pdflist a{display:flex;gap:.5em;align-items:center;padding:.6em .8em;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-sm);text-decoration:none;color:var(--color-text);font-size:var(--size-sm)}
+  .pdflist a:hover{border-color:var(--color-playbook);color:var(--color-playbook-text)}
+  .howto :global(.icon){color:var(--color-playbook)}
+  .howto h3{margin-top:.5em}
+</style>

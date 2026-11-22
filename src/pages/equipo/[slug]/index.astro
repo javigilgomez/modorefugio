@@ -1,0 +1,93 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import Photo from '../../../components/Photo.astro';
+import Icon from '../../../components/Icon.astro';
+import ProductBox from '../../../components/ProductBox.astro';
+import AffiliateNote from '../../../components/AffiliateNote.astro';
+import Faq from '../../../components/Faq.astro';
+import Sources from '../../../components/Sources.astro';
+import Newsletter from '../../../components/Newsletter.astro';
+import AdSlot from '../../../components/AdSlot.astro';
+import { prodById } from '../../../data/products';
+import { catById } from '../../../data/categorias';
+import { SITE, AFFILIATE, amazonSearchUrl, amazonAsinUrl } from '../../../data/site';
+export async function getStaticPaths() {
+  return (await getCollection('equipo')).map((e) => ({ params: { slug: e.id }, props: { e } }));
+}
+const { e } = Astro.props;
+const d = e.data;
+const { Content } = await render(e);
+const prods = d.productos.map(prodById);
+const cols = [...new Set(prods.flatMap((p) => p.specs.map(([k]) => k)))];
+const cat = catById(d.categoria);
+const crumbs = [{ name: 'Equipo', href: '/equipo/' }, { name: d.title, href: `/equipo/${e.id}/` }];
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'Article', headline: d.title, description: d.description, inLanguage: 'es', dateModified: d.actualizado.toISOString(), mainEntityOfPage: `${SITE.url}/equipo/${e.id}/`, author: { '@type': 'Organization', name: SITE.name, url: SITE.url } },
+  { '@context': 'https://schema.org', '@type': 'ItemList', name: d.title, itemListElement: prods.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.nombre, url: `${SITE.url}/equipo/${e.id}/#p-${p.id}` })) },
+  ...(d.faq.length ? [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: d.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }] : []),
+];
+const href = (p: ReturnType<typeof prodById>) => (p.asin ? amazonAsinUrl(p.asin) : amazonSearchUrl(p.amazonQuery));
+---
+<Base title={d.title} description={d.description} type="article" crumbs={crumbs} schema={schema}>
+  <section class="phero">
+    <div class="phero__img"><Photo k={d.photo} eager sizes="100vw" /></div>
+    <div class="container phero__inner">
+      <Breadcrumbs items={crumbs} />
+      <p class="eyebrow"><Icon name="star" size={16} /> Comparativa · {cat.nombre} · <span class={`badge ${d.nivel === 'basico' ? 'badge--basic' : 'badge--advanced'}`}>{d.nivel === 'basico' ? 'Básico' : 'Avanzado'}</span></p>
+      <h1>{d.title}</h1>
+      <p class="lead">{d.intro}</p>
+    </div>
+  </section>
+  <div class="container container--narrow section--tight">
+    <AffiliateNote />
+    <h2>Comparativa rápida</h2>
+    <div class="table-wrap">
+      <table class="cmp">
+        <thead><tr><th>Modelo</th>{cols.map((c) => <th>{c}</th>)}<th></th></tr></thead>
+        <tbody>
+          {prods.map((p) => (
+            <tr>
+              <th scope="row"><a href={`#p-${p.id}`}>{p.nombre}</a>{p.destacado && <span class="tag">{p.destacado}</span>}</th>
+              {cols.map((c) => <td>{p.specs.find(([k]) => k === c)?.[1] ?? '—'}</td>)}
+              <td>{AFFILIATE.enabled && <a class="btn btn--accent btn--sm" href={href(p)} rel={AFFILIATE.rel} target="_blank">Ver precio</a>}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="xs muted">Especificaciones publicadas por cada fabricante (enlace en cada ficha). No mostramos precios porque cambian a diario.</p>
+
+    <article class="prose"><Content /></article>
+
+    <h2>Qué mirar antes de comprar</h2>
+    <dl class="crit">{d.criterios.map((c) => <div><dt>{c.nombre}</dt><dd>{c.detalle}</dd></div>)}</dl>
+
+    <h2>Los modelos, uno a uno</h2>
+    {prods.map((p, i) => <ProductBox id={p.id} rank={i + 1} />)}
+    <AdSlot slot="inArticle" />
+    <div class="method">
+      <Icon name="microscope" size={22} />
+      <p><strong>Cómo hacemos esta comparativa.</strong> Seleccionamos modelos disponibles en España con buena reputación y especificaciones publicadas. Aún no hemos hecho pruebas de laboratorio propias de estos modelos: cuando las hagamos, lo indicaremos claramente con los resultados medidos. Las comisiones de afiliado no influyen en el orden. <a href="/divulgacion-afiliados/">Más sobre nuestro método</a>.</p>
+    </div>
+    <Faq items={d.faq} />
+    <Sources items={d.fuentes} updated={d.actualizado} />
+    <p><a class="btn btn--ghost" href={`/preparate/${cat.id}/`}><Icon name="arrow-left" size={16} /> Volver a Prepárate: {cat.nombre}</a></p>
+  </div>
+  <Newsletter />
+</Base>
+<style>
+  .cmp{width:100%;border-collapse:collapse;font-size:var(--size-sm);background:var(--color-surface);border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm)}
+  .cmp th,.cmp td{padding:.7em .8em;border-bottom:1px solid var(--color-border);text-align:left;vertical-align:middle}
+  .cmp thead th{background:var(--color-primary);color:var(--color-on-primary);font-weight:600;font-size:var(--size-xs);white-space:nowrap}
+  .cmp tbody th a{color:var(--color-heading);font-weight:700;text-decoration:none}
+  .tag{display:block;font-size:10px;font-weight:700;color:var(--amber-700);text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+  .crit{display:grid;gap:var(--space-3)}
+  .crit div{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--space-4) var(--space-5)}
+  .crit dt{font-weight:700;color:var(--color-heading)}
+  .crit dd{margin:.25em 0 0;color:var(--color-text-muted);font-size:var(--size-sm)}
+  .method{display:flex;gap:var(--space-4);background:var(--color-secondary-soft);border-radius:var(--radius-md);padding:var(--space-5);margin:var(--space-8) 0;font-size:var(--size-sm)}
+  .method p{margin:0}
+  h2{margin-top:2em}
+</style>

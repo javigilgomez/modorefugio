@@ -1,0 +1,16 @@
+---
+import { ADS } from '../data/site';
+interface Props { slot: keyof typeof ADS.slots; format?: string }
+const { slot, format = 'auto' } = Astro.props;
+---
+{ADS.enabled && (
+  <div class="ad-slot" aria-label="Publicidad">
+    <span class="ad-slot__l">Publicidad</span>
+    <ins class="adsbygoogle" style="display:block" data-ad-client={ADS.client} data-ad-slot={ADS.slots[slot]} data-ad-format={format} data-full-width-responsive="true"></ins>
+    <script is:inline>document.addEventListener('mr:consent',function(e){if(e.detail&&e.detail.ads){(window.adsbygoogle=window.adsbygoogle||[]).push({})}},{once:true});</script>
+  </div>
+)}
+<style>
+  .ad-slot{margin:var(--space-8) 0;min-height:120px;text-align:center}
+  .ad-slot__l{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:4px}
+</style>

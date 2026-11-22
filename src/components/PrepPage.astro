@@ -1,0 +1,127 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import Photo from './Photo.astro';
+import Icon from './Icon.astro';
+import Checklist from './Checklist.astro';
+import ProductBox from './ProductBox.astro';
+import AffiliateNote from './AffiliateNote.astro';
+import Faq from './Faq.astro';
+import Sources from './Sources.astro';
+import PlaybookCard from './PlaybookCard.astro';
+import Newsletter from './Newsletter.astro';
+import AdSlot from './AdSlot.astro';
+import { catById, CATEGORIAS } from '../data/categorias';
+import { SITE } from '../data/site';
+
+interface Props { entry: CollectionEntry<'preparate'> }
+const { entry } = Astro.props;
+const d = entry.data;
+const cat = catById(d.categoria);
+const isBasic = d.nivel === 'basico';
+const { Content } = await render(entry);
+const pbs = (await getCollection('playbooks')).filter((p) => d.playbooks.includes(p.id));
+const allPbs = await getCollection('playbooks');
+const backlinks = allPbs.filter((p) => p.data.categorias.includes(cat.id) && !d.playbooks.includes(p.id));
+const equipo = (await getCollection('equipo')).filter((e) => d.comparativas.includes(e.id));
+const base = `/preparate/${cat.id}/`;
+const url = isBasic ? base : `${base}avanzado/`;
+const crumbs = [{ name: 'Prepárate', href: '/preparate/' }, { name: cat.nombre, href: base }, ...(isBasic ? [] : [{ name: 'Avanzado', href: url }])];
+const idx = CATEGORIAS.findIndex((c) => c.id === cat.id);
+const next = CATEGORIAS[(idx + 1) % CATEGORIAS.length];
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'Article', headline: d.title, description: d.description, inLanguage: 'es', dateModified: d.actualizado.toISOString(), mainEntityOfPage: SITE.url + url, image: `${SITE.url}/og/preparate-${cat.id}.png`, author: { '@type': 'Organization', name: SITE.name, url: SITE.url }, publisher: { '@type': 'Organization', name: SITE.name, logo: { '@type': 'ImageObject', url: `${SITE.url}/icon-512.png` } } },
+  ...(d.faq.length ? [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: d.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a.replace(/<[^>]+>/g, '') } })) }] : []),
+];
+---
+<Base title={d.title} description={d.description} type="article" image={`/og/preparate-${cat.id}.png`} crumbs={crumbs} schema={schema}>
+  <section class="phero">
+    <div class="phero__img"><Photo k={cat.photo} eager sizes="100vw" /></div>
+    <div class="container phero__inner">
+      <Breadcrumbs items={crumbs} />
+      <p class="eyebrow"><Icon name={cat.icon} size={16} /> Prepárate · {cat.nombre}</p>
+      <h1>{d.title}</h1>
+      <p class="lead">{d.resumen}</p>
+      <nav class="levels" aria-label="Nivel">
+        <a href={base} class="is-basic" aria-current={isBasic ? 'page' : undefined}><Icon name="circle-dot" size={16} /> Básico</a>
+        <a href={`${base}avanzado/`} class="is-adv" aria-current={!isBasic ? 'page' : undefined}><Icon name="layers" size={16} /> Avanzado</a>
+      </nav>
+    </div>
+  </section>
+
+  <div class="container section--tight">
+    <div class="with-aside">
+      <div>
+        <section class:list={['listbox', isBasic ? 'listbox--basic' : 'listbox--adv']}>
+          <header>
+            <span class={`badge ${isBasic ? 'badge--basic' : 'badge--advanced'}`}>{isBasic ? 'Nivel básico' : 'Nivel avanzado'}</span>
+            <h2>{isBasic ? 'Tu lista, sin rodeos' : 'La lista avanzada'}</h2>
+            <p class="muted small">Marca lo que ya tienes: se guarda en este dispositivo.</p>
+          </header>
+          <Checklist id={`prep-${entry.id.replace('/', '-')}`} items={d.checklist} />
+          <div class="listbox__cta">
+            <a class="btn btn--primary" href={`/pdf/checklist-${cat.id}.pdf`} download><Icon name="file-down" size={18} /> Descargar checklist (PDF)</a>
+            {isBasic
+              ? <a class="btn btn--ghost" href={`${base}avanzado/`}>Ver nivel avanzado <Icon name="arrow-right" size={16} /></a>
+              : <a class="btn btn--ghost" href={base}><Icon name="arrow-left" size={16} /> Volver al básico</a>}
+          </div>
+        </section>
+
+        <article class="prose"><Content /></article>
+
+        {d.productos.length > 0 && (
+          <section class="prods">
+            <h2>Equipo que recomendamos</h2>
+            <AffiliateNote />
+            <div class="grid grid--2">{d.productos.map((p) => <ProductBox id={p} compact />)}</div>
+            {equipo.length > 0 && <p class="small">Comparativas completas: {equipo.map((e, i) => <>{i > 0 && ' · '}<a href={`/equipo/${e.id}/`}>{e.data.title}</a></>)}</p>}
+          </section>
+        )}
+        <AdSlot slot="inArticle" />
+        <Faq items={d.faq} />
+        <Sources items={d.fuentes} updated={d.actualizado} />
+      </div>
+      <aside>
+        <div class="aside-sticky">
+          <div class="aside-box pbx">
+            <h3><Icon name="siren" size={18} /> ¿Ya está pasando?</h3>
+            <ul>{pbs.map((p) => <li><a href={`/playbook/${p.id}/`}><Icon name={p.data.icon} size={18} /> Playbook: {p.data.nombre}</a></li>)}</ul>
+          </div>
+          {backlinks.length > 0 && (
+            <div class="aside-box">
+              <h3>También útil para</h3>
+              <ul>{backlinks.map((p) => <li><a href={`/preparate/riesgo/${p.id}/`}><Icon name={p.data.icon} size={18} /> {p.data.nombre}</a></li>)}</ul>
+            </div>
+          )}
+          <div class="aside-box">
+            <h3>Otras categorías</h3>
+            <ul>{CATEGORIAS.filter((c) => c.id !== cat.id).slice(0, 6).map((c) => <li><a href={`/preparate/${c.id}/`}><Icon name={c.icon} size={18} /> {c.nombre}</a></li>)}<li><a href="/preparate/">Ver las 12 →</a></li></ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <section class="section section--subtle">
+    <div class="container">
+      <div class="section-head"><h2>Playbooks relacionados</h2><a class="btn btn--ghost" href={`/preparate/${next.id}/`}>Siguiente: {next.nombre} <Icon name="arrow-right" size={16} /></a></div>
+      <div class="grid grid--4">{pbs.map((p) => <PlaybookCard pb={p} size="sm" />)}</div>
+    </div>
+  </section>
+  <Newsletter />
+</Base>
+<style>
+  .listbox{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-6);box-shadow:var(--shadow-md);margin-top:calc(-1 * var(--space-16));position:relative;margin-bottom:var(--space-10)}
+  .listbox--basic{border-top:6px solid var(--color-basic)}
+  .listbox--adv{border-top:6px solid var(--color-advanced)}
+  .listbox h2{margin:.4em 0 .1em}
+  .listbox header{margin-bottom:var(--space-4)}
+  .listbox__cta{display:flex;flex-wrap:wrap;gap:var(--space-3);margin-top:var(--space-5)}
+  .prods{margin-top:var(--space-12)}
+  .pbx{background:var(--color-playbook-bg);border-color:var(--signal-200)}
+  .pbx h3{color:var(--color-playbook-text);display:flex;gap:.4em;align-items:center}
+  .aside-box :global(.icon){color:var(--color-secondary)}
+  .pbx :global(.icon){color:var(--color-playbook)}
+  .phero .phero__inner{padding-bottom:calc(var(--space-16) + var(--space-8))}
+</style>

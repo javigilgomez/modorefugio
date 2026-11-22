@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Photo from '../../components/Photo.astro';
+import Icon from '../../components/Icon.astro';
+import AffiliateNote from '../../components/AffiliateNote.astro';
+import ProductBox from '../../components/ProductBox.astro';
+import { catById } from '../../data/categorias';
+const eq = await getCollection('equipo');
+const crumbs = [{ name: 'Equipo', href: '/equipo/' }];
+---
+<Base title="Equipo de emergencia recomendado: comparativas" description="Comparativas de equipo de emergencia: estaciones de energía, radios, linternas frontales, powerbanks, filtros y almacenaje de agua, y comida de larga duración." crumbs={crumbs}>
+  <section class="container section--tight">
+    <Breadcrumbs items={crumbs} />
+    <p class="eyebrow"><Icon name="star" size={16} /> Equipo</p>
+    <h1>Equipo recomendado</h1>
+    <p class="lead">Lo que de verdad usarás en una emergencia, explicado sin humo. Empieza por lo básico (luz, radio, batería, agua) y amplía cuando lo tengas.</p>
+    <AffiliateNote />
+    <div class="grid grid--3 eq">
+      {eq.map((e) => (
+        <a class="card" href={`/equipo/${e.id}/`}>
+          <Photo k={e.data.photo} widths={[400, 700]} sizes="(min-width:1000px) 33vw, 100vw" ratio="16/9" />
+          <div class="card__body">
+            <span class={`badge ${e.data.nivel === 'basico' ? 'badge--basic' : 'badge--advanced'}`}>{e.data.nivel === 'basico' ? 'Básico' : 'Avanzado'}</span>
+            <h2 class="h3">{e.data.title}</h2>
+            <p class="small muted">{catById(e.data.categoria).nombre} · {e.data.productos.length} modelos</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+  <section class="section section--subtle">
+    <div class="container">
+      <h2>Si solo compras tres cosas</h2>
+      <p class="muted">Lo mínimo para que un apagón sea una anécdota.</p>
+      <div class="grid grid--3">
+        <ProductBox id="petzl-actik-core" compact />
+        <ProductBox id="midland-er300" compact />
+        <ProductBox id="anker-zolo-20000" compact />
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .eq{margin-top:var(--space-8)}
+  .h3{font-size:var(--size-xl);margin:.5em 0 .2em}
+</style>

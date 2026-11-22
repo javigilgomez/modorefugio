@@ -1,0 +1,32 @@
+---
+interface Item { item: string; cantidad?: string; nota?: string }
+interface Props { id: string; items: (Item | string)[] }
+const { id, items } = Astro.props;
+const norm = items.map((x) => (typeof x === 'string' ? { item: x } : x));
+---
+<ul class="checklist" data-checklist={id}>
+  {norm.map((it, i) => (
+    <li>
+      <input type="checkbox" id={`${id}-${i}`} aria-label={it.item} />
+      <label for={`${id}-${i}`} class="checklist__text">
+        {it.cantidad && <span class="checklist__qty">{it.cantidad} · </span>}
+        <span set:html={it.item} />
+        {it.nota && <span class="checklist__note">{it.nota}</span>}
+      </label>
+    </li>
+  ))}
+</ul>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-checklist]').forEach((ul) => {
+    const key = 'mr-check-' + ul.dataset.checklist;
+    let saved: Record<string, boolean> = {};
+    try { saved = JSON.parse(localStorage.getItem(key) || '{}'); } catch {}
+    ul.querySelectorAll<HTMLInputElement>('input[type=checkbox]').forEach((cb) => {
+      if (saved[cb.id]) cb.checked = true;
+      cb.addEventListener('change', () => { saved[cb.id] = cb.checked; try { localStorage.setItem(key, JSON.stringify(saved)); } catch {} });
+    });
+  });
+</script>
+<style>
+  label{cursor:pointer;flex:1}
+</style>

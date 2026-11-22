@@ -1,0 +1,21 @@
+---
+import LegalPage from '../../components/LegalPage.astro';
+import { OWNER, NEWSLETTER } from '../../data/site';
+---
+<LegalPage title="Política de privacidad" description="Cómo trata Modo Refugio tus datos personales conforme al RGPD y la LOPDGDD." href="/privacidad/">
+  <h2>Responsable del tratamiento</h2>
+  <p>{OWNER.nombre} · {OWNER.nif} · {OWNER.direccion} · {OWNER.email}</p>
+  <h2>Qué datos tratamos y para qué</h2>
+  <ul>
+    <li><strong>Newsletter y descargas:</strong> si te suscribes, tratamos tu email para enviarte la checklist y comunicaciones sobre preparación (como el recordatorio semestral de revisión del kit). Base jurídica: tu consentimiento (art. 6.1.a RGPD). Puedes darte de baja en cualquier momento desde cada email. Proveedor de envío: {NEWSLETTER.provider === 'PENDIENTE' ? '[PROVEEDOR DE EMAIL MARKETING, pendiente de definir]' : NEWSLETTER.provider}.</li>
+    <li><strong>Contacto:</strong> si nos escribes, usamos tus datos solo para responderte. Base jurídica: tu consentimiento e interés legítimo en atender la consulta.</li>
+    <li><strong>Estadísticas y publicidad:</strong> solo si lo aceptas en el aviso de cookies. Ver la <a href="/cookies/">política de cookies</a>.</li>
+  </ul>
+  <p>Las herramientas del sitio (test de nivel, calculadoras, checklists) funcionan en tu navegador: lo que marcas se guarda solo en tu dispositivo (almacenamiento local) y no se envía a ningún servidor.</p>
+  <h2>Conservación</h2>
+  <p>Conservamos los datos mientras mantengas la suscripción o sea necesario para atender tu consulta, y después durante los plazos legales.</p>
+  <h2>Destinatarios y transferencias</h2>
+  <p>No cedemos datos a terceros salvo obligación legal. Algunos proveedores (alojamiento, envío de email, analítica) pueden tratar datos como encargados del tratamiento, con las garantías del RGPD; si alguno está fuera del EEE, se ampara en decisiones de adecuación o cláusulas contractuales tipo.</p>
+  <h2>Tus derechos</h2>
+  <p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a {OWNER.email}. Si consideras que no se han atendido, puedes reclamar ante la <a href="https://www.aepd.es" rel="noopener" target="_blank">Agencia Española de Protección de Datos</a>.</p>
+</LegalPage>

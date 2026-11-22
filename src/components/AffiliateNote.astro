@@ -1,0 +1,9 @@
+---
+import Icon from './Icon.astro';
+import { AFFILIATE } from '../data/site';
+---
+<p class="affnote"><Icon name="badge-info" size={16} /> <span><strong>Transparencia:</strong> esta página contiene enlaces de afiliado. Si compras a través de ellos, Modo Refugio recibe una comisión sin coste extra para ti. No mostramos precios porque cambian a diario: consulta el actual en la tienda. {AFFILIATE.amazonDisclosure} <a href="/divulgacion-afiliados/">Cómo elegimos los productos</a>.</span></p>
+<style>
+  .affnote{display:flex;gap:.6em;align-items:flex-start;font-size:var(--size-xs);color:var(--color-text-muted);background:var(--color-bg-subtle);border-radius:var(--radius-sm);padding:.75em 1em;margin:var(--space-4) 0}
+  .affnote :global(.icon){margin-top:2px;flex:none}
+</style>
