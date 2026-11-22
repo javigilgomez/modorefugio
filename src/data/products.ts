@@ -39,7 +39,7 @@ export const PRODUCTOS: Producto[] = [
     pros: ['600 W continuos: más margen con aparatos de cocina pequeños', 'Admite paneles de 200 W'],
     contras: ['Algo más pesada', 'La capacidad sigue siendo de gama pequeña'],
     idealPara: 'Quien quiere poca capacidad pero algo de potencia (un hervidor pequeño, una batidora, herramientas).',
-    amazonQuery: 'BLUETTI EB3A', asin: 'B0B5RJSPD6', fuente: 'https://versus.com/es/bluetti-eb3a-vs-ecoflow-river-2', destacado: 'Más potencia en tamaño pequeño',
+    amazonQuery: 'BLUETTI EB3A', fuente: 'https://versus.com/es/bluetti-eb3a-vs-ecoflow-river-2', destacado: 'Más potencia en tamaño pequeño',
   },
   {
     id: 'jackery-explorer-300-plus', nombre: 'Jackery Explorer 300 Plus', marca: 'Jackery', tipo: 'Estación de energía portátil', nivel: 'avanzado',
@@ -48,7 +48,7 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Un poco más de capacidad que sus rivales', 'Formato muy compacto'],
     contras: ['Entrada solar limitada a 100 W', 'Solo 300 W continuos'],
     idealPara: 'Mantener comunicaciones y luz el máximo tiempo posible con un solo aparato pequeño.',
-    amazonQuery: 'Jackery Explorer 300 Plus', asin: 'B0CFV93GZM', fuente: 'https://wattlong.com/models/',
+    amazonQuery: 'Jackery Explorer 300 Plus', fuente: 'https://wattlong.com/models/',
   },
   {
     id: 'ecoflow-river-2-pro', nombre: 'EcoFlow RIVER 2 Pro', marca: 'EcoFlow', tipo: 'Estación de energía portátil', nivel: 'avanzado',
@@ -76,7 +76,7 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Funciona con pilas AA normales si todo lo demás falla', 'Pensada para el mercado europeo', 'Puede dar algo de carga al móvil'],
     contras: ['Sin onda corta', 'La manivela da poca carga por minuto (es normal en todas)'],
     idealPara: 'El kit básico de cualquier casa en España.',
-    amazonQuery: 'Midland ER300 radio emergencia', asin: 'B00SXA05QI', fuente: 'https://support.midlandeurope.com/media/manual/c/9/d/6/c9d6f5fbf891d741b0e6db652064edcad6ddab15_MANUAL_ER300.pdf', destacado: 'Fácil de encontrar en España',
+    amazonQuery: 'Midland ER300 radio emergencia', fuente: 'https://support.midlandeurope.com/media/manual/c/9/d/6/c9d6f5fbf891d741b0e6db652064edcad6ddab15_MANUAL_ER300.pdf', destacado: 'Fácil de encontrar en España',
   },
   {
     id: 'sangean-mmr-88', nombre: 'Sangean MMR-88 DAB', marca: 'Sangean', tipo: 'Radio de emergencia', nivel: 'basico',
@@ -85,7 +85,7 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Construcción resistente', 'Recibe DAB+ (útil en España y buena parte de Europa)', 'Linterna y sirena'],
     contras: ['Batería pequeña para cargar el móvil', 'No admite pilas AA'],
     idealPara: 'Mochila de evacuación y quien prioriza tamaño y robustez.',
-    amazonQuery: 'Sangean MMR-88 DAB', asin: 'B071R3SGZQ', fuente: 'https://us.sangean.com/es/product/mmr-88-fcc-yellow',
+    amazonQuery: 'Sangean MMR-88 DAB', fuente: 'https://us.sangean.com/es/product/mmr-88-fcc-yellow',
   },
   {
     id: 'kaito-ka500', nombre: 'Kaito KA500 Voyager', marca: 'Kaito', tipo: 'Radio de emergencia', nivel: 'avanzado',
@@ -122,7 +122,7 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Resistente al agua de verdad', 'Funciona con pilas comunes', 'Bloqueo para que no se encienda en la mochila'],
     contras: ['Con pilas alcalinas pierde brillo según se gastan'],
     idealPara: 'Kits que se guardan mucho tiempo: pon pilas de litio y olvídate.',
-    amazonQuery: 'Black Diamond Spot 400 frontal', fuente: 'https://peakgearguide.com/es/mejor-equipo/linternas-frontales', destacado: 'Buena relación calidad-precio',
+    amazonQuery: 'Black Diamond Spot 400 frontal', asin: 'B09NQL4S1L', fuente: 'https://peakgearguide.com/es/mejor-equipo/linternas-frontales', destacado: 'Buena relación calidad-precio',
   },
   {
     id: 'ledlenser-mh5', nombre: 'Ledlenser MH5', marca: 'Ledlenser', tipo: 'Linterna frontal', nivel: 'basico',
@@ -216,7 +216,7 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Calorías densas en poco espacio', 'Aguantan calor del maletero'],
     contras: ['Sabor monótono', 'Solo para emergencia real, no para el día a día'],
     idealPara: 'Mochila de evacuación y coche.',
-    amazonQuery: 'Datrex 3600 racion emergencia', asin: 'B001CSAHW0', fuente: 'https://www.datrex.com/product/datrex-emergency-food-ration-20-pack-case/', destacado: 'Para la mochila',
+    amazonQuery: 'Datrex 3600 racion emergencia', fuente: 'https://www.datrex.com/product/datrex-emergency-food-ration-20-pack-case/', destacado: 'Para la mochila',
   },
   {
     id: 'convar-7', nombre: 'NRG-5 (ración de emergencia 500 g)', marca: 'Katadyn', tipo: 'Comida de emergencia', nivel: 'avanzado',

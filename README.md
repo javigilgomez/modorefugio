@@ -59,7 +59,7 @@ Todo lo que hay que cambiar al crear cuentas está en `src/data/site.ts`:
 - `AFFILIATE.amazonTag` — ahora `modorefugio-21`. Los botones dicen «Ver precio en Amazon» (sin precios inventados) y llevan `rel="sponsored nofollow noopener"`.
 - `ADS.enabled` — `false` hasta tener cuenta y un CMP certificado por Google (obligatorio en el EEE antes de activar AdSense).
 - `NEWSLETTER` — proveedor pendiente; si está desactivado, el formulario ofrece la descarga directa del PDF «Kit básico apagón».
-- `OWNER.email` — ahora `modorefugio@proton.me`. Nombre, NIF y domicilio: pendientes (TODO en el código); hay que rellenarlos antes de publicar en serio (LSSI).
+- `OWNER.email` — ahora `hola@modorefugio.com`. Nombre, NIF y domicilio: pendientes (TODO en el código); hay que rellenarlos antes de publicar en serio (LSSI).
 
 ## Marca y modo oscuro
 

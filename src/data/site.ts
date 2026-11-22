@@ -59,7 +59,7 @@ export const OWNER = {
   nombre: '',
   nif: '',
   direccion: '',
-  email: 'modorefugio@proton.me',
+  email: 'hola@modorefugio.com',
   registro: '',
 };
 
