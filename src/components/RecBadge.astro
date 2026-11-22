@@ -1,13 +1,16 @@
 ---
 import type { Rec } from '../data/recomendados';
 import { AFFILIATE } from '../data/site';
-import { recAmazonHref } from '../data/recomendados';
+import { recAmazonHref, recIsAffiliate, recRel } from '../data/recomendados';
 interface Props { rec: Rec }
 const { rec } = Astro.props;
+const href = recAmazonHref(rec);
+const affiliate = recIsAffiliate(rec);
+const dest = affiliate ? 'en Amazon' : 'en el sitio oficial';
 ---
 <span class="rec">
-  {AFFILIATE.enabled ? (
-    <a class="rec__amz" href={recAmazonHref(rec)} rel={AFFILIATE.rel} target="_blank" aria-label={`Ver ${rec.nombre} en Amazon`}>
+  {AFFILIATE.enabled || !affiliate ? (
+    <a class="rec__amz" href={href} rel={recRel(rec)} target="_blank" aria-label={`Ver ${rec.nombre} ${dest}`}>
       {rec.nombre} →
     </a>
   ) : (

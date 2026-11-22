@@ -25,6 +25,6 @@ export const catById = (id: string) => CATEGORIAS.find((c) => c.id === id)!;
 export const GRUPOS_PLAYBOOK = {
   suministros: { nombre: 'Cortes de suministro', icon: 'plug-zap', desc: 'Luz, agua, internet, comida: cuando falla lo que damos por hecho.' },
   naturaleza: { nombre: 'Fenómenos naturales', icon: 'cloud-lightning', desc: 'DANA, terremotos, incendios, calor y frío extremos.' },
-  sociedad: { nombre: 'Crisis tecnológicas y sociales', icon: 'radiation', desc: 'Ciberataques, IA, emergencias nucleares, pandemias y disturbios.' },
+  sociedad: { nombre: 'Crisis tecnológicas y sociales', icon: 'radiation', desc: 'Ciberataques, IA, emergencias nucleares y químicas, pandemias y disturbios.' },
 } as const;
 export type GrupoPlaybook = keyof typeof GRUPOS_PLAYBOOK;

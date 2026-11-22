@@ -1,6 +1,6 @@
 ---
 title: "Comunicaciones nivel Prepper: radio HF, CB, LoRa y licencias en España"
-description: "Cómo comunicarte cuando cae todo: licencia de radioaficionado en España, HF y VHF, banda ciudadana CB-27, Meshtastic en LoRa, mensajeros satelitales y el plan PACE."
+description: "Cómo comunicarte cuando cae todo: licencia de radioaficionado en España, HF y VHF, banda ciudadana CB-27, Meshtastic en LoRa, mensajeros satelitales, Starlink y el plan PACE."
 categoria: comunicaciones
 nivel: prepper
 resumen: "Con el PMR446 hablas con tu calle. Con HF hablas con otro continente. Pero esto no se improvisa: tiene examen, licencia y práctica. Lo bueno es que existe una red de radioaficionados que apoya a Protección Civil."
@@ -14,6 +14,7 @@ checklist:
   - { item: "Receptor de radio de onda corta SW de buen rendimiento" }
   - { item: "Receptor SDR para escuchar frecuencias", nota: "Solo escuchar: no emitas." }
   - { item: "Mensajero satelital tipo Garmin inReach", nota: "Funciona sin cobertura móvil. Pago de suscripción." }
+  - { item: "Starlink (kit Mini o Standard) como internet por satélite de respaldo", nota: "Compra oficial en starlink.com. El Mini gasta unos 25–40 W y el Standard, a menudo 75–150 W: sin luz o batería, no hay internet. Requiere cielo despejado y suscripción." }
   - { item: "Bolsa Faraday para un equipo de repuesto" }
   - { item: "Libreta con frecuencias, canales y plan PACE", nota: "Primario, Alternativo, Contingencia, Emergencia." }
 productos: []
@@ -24,6 +25,8 @@ faq:
     a: "No para los PMR446 (de uso libre en la UE). Para HF y VHF/UHF de aficionados necesitas aprobar un examen y obtener la autorización de radioaficionado."
   - q: "¿Qué es REMER?"
     a: "Es la Red Nacional de Radio de Emergencia: radioaficionados voluntarios que apoyan las comunicaciones de Protección Civil cuando las redes habituales fallan. Para colaborar hay que tener autorización de radioaficionado en vigor."
+  - q: "¿Starlink funciona en un apagón?"
+    a: "Solo si le das electricidad. El Mini pide unos 25–40 W de forma continua y el Standard, a menudo 75–150 W: no se alimenta con un powerbank de móvil. Necesitas una estación de energía (o un generador) y margen de batería, más cielo despejado y la suscripción al día. No sustituye a la radio a pilas."
 fuentes:
   - { nombre: "Ministerio para la Transformación Digital: exámenes de radioaficionado", url: "https://digital.gob.es/telecomunicaciones-infraestructuras-digitales/areas-interes/espectro-radioelectrico/radioaficionados-cb27/examenes-radioaficionado" }
   - { nombre: "Unión de Radioaficionados Españoles (URE): obtener la autorización", url: "https://www.ure.es/obtener-autorizacion/" }
@@ -44,6 +47,7 @@ Comunicarse es una escalera, y cada peldaño tiene su regla:
 | LoRa / Meshtastic | km a decenas de km en cadena | No (869 MHz, con límites) |
 | VHF/UHF y HF de aficionados | de local a otro continente | **Sí**: examen y autorización |
 | Satélite (inReach) | todo el planeta | No (suscripción) |
+| Starlink (internet satelital) | banda ancha donde hay cielo libre | No (suscripción; necesita electricidad) |
 
 ## Radioafición: la red que sigue funcionando
 
@@ -62,6 +66,8 @@ Una gran tormenta geomagnética degrada las comunicaciones HF y el GPS durante h
 ## Satélite y mucha prudencia
 
 Un mensajero satelital tipo inReach envía mensajes y un SOS desde cualquier punto, sin red móvil. Es una póliza de seguro con cuota mensual. Si la red eléctrica se cae, necesitarás cargarlo: de ahí el powerbank solar.
+
+**Starlink** es otra cosa: internet de verdad (videollamadas, banca, noticias) a través de satélites, no un mensajero. El kit Mini es el más razonable para un plan de contingencia: consume unos **25–40 W**. El Standard, pensado para casa, suele irse a **75–150 W** según modelo y temperatura. Eso se nota: una estación de energía de 500 Wh puede aguantar el Mini varias horas, y el Standard, muchas menos. Sin electricidad o una batería a la altura, la antena no sirve. También necesita **vista libre al cielo**, una **suscripción** activa y, si hay una tormenta solar intensa, el servicio puede degradarse. Cómpralo en la web oficial de Starlink; en Amazon aparecen kits de terceros que no son el canal oficial y pueden dar problemas de activación o garantía.
 
 ## Practicar antes
 

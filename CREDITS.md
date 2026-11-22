@@ -32,6 +32,7 @@ Se descargaron a través de Openverse (fuentes StockSnap y rawpixel). La resoluc
 - **disturbios** — Multitud caminando por la calle. Autor desconocido · [rawpixel](https://www.rawpixel.com/image/5922826/photo-image-public-domain-people-free) · [CC0 1.0 (dominio público)](https://creativecommons.org/publicdomain/zero/1.0/deed.es)
 - **evacuacion** — Coches en un atasco. [Nabeel Syed](https://stocksnap.io/author/4847) · [StockSnap](https://stocksnap.io/photo/cars-traffic-OEP6DXZE7T) · [CC0 1.0 (dominio público)](https://creativecommons.org/publicdomain/zero/1.0/deed.es)
 - **nuclear** — Torres de refrigeración de una central. Autor desconocido · [rawpixel](https://www.rawpixel.com/image/5961244/free-public-domain-cc0-photo) · [CC0 1.0 (dominio público)](https://creativecommons.org/publicdomain/zero/1.0/deed.es)
+- **quimico** — Chimeneas de una planta química. [U.S. National Archives](https://www.archives.gov) · [rawpixel](https://www.rawpixel.com/image/8799532/photo-image-smoke-public-domain) · [CC0 1.0 (dominio público)](https://creativecommons.org/publicdomain/zero/1.0/deed.es)
 - **ia** — Portátil con código en una pantalla a oscuras. Autor desconocido · [rawpixel](https://www.rawpixel.com/image/5944502/free-public-domain-cc0-photo) · [CC0 1.0 (dominio público)](https://creativecommons.org/publicdomain/zero/1.0/deed.es)
 
 

@@ -8,6 +8,8 @@ export interface Rec {
   query: string;
   /** ASIN verificado en amazon.es; si falta, se usa la búsqueda. */
   asin?: string;
+  /** URL oficial (sin afiliado). Tiene prioridad sobre Amazon. */
+  href?: string;
 }
 
 export const RECOMENDADOS: Rec[] = [
@@ -187,8 +189,13 @@ export const RECOMENDADOS: Rec[] = [
   { id: 'caja-estanca', nombre: 'Caja estanca', query: 'caja estanca hermética plástico' , asin: 'B0043RLJ42' },
   { id: 'hepa', nombre: 'Purificador HEPA', query: 'purificador de aire HEPA filtros de repuesto' , asin: 'B0CGDJHJP6' },
   { id: 'medidor-co2', nombre: 'Medidor de CO2', query: 'medidor CO2 NDIR calidad del aire' , asin: 'B0F674FRW7' },
-  { id: 'plastico-sellado', nombre: 'Plástico y cinta de sellado', query: 'plástico polietileno cinta americana sellar ventanas' },
-  { id: 'mascara-antigas', nombre: 'Máscara antigás NBC', query: 'máscara antigás filtro NBC 40 mm' },
+  { id: 'plastico-sellado', nombre: 'Lámina de plástico', query: 'plástico polietileno cubretodo 4x5 metros' },
+  { id: 'mascara-antigas', nombre: 'Máscara antigás NBC', query: 'máscara antigás filtro NBC 40 mm Dräger', asin: 'B004T9WRJK' },
+  { id: 'geiger', nombre: 'Medidor Geiger', query: 'contador Geiger dosímetro GQ GMC-800', asin: 'B0CKM8NML7' },
+  { id: 'traje-tyvek', nombre: 'Traje Tyvek 500 Xpert', query: 'DuPont Tyvek 500 Xpert categoría III tipo 5 6', asin: 'B008O3AI1G' },
+  { id: 'tijeras', nombre: 'Tijeras', query: 'tijeras universales Fiskars', asin: 'B06XJ3Q5PK' },
+  { id: 'toallas', nombre: 'Toallas de algodón', query: 'pack toallas algodón baño', asin: 'B06XQ5R46N' },
+  { id: 'starlink', nombre: 'Starlink', query: 'Starlink Mini kit internet satelital', href: 'https://www.starlink.com/es' },
   { id: 'kit-dental', nombre: 'Kit dental de emergencia', query: 'kit dental emergencia' },
   { id: 'cerradura', nombre: 'Cerradura de seguridad', query: 'cerradura seguridad multipunto cerrojo refuerzo puerta' , asin: 'B0BRJQPG5S' },
   { id: 'barra-puerta', nombre: 'Barra de seguridad', query: 'barra seguridad puerta cadena de seguridad' , asin: 'B0H5VZJTL1' },
@@ -251,8 +258,9 @@ const REC_RULES: RecRule[] = [
   { id: 'botiquin', include: [/botiqu[ií]n/i], exclude: [/botiqu[ií]n veterinario/i, /revisa el botiqu[ií]n y las caducidades/i] },
   { id: 'curas', include: [/gasas est[eé]riles/i, /\bvendas\b/i, /\btiritas\b/i, /ap[oó]sitos/i, /f[eé]rula/i, /suturas adhesivas/i], exclude: [/botiqu[ií]n veterinario/i] },
   { id: 'antiseptico', include: [/antis[eé]ptico/i, /clorhexidina/i, /povidona/i, /suero fisiol[oó]gico/i] },
-  { id: 'guantes-desechables', include: [/guantes desechables/i] },
-  { id: 'tijeras-pinzas', include: [/tijeras de punta roma/i, /pinzas/i], exclude: [/garrapatas/i] },
+  { id: 'guantes-desechables', include: [/guantes desechables/i, /guantes de nitrilo/i] },
+  { id: 'tijeras-pinzas', include: [/tijeras de punta roma/i, /tijeras y pinzas/i, /pinzas/i], exclude: [/garrapatas/i, /tijeras universales/i] },
+  { id: 'tijeras', include: [/\btijeras\b/i], exclude: [/tijeras de punta roma/i, /tijeras y pinzas/i] },
   { id: 'termometro-interior', include: [/term[oó]metro (?:de )?interior/i, /term[oó]metro interior/i] },
   { id: 'termometro', include: [/term[oó]metro/i], exclude: [/term[oó]metro (?:de )?interior/i] },
   { id: 'analgesico', include: [/analg[eé]sico/i, /antit[eé]rmico/i, /paracetamol/i] },
@@ -392,8 +400,12 @@ const REC_RULES: RecRule[] = [
   { id: 'caja-estanca', include: [/caja estanca/i] },
   { id: 'hepa', include: [/purificador de aire HEPA/i] },
   { id: 'medidor-co2', include: [/medidor de CO2/i] },
-  { id: 'plastico-sellado', include: [/pl[aá]stico y cinta/i] },
+  { id: 'plastico-sellado', include: [/l[aá]mina de pl[aá]stico/i, /pl[aá]stico de polietileno/i, /pl[aá]stico para sellar/i, /pl[aá]stico recortado/i, /pl[aá]stico y cinta/i] },
   { id: 'mascara-antigas', include: [/m[aá]scara antig[aá]s/i] },
+  { id: 'geiger', include: [/medidor geiger/i, /contador geiger/i, /dos[ií]metro/i] },
+  { id: 'traje-tyvek', include: [/traje(?:s)? de protecci[oó]n qu[ií]mica/i, /\bTyvek\b/i, /buzo de protecci[oó]n/i] },
+  { id: 'toallas', include: [/toallas? o trapos/i, /toallas? para rendijas/i, /trapos para rendijas/i, /toallas de algod[oó]n/i] },
+  { id: 'starlink', include: [/\bStarlink\b/i, /internet por sat[eé]lite/i, /kit de internet satelital/i] },
   { id: 'kit-dental', include: [/kit dental/i] },
   { id: 'cerradura', include: [/cerradura de seguridad/i] },
   { id: 'barra-puerta', include: [/barra o cadena de seguridad/i] },
@@ -449,9 +461,15 @@ export function findRec(text: string): Rec | undefined {
 }
 
 export function recAmazonHref(r: Rec) {
+  if (r.href) return r.href;
   return r.asin ? amazonAsinUrl(r.asin) : amazonSearchUrl(r.query);
 }
 
-export function recRel() {
+export function recIsAffiliate(r: Rec) {
+  return !r.href;
+}
+
+export function recRel(r?: Rec) {
+  if (r && !recIsAffiliate(r)) return 'noopener noreferrer';
   return AFFILIATE.rel;
 }

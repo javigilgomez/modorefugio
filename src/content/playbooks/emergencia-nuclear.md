@@ -54,19 +54,28 @@ prepara:
   basico:
     - "Radio a pilas o de manivela"
     - "Agua y comida envasada para 3 días"
-    - "Cinta adhesiva ancha y paños para sellar rendijas"
+    - "Cinta americana ancha"
+    - "Lámina de plástico de polietileno para sellar ventanas y rendijas"
+    - "Tijeras"
+    - "Toallas o trapos para rendijas"
     - "Mochila 72 h por si ordenan evacuar"
   avanzado:
     - "Saber si vives en la zona de planificación de una central (planes PENBU, PENCA, PENGUA, PENTA, PENVA)"
-    - "Habitación interior preparada para confinamiento con reserva"
+    - "Habitación interior o sótano preparado para confinamiento, con reserva"
     - "Mascarillas FFP2/FFP3 y ropa de recambio en bolsa"
-categorias: [agua, alimentos, comunicaciones, refugio-y-temperatura]
+    - "Medidor Geiger o dosímetro"
+    - "Traje de protección química tipo Tyvek, guantes de nitrilo y cubrebotas"
+categorias: [agua, alimentos, comunicaciones, refugio-y-temperatura, salud-y-botiquin]
 comparativas: [radios-de-emergencia]
 faq:
   - q: "¿Debo tener pastillas de yoduro potásico en casa?"
     a: "En España, la distribución de yoduro potásico a la población está prevista en los planes de emergencia nuclear de las zonas cercanas a centrales, y su toma siempre se hace por indicación de las autoridades sanitarias. No lo tomes por tu cuenta: no protege contra otros elementos radiactivos y puede tener efectos adversos."
   - q: "¿Qué protege más, irse o quedarse en casa?"
     a: "En los primeros momentos, quedarse dentro de un edificio cerrado reduce mucho la exposición. Evacuar sin indicación puede exponerte más en el exterior. Sigue siempre la instrucción oficial."
+  - q: "¿Me sirve un medidor Geiger?"
+    a: "Un dosímetro o un contador Geiger doméstico mide sobre todo radiación gamma y beta (en CPM y en µSv/h) y te ayuda a contrastar con la información oficial. No sustituye las instrucciones de Protección Civil ni del CSN. Más detalle, límites y el equipo de protección en la página de Salud nivel Prepper."
+  - q: "¿Es lo mismo confinarse por radiación que por una nube química?"
+    a: "No del todo. Frente a la radiación, un sótano o una habitación interior baja protege más porque hay más material sobre tu cabeza. En una nube tóxica, muchos gases son más densos que el aire: evitas sótanos y garajes y te confinas en una habitación interior alta. El plan para una fuga o un ataque químico está en su propio playbook."
 fuentes:
   - { nombre: "Protección Civil: riesgo nuclear", url: "https://www.proteccioncivil.es/coordinacion/gestion-de-riesgos/tecnologicos/riesgo-nuclear" }
   - { nombre: "CSN: información en emergencias", url: "https://www.csn.es/emergencias/informacion-en-emergencias" }
@@ -79,3 +88,5 @@ actualizado: 2026-11-22
 Una emergencia nuclear grave es muy improbable, pero es uno de los riesgos que más preguntas genera. En España, las zonas alrededor de las centrales tienen planes de emergencia específicos coordinados por Protección Civil y el Consejo de Seguridad Nuclear (CSN).
 
 La medida más eficaz es también la más sencilla: **entrar, quedarse dentro y sintonizar**. Las paredes y el techo de un edificio reducen mucho la exposición, y la información oficial te dirá cuándo y cómo actuar.
+
+Un **medidor Geiger** o un dosímetro te permite contrastar lecturas (CPM y µSv/h) con lo que digan el CSN y Protección Civil; no sirve para decidir una evacuación por tu cuenta. Y un apunte importante: el sitio de la casa que más protege **no es el mismo** que en una [nube tóxica](/playbook/ataque-quimico/). Aquí conviene un sótano o una estancia interior con mucho material encima; allí, una habitación alta, porque muchos gases se acumulan abajo. El equipo (máscara, traje tipo Tyvek, kit de sellado) está detallado en [Salud nivel Prepper](/preparate/salud-y-botiquin/prepper/).

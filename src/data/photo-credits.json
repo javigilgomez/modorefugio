@@ -305,5 +305,13 @@
   "url": "https://commons.wikimedia.org/wiki/File:An_aurora_blankets_the_Earth_beneath_a_celestial_night_sky_as_the_International_Space_Station_orbited_261_miles_above_the_Atlantic_Ocean_off_the_coast_of_North_America.jpg",
   "licencia": "Dominio público (NASA)",
   "alt": "Aurora sobre la Tierra vista desde la Estación Espacial Internacional"
+ },
+ "quimico": {
+  "autor": "U.S. National Archives",
+  "fuente": "rawpixel",
+  "url": "https://www.rawpixel.com/image/8799532/photo-image-smoke-public-domain",
+  "licencia": "CC0 1.0 (dominio público)",
+  "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+  "alt": "Chimeneas de una planta química"
  }
 }
