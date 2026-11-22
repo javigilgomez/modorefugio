@@ -1,6 +1,6 @@
 ---
 import LegalPage from '../../components/LegalPage.astro';
-import { AFFILIATE } from '../../data/site';
+import { AFFILIATE, OWNER } from '../../data/site';
 ---
 <LegalPage title="Divulgación de afiliados" description="Cómo se financia Modo Refugio: enlaces de afiliado de Amazon y nuestra política editorial." href="/divulgacion-afiliados/">
   <p><strong>{AFFILIATE.amazonDisclosure}</strong></p>
@@ -18,4 +18,6 @@ import { AFFILIATE } from '../../data/site';
     <li>Si algún día probamos productos nosotros mismos, lo indicaremos claramente con los resultados. Si una marca nos cede un producto, también lo diremos.</li>
     <li>Ninguna marca paga por aparecer ni por el orden en que mostramos el equipo.</li>
   </ul>
+  <h2>Contacto</h2>
+  <p>Si tienes alguna pregunta sobre nuestros enlaces de afiliado, escríbenos a <a href={`mailto:${OWNER.email}`}>{OWNER.email}</a>.</p>
 </LegalPage>

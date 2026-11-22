@@ -1,7 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import { CATEGORIAS } from '../data/categorias';
-import { SITE, AFFILIATE } from '../data/site';
+import { SITE, AFFILIATE, OWNER } from '../data/site';
 import { getCollection } from 'astro:content';
 const pbs = (await getCollection('playbooks')).sort((a, b) => a.data.orden - b.data.orden);
 ---
@@ -29,6 +29,7 @@ const pbs = (await getCollection('playbooks')).sort((a, b) => a.data.orden - b.d
           <li><a href="/herramientas/">Herramientas</a></li>
           <li><a href="/descargas/">Descargas PDF</a></li>
           <li><a href="/sobre-nosotros/">Quiénes somos y método</a></li>
+          <li><a href={`mailto:${OWNER.email}`}>{OWNER.email}</a></li>
           <li><a href="/telefonos-de-emergencia/">Teléfonos de emergencia</a></li>
         </ul>
       </div>
@@ -36,7 +37,7 @@ const pbs = (await getCollection('playbooks')).sort((a, b) => a.data.orden - b.d
     <p class="disclosure"><Icon name="info" size={16} /> {AFFILIATE.amazonDisclosure} Algunos enlaces de esta web son de afiliado: si compras a través de ellos, recibimos una pequeña comisión sin coste para ti. <a href="/divulgacion-afiliados/">Más información</a>.</p>
     <p class="disclaimer">La información de Modo Refugio es divulgativa y no sustituye las indicaciones de Protección Civil, el 112, las autoridades sanitarias ni de tu médico. Ante una emergencia, sigue siempre las instrucciones oficiales.</p>
     <div class="bottom">
-      <span>© {new Date().getFullYear()} Modo Refugio</span>
+      <span>© {new Date().getFullYear()} Modo Refugio · <a href={`mailto:${OWNER.email}`}>{OWNER.email}</a></span>
       <nav aria-label="Legal">
         <a href="/aviso-legal/">Aviso legal</a>
         <a href="/privacidad/">Privacidad</a>

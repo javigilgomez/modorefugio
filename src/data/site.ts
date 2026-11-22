@@ -47,13 +47,14 @@ export const NEWSLETTER = {
   leadMagnet: '/pdf/kit-basico-apagon.pdf',
 };
 
-/** Datos del titular (LSSI). Rellenar antes de publicar. */
+/** Datos del titular (LSSI). */
 export const OWNER = {
-  nombre: '[NOMBRE Y APELLIDOS O RAZÓN SOCIAL DEL TITULAR]',
-  nif: '[NIF/CIF]',
-  direccion: '[DIRECCIÓN POSTAL O APARTADO DE CORREOS]',
-  email: '[EMAIL DE CONTACTO, p. ej. hola@modorefugio.com]',
-  registro: '[DATOS REGISTRALES, si es sociedad]',
+  // TODO: rellenar nombre, NIF, domicilio y (si aplica) datos registrales antes de publicar.
+  nombre: '',
+  nif: '',
+  direccion: '',
+  email: 'modorefugio@proton.me',
+  registro: '',
 };
 
 export function amazonSearchUrl(query: string) {

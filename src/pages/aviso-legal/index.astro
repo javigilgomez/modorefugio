@@ -5,12 +5,9 @@ import { OWNER, SITE } from '../../data/site';
 <LegalPage title="Aviso legal" description="Aviso legal de Modo Refugio (modorefugio.com): datos del titular, condiciones de uso y responsabilidad." href="/aviso-legal/">
   <h2>1. Datos del titular</h2>
   <p>En cumplimiento del artículo 10 de la Ley 34/2002, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa de:</p>
+  {/* TODO: añadir titular, NIF y domicilio cuando estén disponibles. */}
   <ul>
-    <li>Titular: {OWNER.nombre}</li>
-    <li>NIF/CIF: {OWNER.nif}</li>
-    <li>Domicilio: {OWNER.direccion}</li>
-    <li>Correo electrónico: {OWNER.email}</li>
-    <li>{OWNER.registro}</li>
+    <li>Correo electrónico: <a href={`mailto:${OWNER.email}`}>{OWNER.email}</a></li>
     <li>Sitio web: {SITE.url}</li>
   </ul>
   <h2>2. Objeto</h2>
