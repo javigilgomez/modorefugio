@@ -1,8 +1,8 @@
 /**
  * Catálogo de productos recomendados.
  * Reglas: solo especificaciones publicadas por el fabricante (ver `fuente`) y NUNCA precios
- * (Amazon prohíbe mostrar precios estáticos). Los enlaces usan búsqueda con el tag de afiliado;
- * cuando tengas el ASIN exacto, rellena `asin` y el enlace irá directo a la ficha.
+ * (Amazon prohíbe mostrar precios estáticos). Si hay `asin` verificado en amazon.es,
+ * el enlace va a /dp/ASIN?tag=…; si no, se mantiene la búsqueda con el tag.
  */
 export interface Producto {
   id: string;
@@ -30,7 +30,7 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Carga muy rápida desde la red', 'Química LiFePO4 de larga vida', 'Ligera y compacta'],
     contras: ['300 W no mueven una nevera con arranque exigente', '256 Wh dan para router y móviles, no para cocinar'],
     idealPara: 'Router, móviles, luces LED y un portátil durante un apagón de un día.',
-    amazonQuery: 'EcoFlow RIVER 2 256Wh', fuente: 'https://www.ecoflow.com/es/river-2-portable-power-station', destacado: 'Para empezar',
+    amazonQuery: 'EcoFlow RIVER 2 256Wh', asin: 'B0BFQC1CNQ', fuente: 'https://www.ecoflow.com/es/river-2-portable-power-station', destacado: 'Para empezar',
   },
   {
     id: 'bluetti-eb3a', nombre: 'BLUETTI EB3A', marca: 'BLUETTI', tipo: 'Estación de energía portátil', nivel: 'avanzado',
@@ -39,7 +39,7 @@ export const PRODUCTOS: Producto[] = [
     pros: ['600 W continuos: más margen con aparatos de cocina pequeños', 'Admite paneles de 200 W'],
     contras: ['Algo más pesada', 'La capacidad sigue siendo de gama pequeña'],
     idealPara: 'Quien quiere poca capacidad pero algo de potencia (un hervidor pequeño, una batidora, herramientas).',
-    amazonQuery: 'BLUETTI EB3A', fuente: 'https://versus.com/es/bluetti-eb3a-vs-ecoflow-river-2', destacado: 'Más potencia en tamaño pequeño',
+    amazonQuery: 'BLUETTI EB3A', asin: 'B0B5RJSPD6', fuente: 'https://versus.com/es/bluetti-eb3a-vs-ecoflow-river-2', destacado: 'Más potencia en tamaño pequeño',
   },
   {
     id: 'jackery-explorer-300-plus', nombre: 'Jackery Explorer 300 Plus', marca: 'Jackery', tipo: 'Estación de energía portátil', nivel: 'avanzado',
@@ -48,7 +48,7 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Un poco más de capacidad que sus rivales', 'Formato muy compacto'],
     contras: ['Entrada solar limitada a 100 W', 'Solo 300 W continuos'],
     idealPara: 'Mantener comunicaciones y luz el máximo tiempo posible con un solo aparato pequeño.',
-    amazonQuery: 'Jackery Explorer 300 Plus', fuente: 'https://wattlong.com/models/',
+    amazonQuery: 'Jackery Explorer 300 Plus', asin: 'B0CFV93GZM', fuente: 'https://wattlong.com/models/',
   },
   {
     id: 'ecoflow-river-2-pro', nombre: 'EcoFlow RIVER 2 Pro', marca: 'EcoFlow', tipo: 'Estación de energía portátil', nivel: 'avanzado',
@@ -57,16 +57,16 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Capacidad para un fin de semana de consumos básicos', 'Todavía transportable con una mano'],
     contras: ['Más cara y pesada', 'X-Boost reduce la potencia real del aparato conectado'],
     idealPara: 'Hogares que quieren cubrir nevera a ratos, comunicaciones y luz durante 1-2 días.',
-    amazonQuery: 'EcoFlow RIVER 2 Pro 768Wh', fuente: 'https://www.ecoflow.com/es/river-2-portable-power-station',
+    amazonQuery: 'EcoFlow RIVER 2 Pro 768Wh', asin: 'B0BFQD5RMJ', fuente: 'https://www.ecoflow.com/es/river-2-portable-power-station',
   },
   {
-    id: 'anker-solix-c1000', nombre: 'Anker SOLIX C1000', marca: 'Anker', tipo: 'Estación de energía portátil', nivel: 'avanzado',
-    resumen: 'Clase de 1 kWh: la opción para quien depende de un aparato médico o quiere mantener nevera y congelador.',
-    specs: [['Capacidad', '1.056 Wh'], ['Salida AC', '1.800 W (pico 2.400 W)'], ['Batería', 'LiFePO4'], ['Entrada solar', 'hasta 600 W']],
-    pros: ['1 kWh real de capacidad nominal', 'Potencia para casi cualquier electrodoméstico doméstico', 'Admite mucha entrada solar'],
+    id: 'anker-solix-c1000', nombre: 'Anker SOLIX C1000 Gen 2', marca: 'Anker', tipo: 'Estación de energía portátil', nivel: 'avanzado',
+    resumen: 'Clase de 1 kWh: la opción para quien depende de un aparato médico o quiere mantener nevera y congelador. Es la generación actual de la C1000, con más potencia de salida.',
+    specs: [['Capacidad', '1.024 Wh'], ['Salida AC', '2.000 W (pico 3.000 W)'], ['Batería', 'LiFePO4'], ['Entrada solar', 'hasta 600 W']],
+    pros: ['En torno a 1 kWh de capacidad', 'Potencia para casi cualquier electrodoméstico doméstico', 'Admite mucha entrada solar', 'Carga completa en enchufe en unos 49 minutos según el fabricante'],
     contras: ['Pesa y ocupa bastante más', 'Inversión alta: solo compensa si sabes qué vas a alimentar'],
     idealPara: 'Personas con CPAP u otro equipo médico, teletrabajo crítico o apagones largos con nevera.',
-    amazonQuery: 'Anker SOLIX C1000', fuente: 'https://wattlong.com/models/', destacado: 'Para apagones largos',
+    amazonQuery: 'Anker SOLIX C1000 Gen 2', asin: 'B0FN7MSY4L', fuente: 'https://wattlong.com/models/', destacado: 'Para apagones largos',
   },
   // ---------- Radios ----------
   {
@@ -76,16 +76,16 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Funciona con pilas AA normales si todo lo demás falla', 'Pensada para el mercado europeo', 'Puede dar algo de carga al móvil'],
     contras: ['Sin onda corta', 'La manivela da poca carga por minuto (es normal en todas)'],
     idealPara: 'El kit básico de cualquier casa en España.',
-    amazonQuery: 'Midland ER300 radio emergencia', fuente: 'https://support.midlandeurope.com/media/manual/c/9/d/6/c9d6f5fbf891d741b0e6db652064edcad6ddab15_MANUAL_ER300.pdf', destacado: 'Fácil de encontrar en España',
+    amazonQuery: 'Midland ER300 radio emergencia', asin: 'B00SXA05QI', fuente: 'https://support.midlandeurope.com/media/manual/c/9/d/6/c9d6f5fbf891d741b0e6db652064edcad6ddab15_MANUAL_ER300.pdf', destacado: 'Fácil de encontrar en España',
   },
   {
-    id: 'sangean-mmr-88', nombre: 'Sangean MMR-88', marca: 'Sangean', tipo: 'Radio de emergencia', nivel: 'basico',
-    resumen: 'Compacta y robusta, con esquinas de goma y muy buena recepción en FM según el fabricante.',
-    specs: [['Bandas', 'AM · FM (y WX, solo útil en EE. UU.)'], ['Batería', 'Li-ion 18350 de 850 mAh'], ['Autonomía', 'hasta 14 h'], ['Carga', 'Manivela, solar, micro-USB'], ['Peso', '377 g']],
-    pros: ['Construcción resistente', 'Pequeña y ligera', 'Linterna y sirena'],
+    id: 'sangean-mmr-88', nombre: 'Sangean MMR-88 DAB', marca: 'Sangean', tipo: 'Radio de emergencia', nivel: 'basico',
+    resumen: 'La versión europea con DAB+ y FM: compacta, con manivela, panel solar y linterna SOS.',
+    specs: [['Bandas', 'DAB+ · FM'], ['Batería', 'Li-ion integrada de 850 mAh'], ['Carga', 'Manivela, solar y USB'], ['Extras', 'Linterna SOS y salida USB']],
+    pros: ['Construcción resistente', 'Recibe DAB+ (útil en España y buena parte de Europa)', 'Linterna y sirena'],
     contras: ['Batería pequeña para cargar el móvil', 'No admite pilas AA'],
     idealPara: 'Mochila de evacuación y quien prioriza tamaño y robustez.',
-    amazonQuery: 'Sangean MMR-88', fuente: 'https://us.sangean.com/es/product/mmr-88-fcc-yellow',
+    amazonQuery: 'Sangean MMR-88 DAB', asin: 'B071R3SGZQ', fuente: 'https://us.sangean.com/es/product/mmr-88-fcc-yellow',
   },
   {
     id: 'kaito-ka500', nombre: 'Kaito KA500 Voyager', marca: 'Kaito', tipo: 'Radio de emergencia', nivel: 'avanzado',
@@ -108,12 +108,12 @@ export const PRODUCTOS: Producto[] = [
   // ---------- Frontales ----------
   {
     id: 'petzl-actik-core', nombre: 'Petzl ACTIK CORE', marca: 'Petzl', tipo: 'Linterna frontal', nivel: 'basico',
-    resumen: 'Recargable por USB-C y compatible con 3 pilas AAA: no te deja tirado si no hay forma de cargar.',
+    resumen: 'Recargable (batería CORE incluida) y compatible con 3 pilas AAA: no te deja tirado si no hay forma de cargar.',
     specs: [['Potencia', '625 lm (450 lm con AAA)'], ['Batería', 'CORE 1.250 mAh o 3 AAA'], ['Autonomía', '100 h a 7 lm · 2 h a máxima'], ['Estanqueidad', 'IPX4'], ['Peso', '88 g']],
     pros: ['Sistema híbrido batería/pilas', 'Luz roja para no deslumbrar', 'Muy buena autonomía en modo bajo'],
     contras: ['Cable de carga no incluido', 'Precio superior a frontales de pilas'],
     idealPara: 'La frontal de casa y de la mochila de evacuación.',
-    amazonQuery: 'Petzl Actik Core', fuente: 'https://www.petzl.com/es/es/sport/productos/linternas-frontales-multisport/actik-core/ACTIK-CORE_SPO_a2mTx000000o12YIAQ.html', destacado: 'Buena para casi todo',
+    amazonQuery: 'Petzl Actik Core', asin: 'B0FHJRVP3T', fuente: 'https://www.petzl.com/es/es/sport/productos/linternas-frontales-multisport/actik-core/ACTIK-CORE_SPO_a2mTx000000o12YIAQ.html', destacado: 'Buena para casi todo',
   },
   {
     id: 'bd-spot-400', nombre: 'Black Diamond Spot 400', marca: 'Black Diamond', tipo: 'Linterna frontal', nivel: 'basico',
@@ -131,7 +131,7 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Foco ajustable', 'Usa una sola pila AA si se agota', 'Sirve de linterna de mano'],
     contras: ['Cable magnético propio'],
     idealPara: 'Quien quiere un único aparato para cabeza y mano.',
-    amazonQuery: 'Ledlenser MH5', fuente: 'https://ledlenser.co.uk/products/mh5',
+    amazonQuery: 'Ledlenser MH5', asin: 'B084P89TPL', fuente: 'https://ledlenser.co.uk/products/mh5',
   },
   // ---------- Agua ----------
   {
@@ -141,7 +141,7 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Apilable', 'Grifo para servir sin derramar', 'Fabricación española'],
     contras: ['Lleno pesa más de 20 kg: no es para transportar'],
     idealPara: 'Reserva de agua en casa (agua de grifo rotada cada 6 meses).',
-    amazonQuery: 'bidon 20 litros grifo alimentario Helguefer', fuente: 'https://www.amazon.es/dp/B01M22FS00', destacado: 'Para la reserva de casa',
+    amazonQuery: 'bidon 20 litros grifo alimentario Helguefer', asin: 'B01M22FS00', fuente: 'https://www.amazon.es/dp/B01M22FS00', destacado: 'Para la reserva de casa',
   },
   {
     id: 'reliance-aqua-tainer', nombre: 'Reliance Aqua-Tainer 26,5 L', marca: 'Reliance', tipo: 'Almacenaje de agua', nivel: 'basico',
@@ -159,7 +159,7 @@ export const PRODUCTOS: Producto[] = [
     pros: ['No hay que rotarla cada pocos meses', 'Plana y ligera para mochilas'],
     contras: ['Coste por litro muy superior al agua embotellada'],
     idealPara: 'Mochila de evacuación y maletero del coche.',
-    amazonQuery: 'Datrex agua emergencia 125 ml', fuente: 'https://tormag.mx/comida-y-agua-de-emergencia',
+    amazonQuery: 'Datrex agua emergencia 125 ml', asin: 'B00ANY4EXM', fuente: 'https://tormag.mx/comida-y-agua-de-emergencia',
   },
   // ---------- Filtros ----------
   {
@@ -169,35 +169,35 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Ligerísimo', 'Se rosca a botellas comunes', 'Vida útil enorme si se limpia'],
     contras: ['No elimina virus ni químicos', 'Se daña si se congela con agua dentro'],
     idealPara: 'Mochila de evacuación y senderismo.',
-    amazonQuery: 'Sawyer Mini filtro agua', fuente: 'https://www.sawyer.com.co/sp128.html', destacado: 'Para la mochila',
+    amazonQuery: 'Sawyer Mini filtro agua', asin: 'B000FAGUKO', fuente: 'https://www.sawyer.com.co/sp128.html', destacado: 'Para la mochila',
   },
   {
-    id: 'katadyn-befree', nombre: 'Katadyn BeFree 1 L', marca: 'Katadyn', tipo: 'Filtro de agua portátil', nivel: 'avanzado',
-    resumen: 'Botella blanda con filtro de 0,1 micras de caudal muy alto; se limpia agitando.',
-    specs: [['Poro', '0,1 µm'], ['Vida útil', 'hasta 1.000 L según calidad del agua'], ['Formato', 'Botella plegable de 1 L']],
-    pros: ['Caudal rápido', 'Plegada ocupa casi nada'],
-    contras: ['Vida útil menor que Sawyer', 'No elimina virus ni químicos'],
+    id: 'katadyn-befree', nombre: 'Katadyn BeFree AC 1 L', marca: 'Katadyn', tipo: 'Filtro de agua portátil', nivel: 'avanzado',
+    resumen: 'Botella blanda de 1 L con membrana de 0,1 micras y filtro de carbón activado; caudal alto y se limpia agitando.',
+    specs: [['Poro', '0,1 µm'], ['Vida útil', 'hasta 1.000 L según calidad del agua'], ['Formato', 'Botella plegable de 1 L con carbón activado'], ['Peso', '76 g']],
+    pros: ['Caudal rápido', 'Plegada ocupa casi nada', 'El carbón mejora el sabor'],
+    contras: ['Vida útil menor que Sawyer', 'No elimina virus'],
     idealPara: 'Beber directamente en ruta durante una evacuación.',
-    amazonQuery: 'Katadyn BeFree 1L', fuente: 'https://www.katadyngroup.com/Downloads/katadyn/manuals/filters/current/Manual%20BeFree_EU_es.pdf',
+    amazonQuery: 'Katadyn BeFree AC 1L', asin: 'B0DT9J7MBC', fuente: 'https://www.katadyngroup.com/Downloads/katadyn/manuals/filters/current/Manual%20BeFree_EU_es.pdf',
   },
   {
-    id: 'lifestraw-personal', nombre: 'LifeStraw Personal', marca: 'LifeStraw', tipo: 'Filtro de agua portátil', nivel: 'basico',
-    resumen: 'La pajita filtrante más conocida. Sin piezas, sin bombeo: sorbes directamente.',
-    specs: [['Poro', '0,2 µm'], ['Vida útil', 'hasta 4.000 L (fabricante)'], ['Formato', 'Pajita']],
-    pros: ['Imposible de usar mal', 'Barata y ligera'],
+    id: 'lifestraw-personal', nombre: 'LifeStraw Peak Series Personal', marca: 'LifeStraw', tipo: 'Filtro de agua portátil', nivel: 'basico',
+    resumen: 'La pajita filtrante de la serie Peak: sin piezas extra, sin bombeo, pensada como plan B en la mochila.',
+    specs: [['Formato', 'Pajita (Peak Series)'], ['Vida útil', 'hasta 5 años (fabricante)'], ['Elimina', 'Bacterias, parásitos y microplásticos (fabricante)']],
+    pros: ['Imposible de usar mal', 'Barata y ligera', 'Vida útil larga en la mochila'],
     contras: ['Solo para beber en el momento: no llena botellas', 'No elimina virus ni químicos'],
     idealPara: 'Un plan B barato en cada mochila de la familia.',
-    amazonQuery: 'LifeStraw Personal', fuente: 'https://supervivencia.tienda/blog/lifestraw-vs-sawyer-vs-katadyn.html',
+    amazonQuery: 'LifeStraw Peak Series Personal', asin: 'B09SBPP9R9', fuente: 'https://supervivencia.tienda/blog/lifestraw-vs-sawyer-vs-katadyn.html',
   },
   // ---------- Powerbanks ----------
   {
-    id: 'anker-zolo-20000', nombre: 'Anker Zolo Power Bank 20.000 mAh 22,5 W', marca: 'Anker', tipo: 'Batería externa', nivel: 'basico',
-    resumen: 'Con cable USB-C integrado: no dependes de encontrar el cable en plena oscuridad.',
-    specs: [['Capacidad', '20.000 mAh (74 Wh)'], ['Salida máx.', '22,5 W'], ['Puertos', '2 USB-C + 1 USB-A + cable integrado'], ['Peso', '392 g']],
+    id: 'anker-zolo-20000', nombre: 'Anker Zolo Power Bank 20.000 mAh 30 W', marca: 'Anker', tipo: 'Batería externa', nivel: 'basico',
+    resumen: 'Con cable USB-C integrado: no dependes de encontrar el cable en plena oscuridad. Es el modelo actual de 30 W (el de 22,5 W ya no aparece como ficha propia en Amazon.es).',
+    specs: [['Capacidad', '20.000 mAh'], ['Salida máx.', '30 W'], ['Puertos', 'Cable USB-C integrado'], ['Peso', '365 g']],
     pros: ['Cable integrado', 'Carga varios móviles completos', 'Puede viajar en avión (menos de 100 Wh)'],
     contras: ['Pesada para el bolsillo'],
     idealPara: 'Tener 3-4 cargas de móvil en cualquier apagón.',
-    amazonQuery: 'Anker Zolo power bank 20000 22.5W cable integrado', fuente: 'https://www.mrmicro.es/tablets-smartphones/baterias-externas/powerbank-anker-20000-mah-22-5w-con-cable-usb-c-integrado_84439/especificaciones/', destacado: 'Buena para casi todo',
+    amazonQuery: 'Anker Zolo power bank 20000 30W cable integrado', asin: 'B0CZ9LH53B', fuente: 'https://www.mrmicro.es/tablets-smartphones/baterias-externas/powerbank-anker-20000-mah-22-5w-con-cable-usb-c-integrado_84439/especificaciones/', destacado: 'Buena para casi todo',
   },
   {
     id: 'redmi-20000-18w', nombre: 'Xiaomi Redmi Power Bank 20.000 mAh 18 W', marca: 'Xiaomi', tipo: 'Batería externa', nivel: 'basico',
@@ -206,7 +206,7 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Precio ajustado', 'Dos salidas USB-A'],
     contras: ['Carga más lenta', 'Sin salida USB-C'],
     idealPara: 'Segunda batería de la familia o la del coche.',
-    amazonQuery: 'Xiaomi Redmi power bank 20000 18W', fuente: 'https://www.mi.com/mx/product/20000mah-redmi-fast-charge-power-bank/specs/', destacado: 'Más económica',
+    amazonQuery: 'Xiaomi Redmi power bank 20000 18W', asin: 'B08861XCML', fuente: 'https://www.mi.com/mx/product/20000mah-redmi-fast-charge-power-bank/specs/', destacado: 'Más económica',
   },
   // ---------- Comida ----------
   {
@@ -216,16 +216,16 @@ export const PRODUCTOS: Producto[] = [
     pros: ['Calorías densas en poco espacio', 'Aguantan calor del maletero'],
     contras: ['Sabor monótono', 'Solo para emergencia real, no para el día a día'],
     idealPara: 'Mochila de evacuación y coche.',
-    amazonQuery: 'Datrex 3600 racion emergencia', fuente: 'https://www.datrex.com/product/datrex-emergency-food-ration-20-pack-case/', destacado: 'Para la mochila',
+    amazonQuery: 'Datrex 3600 racion emergencia', asin: 'B001CSAHW0', fuente: 'https://www.datrex.com/product/datrex-emergency-food-ration-20-pack-case/', destacado: 'Para la mochila',
   },
   {
-    id: 'convar-7', nombre: 'Convar-7 / NRG-5 (raciones de larga conservación)', marca: 'Convar', tipo: 'Comida de emergencia', nivel: 'avanzado',
-    resumen: 'Raciones alemanas de emergencia con versiones de muy larga conservación (el fabricante anuncia hasta 20 años en algunas referencias).',
-    specs: [['Formato', 'Barritas comprimidas'], ['Conservación', 'Versiones de 10 y 20 años según referencia']],
+    id: 'convar-7', nombre: 'NRG-5 (ración de emergencia 500 g)', marca: 'Katadyn', tipo: 'Comida de emergencia', nivel: 'avanzado',
+    resumen: 'Ración de emergencia lista para comer: 9 barritas, 2.380 kcal y una conservación anunciada de hasta 20 años. Es la referencia NRG-5 (la misma familia que a menudo se cita como Convar).',
+    specs: [['Formato', '9 barritas en paquete de 500 g'], ['Energía', '2.380 kcal'], ['Conservación', 'hasta 20 años (fabricante)'], ['Dieta', 'Vegana y sin lactosa']],
     pros: ['Pensadas para almacenar y olvidar', 'Se pueden comer sólidas o en papilla'],
-    contras: ['Disponibilidad irregular', 'Caras por caloría'],
+    contras: ['Sabor funcional, no de ocio', 'Caras por caloría frente a conservas de supermercado'],
     idealPara: 'El fondo de reserva del prepper avanzado.',
-    amazonQuery: 'Convar 7 racion emergencia', fuente: 'https://www.liofilizado.es/12277-racion-energetica-de-emergencia-20-anos.html',
+    amazonQuery: 'Katadyn NRG-5 ración emergencia', asin: 'B099SD7LM3', fuente: 'https://www.liofilizado.es/12277-racion-energetica-de-emergencia-20-anos.html',
   },
 ];
 

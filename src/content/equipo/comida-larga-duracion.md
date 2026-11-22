@@ -1,13 +1,13 @@
 ---
 title: "Comida de larga duración"
-description: "Qué comida de larga duración tiene sentido: raciones compactas tipo Datrex, Convar-7 y alternativas de supermercado, con ventajas e inconvenientes."
+description: "Qué comida de larga duración tiene sentido: raciones compactas tipo Datrex, NRG-5 y alternativas de supermercado, con ventajas e inconvenientes."
 photo: alimentos
 nivel: avanzado
 categoria: alimentos
 intro: "Para casa, lo mejor es comida normal rotada. Pero para la mochila, el coche o una reserva que no quieres revisar cada mes, las raciones de larga duración tienen su sitio."
 productos: [datrex-3600, convar-7]
 criterios:
-  - { nombre: "Vida útil", detalle: "De 5 años (Datrex) a 10–20 años según referencia (Convar)." }
+  - { nombre: "Vida útil", detalle: "De 5 años (Datrex) a hasta 20 años según referencia (NRG-5)." }
   - { nombre: "Densidad calórica", detalle: "Calorías por peso y volumen: clave en mochila." }
   - { nombre: "Necesita agua o fuego", detalle: "Las raciones compactas no; los liofilizados necesitan agua caliente." }
   - { nombre: "Sabor y aceptación", detalle: "Prueba antes. Una ración que nadie quiere comer no sirve." }
@@ -16,7 +16,7 @@ faq:
     a: "No. Son un complemento para mochila y coche. Para casa, una despensa rotativa de comida habitual es más barata, más sana y más agradable."
 fuentes:
   - { nombre: "Datrex: ración 3.600 kcal", url: "https://www.datrex.com/product/datrex-emergency-food-ration-20-pack-case/" }
-  - { nombre: "Convar-7: ración de 20 años", url: "https://www.liofilizado.es/12277-racion-energetica-de-emergencia-20-anos.html" }
+  - { nombre: "NRG-5: ración de emergencia", url: "https://www.amazon.es/dp/B099SD7LM3" }
 actualizado: 2026-11-22
 ---
 

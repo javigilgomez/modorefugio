@@ -77,7 +77,7 @@ El modo oscuro («Refugio también de noche») sigue `prefers-color-scheme`, tie
 
 - Las fotos locales ronda los 1024 px de ancho (límite de Openverse / CDNs de origen).
 - Datos del titular legales pendientes.
-- Sin ASINs reales: los enlaces de Amazon son búsquedas con el tag de afiliado.
+- Enlaces de Amazon: ficha directa `/dp/ASIN` con el tag de afiliado cuando el ASIN está verificado en amazon.es; si no, se mantiene la búsqueda.
 - Newsletter y AdSense desactivados (hace falta proveedor y un CMP certificado).
 - Algunas fuentes externas (p. ej. un PDF de Interior) bloquean a los robots; hay que revisarlas a mano de vez en cuando.
 - El artículo de Euronews citado en documentos/dinero devolvió 406 en una comprobación automática.

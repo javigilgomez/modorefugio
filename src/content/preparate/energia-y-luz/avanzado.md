@@ -49,7 +49,7 @@ Prueba nuestra [calculadora de batería](/herramientas/calculadora-bateria/) par
 
 - **250–300 Wh** (RIVER 2, EB3A, Explorer 300 Plus): comunicaciones, luz y móviles durante un día. Pesan 3,5–4,6 kg.
 - **700–800 Wh** (RIVER 2 Pro): suma portátil, ventilador o nevera a ratos.
-- **1 kWh o más** (SOLIX C1000): nevera, equipos médicos o teletrabajo durante un apagón largo.
+- **1 kWh o más** (SOLIX C1000 Gen 2): nevera, equipos médicos o teletrabajo durante un apagón largo.
 
 Fíjate en dos cifras: la **capacidad** (Wh, cuánto tiempo) y la **potencia de salida** (W, qué aparatos puede mover). Un hervidor de 2.000 W no funcionará con una estación de 300 W aunque tenga batería.
 

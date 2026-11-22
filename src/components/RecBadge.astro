@@ -1,6 +1,7 @@
 ---
 import type { Rec } from '../data/recomendados';
-import { AFFILIATE, amazonSearchUrl } from '../data/site';
+import { AFFILIATE } from '../data/site';
+import { recAmazonHref } from '../data/recomendados';
 interface Props { rec: Rec }
 const { rec } = Astro.props;
 ---
@@ -8,7 +9,7 @@ const { rec } = Astro.props;
   <span class="rec__pill">Recomendado</span>
   {rec.page && <a class="rec__a" href={rec.page}>Ver ficha</a>}
   {AFFILIATE.enabled && (
-    <a class="rec__a rec__amz" href={amazonSearchUrl(rec.query)} rel={AFFILIATE.rel} target="_blank">Ver en Amazon</a>
+    <a class="rec__a rec__amz" href={recAmazonHref(rec)} rel={AFFILIATE.rel} target="_blank">Ver en Amazon</a>
   )}
 </span>
 <style>

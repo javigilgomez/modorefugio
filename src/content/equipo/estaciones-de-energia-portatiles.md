@@ -1,6 +1,6 @@
 ---
 title: "Estación de energía portátil"
-description: "Qué estación de energía portátil tener para un apagón: EcoFlow RIVER 2, BLUETTI EB3A, Jackery Explorer 300 Plus, RIVER 2 Pro y Anker SOLIX C1000. Capacidad, potencia y para quién es cada una."
+description: "Qué estación de energía portátil tener para un apagón: EcoFlow RIVER 2, BLUETTI EB3A, Jackery Explorer 300 Plus, RIVER 2 Pro y Anker SOLIX C1000 Gen 2. Capacidad, potencia y para quién es cada una."
 photo: energia
 nivel: avanzado
 categoria: energia-y-luz
@@ -28,7 +28,7 @@ actualizado: 2026-11-22
 
 - **Para empezar:** EcoFlow RIVER 2. Ligera, se recarga en una hora y mantiene router, móviles y luces durante un apagón de un día.
 - **Si quieres algo de potencia:** BLUETTI EB3A, con 600 W continuos.
-- **Para apagones largos o equipos médicos:** Anker SOLIX C1000, en la clase de 1 kWh.
+- **Para apagones largos o equipos médicos:** Anker SOLIX C1000 Gen 2, en la clase de 1 kWh.
 
 ## Cómo leer las especificaciones
 

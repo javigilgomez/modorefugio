@@ -1,6 +1,6 @@
 ---
 title: "Filtro de agua"
-description: "Qué filtro de agua portátil tener: Sawyer Mini, Katadyn BeFree y LifeStraw Personal. Qué eliminan, cuánto duran y cuándo hay que hervir además."
+description: "Qué filtro de agua portátil tener: Sawyer Mini, Katadyn BeFree AC y LifeStraw Peak Series Personal. Qué eliminan, cuánto duran y cuándo hay que hervir además."
 photo: agua
 nivel: avanzado
 categoria: agua
