@@ -75,7 +75,7 @@ faq:
     a: "Sigue siempre la orden de las autoridades: confinamiento o evacuación. Si no hay orden y el fuego llega sin dejar salida segura, una casa sólida protege más que el exterior."
 fuentes:
   - { nombre: "Protección Civil", url: "https://www.proteccioncivil.es/" }
-  - { nombre: "112 Comunitat Valenciana: consejos ante incendios forestales", url: "https://www.112cv.gva.es/es/web/112cv/consejos" }
+  - { nombre: "112 Comunitat Valenciana (avisos y consejos)", url: "https://www.112cv.gva.es/es/" }
   - { nombre: "Generalitat de Catalunya: incendios forestales, consejos", url: "https://interior.gencat.cat/es/arees_dactuacio/proteccio_civil/consells_autoproteccio_emergencia/" }
 actualizado: 2026-11-22
 ---

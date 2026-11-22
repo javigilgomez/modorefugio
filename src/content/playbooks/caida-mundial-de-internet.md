@@ -70,7 +70,7 @@ faq:
     a: "Una banda de radio de uso libre en Europa para walkie-talkies de baja potencia. No necesita licencia y permite hablar a distancias cortas, normalmente de unos cientos de metros a pocos kilómetros según el terreno."
 fuentes:
   - { nombre: "Microsoft: incidente de CrowdStrike del 19 de julio de 2024 (8,5 millones de dispositivos)", url: "https://blogs.microsoft.com/blog/2024/07/20/helping-our-customers-through-the-crowdstrike-outage/" }
-  - { nombre: "Protección Civil: ES-Alert", url: "https://www.proteccioncivil.es/es-alert" }
+  - { nombre: "Protección Civil: ES-Alert", url: "https://www.proteccioncivil.es/coordinacion/redes/ran/public-warning-system" }
   - { nombre: "Comisión Europea: preparación de la población (72 horas)", url: "https://spain.representation.ec.europa.eu/noticias-eventos/noticias-0/estrategia-de-preparacion-de-la-union-para-prevenir-amenazas-y-crisis-emergentes-y-reaccionar-frente-2025-03-26_es" }
 actualizado: 2026-11-22
 ---

@@ -20,7 +20,7 @@ faq:
   - q: "¿Puedo llamar al 112 sin cobertura de mi operador?"
     a: "Los móviles intentan conectar con cualquier red disponible para las llamadas de emergencia. Si hay cobertura de otro operador, es probable que la llamada al 112 entre."
 fuentes:
-  - { nombre: "Protección Civil: ES-Alert", url: "https://www.proteccioncivil.es/es-alert" }
+  - { nombre: "Protección Civil: ES-Alert", url: "https://www.proteccioncivil.es/coordinacion/redes/ran/public-warning-system" }
 actualizado: 2026-11-22
 ---
 

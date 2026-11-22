@@ -17,7 +17,7 @@ faq:
   - q: "¿Puedo reutilizar el agua de fregar?"
     a: "Sí, para la cisterna o para limpiar suelos. No la uses para beber, cocinar ni lavarte."
 fuentes:
-  - { nombre: "OMS: agua, saneamiento e higiene", url: "https://www.who.int/es/health-topics/water-sanitation-and-hygiene-wash" }
+  - { nombre: "OMS: agua, saneamiento e higiene", url: "https://www.who.int/es/news-room/fact-sheets/detail/sanitation" }
 actualizado: 2026-11-22
 ---
 

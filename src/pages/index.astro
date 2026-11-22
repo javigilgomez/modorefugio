@@ -9,7 +9,7 @@ import Newsletter from '../components/Newsletter.astro';
 import { CATEGORIAS } from '../data/categorias';
 import { SITE } from '../data/site';
 const pbs = (await getCollection('playbooks')).sort((a, b) => a.data.orden - b.data.orden);
-const top = pbs.slice(0, 7);
+const top = pbs.slice(0, 9);
 const eq = await getCollection('equipo');
 const schema = [
   { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.url + '/', inLanguage: 'es', description: SITE.description },

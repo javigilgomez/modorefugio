@@ -31,14 +31,17 @@ if (crumbs?.length) {
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script is:inline>(function(){var d=document.documentElement,t;try{t=localStorage.getItem('mr-theme')}catch(e){}if(t!=='dark'&&t!=='light')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';d.dataset.theme=t;try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(e){var s;try{s=localStorage.getItem('mr-theme')}catch(x){}if(!s)d.dataset.theme=e.matches?'dark':'light'})}catch(e){}})()</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonical} />
   <link rel="alternate" hreflang="es" href={canonical} />
   <link rel="alternate" hreflang="x-default" href={canonical} />
   {noindex && <meta name="robots" content="noindex, follow" />}
-  <meta name="theme-color" content="#14352F" />
+  <meta name="theme-color" content="#FAF7F0" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0C2420" media="(prefers-color-scheme: dark)" />
+  <meta name="color-scheme" content="light dark" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="/favicon.ico" sizes="32x32" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -59,7 +62,6 @@ if (crumbs?.length) {
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImage} />
-  <script is:inline>try{if(localStorage.getItem('mr-theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}</script>
   {ld.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
   <slot name="head" />
 </head>

@@ -32,7 +32,7 @@ const is = (p: string) => path.startsWith(p);
       <a href="/descargas/" class="nav__dl" aria-current={is('/descargas') ? 'page' : undefined}><Icon name="download" size={16} /> PDFs</a>
     </nav>
     <div class="bar__end">
-      <button class="iconbtn" id="theme-toggle" type="button" aria-label="Cambiar modo claro/oscuro"><Icon name="moon" size={20} /></button>
+      <button class="iconbtn theme-btn" id="theme-toggle" type="button" aria-label="Activar modo oscuro" title="Modo claro / oscuro"><span class="t-moon"><Icon name="moon" size={20} /></span><span class="t-sun"><Icon name="sun" size={20} /></span></button>
       <a href="/playbook/" class="btn btn--playbook btn--sm now"><Icon name="siren" size={16} /> ¿Está pasando ahora?</a>
       <button class="iconbtn menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú"><Icon name="menu" size={24} /></button>
     </div>
@@ -49,9 +49,17 @@ const is = (p: string) => path.startsWith(p);
   document.getElementById('theme-toggle')?.addEventListener('click', () => {
     const d = document.documentElement;
     const dark = d.dataset.theme !== 'dark';
-    if (dark) d.dataset.theme = 'dark'; else delete d.dataset.theme;
+    d.dataset.theme = dark ? 'dark' : 'light';
     try { localStorage.setItem('mr-theme', dark ? 'dark' : 'light'); } catch {}
+    syncThemeBtn();
   });
+  function syncThemeBtn() {
+    const b = document.getElementById('theme-toggle');
+    const dark = document.documentElement.dataset.theme === 'dark';
+    b?.setAttribute('aria-label', dark ? 'Activar modo claro' : 'Activar modo oscuro');
+    b?.setAttribute('aria-pressed', String(dark));
+  }
+  syncThemeBtn();
 </script>
 <style>
   header.site{position:sticky;top:0;z-index:var(--z-header);background:color-mix(in srgb,var(--color-bg) 88%,transparent);backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--color-border)}
@@ -59,6 +67,10 @@ const is = (p: string) => path.startsWith(p);
   .logo{flex:none;display:block}
   .logo img{height:44px;width:auto}
   .logo-dark{display:none}
+  .t-moon{display:inline-flex}
+  .t-sun{display:none}
+  :global(:root[data-theme='dark']) .t-sun{display:inline-flex}
+  :global(:root[data-theme='dark']) .t-moon{display:none}
   :global(:root[data-theme='dark']) .logo-dark{display:block}
   :global(:root[data-theme='dark']) .logo-light{display:none}
   .nav{display:flex;align-items:center;gap:var(--space-1);margin-left:var(--space-4)}

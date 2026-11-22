@@ -20,7 +20,7 @@ faq:
   - q: "¿Qué es Meshtastic?"
     a: "Un proyecto de código abierto que usa pequeños dispositivos LoRa para enviar mensajes de texto entre ellos formando una red en malla, sin internet ni red móvil. En Europa funciona en la banda de 868 MHz de uso libre."
 fuentes:
-  - { nombre: "Protección Civil: ES-Alert", url: "https://www.proteccioncivil.es/es-alert" }
+  - { nombre: "Protección Civil: ES-Alert", url: "https://www.proteccioncivil.es/coordinacion/redes/ran/public-warning-system" }
 actualizado: 2026-11-22
 ---
 

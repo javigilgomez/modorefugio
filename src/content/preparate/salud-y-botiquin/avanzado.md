@@ -19,7 +19,7 @@ faq:
   - q: "¿Debo tener un torniquete en el botiquín?"
     a: "Solo si sabes usarlo. Un torniquete mal colocado puede causar daño. Si quieres incluirlo, fórmate antes en un curso de primeros auxilios con control de hemorragias."
 fuentes:
-  - { nombre: "Cruz Roja: primeros auxilios", url: "https://www2.cruzroja.es/primeros-auxilios" }
+  - { nombre: "Cruz Roja Española (cursos de primeros auxilios)", url: "https://www2.cruzroja.es/" }
 actualizado: 2026-11-22
 ---
 

@@ -66,7 +66,7 @@ faq:
     a: "Los de 0,1 a 0,2 micras eliminan bacterias y protozoos, pero no virus ni contaminación química. Si el agua puede tener virus (por ejemplo, tras una inundación con aguas residuales), filtra y además hierve o desinfecta."
 fuentes:
   - { nombre: "OMS: agua para consumo humano", url: "https://www.who.int/es/news-room/fact-sheets/detail/drinking-water" }
-  - { nombre: "Ministerio de Sanidad: agua de consumo", url: "https://www.sanidad.gob.es/areas/sanidadAmbiental/calidadAguas/consumo/home.htm" }
+  - { nombre: "Ministerio de Sanidad: agua de consumo", url: "https://www.sanidad.gob.es/areas/sanidadAmbiental/calidadAguas/home.htm" }
 actualizado: 2026-11-22
 ---
 

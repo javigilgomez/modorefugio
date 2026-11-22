@@ -24,7 +24,7 @@ faq:
     a: "No directamente. Recoge el agua de lluvia para el WC y la limpieza. Para beberla, fíltrala y además hiérvela o desinféctala, y evita la que escurre de tejados con materiales dudosos."
 fuentes:
   - { nombre: "OMS: agua para consumo humano", url: "https://www.who.int/es/news-room/fact-sheets/detail/drinking-water" }
-  - { nombre: "Ministerio de Sanidad: agua de consumo", url: "https://www.sanidad.gob.es/areas/sanidadAmbiental/calidadAguas/consumo/home.htm" }
+  - { nombre: "Ministerio de Sanidad: agua de consumo", url: "https://www.sanidad.gob.es/areas/sanidadAmbiental/calidadAguas/home.htm" }
 actualizado: 2026-11-22
 ---
 

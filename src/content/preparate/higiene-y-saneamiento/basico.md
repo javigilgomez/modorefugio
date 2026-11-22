@@ -19,7 +19,7 @@ faq:
   - q: "¿Cómo uso el WC si no hay agua?"
     a: "Coloca una bolsa de basura resistente dentro de la taza (o de un cubo), usa un poco de serrín, arena de gato o papel para absorber, ciérrala bien tras cada uso o al final del día y guárdala en un cubo con tapa, fuera de la vivienda si es posible."
 fuentes:
-  - { nombre: "OMS: agua, saneamiento e higiene", url: "https://www.who.int/es/health-topics/water-sanitation-and-hygiene-wash" }
+  - { nombre: "OMS: agua, saneamiento e higiene", url: "https://www.who.int/es/news-room/fact-sheets/detail/sanitation" }
 actualizado: 2026-11-22
 ---
 

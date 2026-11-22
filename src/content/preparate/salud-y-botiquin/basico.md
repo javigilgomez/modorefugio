@@ -24,7 +24,7 @@ faq:
   - q: "¿Qué hago con los medicamentos que van en nevera si se va la luz?"
     a: "No les pongas hielo directamente. Muchos toleran un tiempo a temperatura ambiente, pero depende de cada uno: consulta el prospecto o pregunta en la farmacia antes de usarlos o desecharlos."
 fuentes:
-  - { nombre: "Cruz Roja: primeros auxilios", url: "https://www2.cruzroja.es/primeros-auxilios" }
+  - { nombre: "Cruz Roja Española (cursos de primeros auxilios)", url: "https://www2.cruzroja.es/" }
   - { nombre: "112 Andalucía: medicamentos en nevera durante un apagón", url: "https://www.juntadeandalucia.es/presidencia/portavoz/emergencias112/204138/junta/activa/situacion2/plan/emergencias/proteccion/civil/apagon" }
 actualizado: 2026-11-22
 ---
