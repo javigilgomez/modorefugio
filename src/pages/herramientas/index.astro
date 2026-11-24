@@ -4,14 +4,15 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import Icon from '../../components/Icon.astro';
 const crumbs = [{ name: 'Herramientas', href: '/herramientas/' }];
 const tools = [
-  { href: '/herramientas/calculadora-agua-comida/', icon: 'calculator', t: 'Calculadora de agua y comida', d: 'Litros y raciones para tu hogar según personas, mascotas y días.' },
+  { href: '/calculadora/', icon: 'calculator', t: 'Calculadora de reserva de emergencia', d: 'Tu lista de la compra con cantidades: agua, comida, higiene, botiquín, luz y energía, en 72 horas, Avanzado o Prepper.' },
+  { href: '/herramientas/calculadora-agua-comida/', icon: 'droplets', t: 'Calculadora de agua y comida', d: 'Solo litros y raciones, si quieres un cálculo rápido y sencillo.' },
   { href: '/herramientas/calculadora-bateria/', icon: 'battery-charging', t: 'Calculadora de batería', d: 'Cuántas horas te dura una estación de energía o un powerbank con tus aparatos.' },
   { href: '/empieza-aqui/que-nivel-eres/', icon: 'sparkles', t: 'Test: ¿qué nivel eres?', d: '10 preguntas para saber cómo de preparado está tu hogar.' },
   { href: '/telefonos-de-emergencia/', icon: 'phone', t: 'Teléfonos de emergencia', d: 'España, UE y Latinoamérica, listos para imprimir.' },
   { href: '/descargas/', icon: 'file-down', t: 'PDFs para imprimir', d: 'Todos los playbooks y checklists en A4.' },
 ];
 ---
-<Base title="Herramientas de preparación: calculadoras y test" description="Calculadora de agua y comida de emergencia, calculadora de autonomía de baterías, test de nivel de preparación y teléfonos de emergencia." crumbs={crumbs}>
+<Base title="Herramientas de preparación: calculadora de reserva, batería y test" description="Calculadora de reserva de emergencia con lista de la compra, calculadora de batería, test de nivel de preparación y teléfonos de emergencia." crumbs={crumbs}>
   <section class="container section--tight">
     <Breadcrumbs items={crumbs} />
     <p class="eyebrow"><Icon name="wrench" size={16} /> Herramientas</p>

@@ -11,6 +11,7 @@ import Newsletter from '../../../components/Newsletter.astro';
 import AdSlot from '../../../components/AdSlot.astro';
 import Checklist from '../../../components/Checklist.astro';
 import AffiliateNote from '../../../components/AffiliateNote.astro';
+import CalcCta from '../../../components/CalcCta.astro';
 import { catById } from '../../../data/categorias';
 import { TELEFONOS } from '../../../data/emergencias';
 import { SITE } from '../../../data/site';
@@ -128,6 +129,8 @@ if (d.faq.length) schema.push({ '@context': 'https://schema.org', '@type': 'FAQP
           <p class="small"><a href={`/preparate/riesgo/${pb.id}/`}>Ver la lista completa de preparación →</a></p>
         </section>
 
+        <CalcCta level={2} />
+
         <AdSlot slot="inArticle" />
 
         <article class="prose context">
@@ -142,6 +145,7 @@ if (d.faq.length) schema.push({ '@context': 'https://schema.org', '@type': 'FAQP
 
       <aside>
         <div class="aside-sticky">
+          <CalcCta variant="box" level={2} text="La lista de reserva para tu hogar: cantidades de agua, comida, luz y más." />
           <div class="aside-box pdfbox">
             <Icon name="file-text" size={28} />
             <h3>Llévalo offline</h3>

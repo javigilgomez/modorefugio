@@ -1,0 +1,35 @@
+---
+import Icon from './Icon.astro';
+interface Props { level?: 1 | 2 | 3; variant?: 'box' | 'banner'; text?: string }
+const { level = 2, variant = 'banner', text } = Astro.props;
+const href = `/calculadora/?l=${level}`;
+const lvName = level === 1 ? '72 horas' : level === 3 ? 'Prepper' : 'Avanzado';
+---
+{variant === 'box' ? (
+  <div class="aside-box calccta calccta--box">
+    <Icon name="calculator" size={28} />
+    <h3>Calcula tu lista</h3>
+    <p class="small">{text ?? '¿Cuánta agua, comida y material necesita tu hogar? La calculadora te arma la lista de la compra.'}</p>
+    <a class="btn btn--primary btn--block" href={href}>Ir a la calculadora <Icon name="arrow-right" size={16} /></a>
+  </div>
+) : (
+  <aside class="calccta calccta--banner" aria-label="Calculadora de reserva">
+    <Icon name="calculator" size={36} />
+    <div>
+      <strong>Calcula tu lista</strong>
+      <p>{text ?? `¿Cuánto necesitas de verdad? Indica tu hogar y obtén una lista de la compra con cantidades (nivel «${lvName}»), para marcar e imprimir.`}</p>
+    </div>
+    <a class="btn btn--accent" href={href}>Ir a la calculadora <Icon name="arrow-right" size={16} /></a>
+  </aside>
+)}
+<style>
+  .calccta--box{background:var(--color-primary);color:var(--color-on-primary);border-color:transparent;min-width:0;max-width:100%;box-sizing:border-box}
+  .calccta--box h3{color:var(--color-on-primary);margin:.3em 0;overflow-wrap:anywhere}
+  .calccta--box :global(.icon){color:var(--color-accent)}
+  .calccta--box .btn{background:var(--color-bg);color:var(--color-primary)}
+  .calccta--banner{display:flex;gap:var(--space-5);align-items:center;flex-wrap:wrap;margin:var(--space-8) 0;padding:var(--space-5) var(--space-6);border-radius:var(--radius-lg);background:var(--color-primary);color:var(--color-on-primary);min-width:0;max-width:100%;box-sizing:border-box}
+  .calccta--banner :global(.icon){color:var(--color-accent);flex:none}
+  .calccta--banner div{flex:1;min-width:min(100%,240px)}
+  .calccta--banner strong{font:700 var(--size-xl)/1.2 var(--font-heading);color:var(--color-on-primary);overflow-wrap:anywhere}
+  .calccta--banner p{margin:.2em 0 0;font-size:var(--size-sm);opacity:.9;overflow-wrap:anywhere}
+</style>

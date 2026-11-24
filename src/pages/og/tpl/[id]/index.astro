@@ -8,6 +8,7 @@ export async function getStaticPaths() {
   const pbs = await getCollection('playbooks');
   return [
     { params: { id: 'default' }, props: { kicker: 'La guía de preparación en español', title: 'Prepárate sin miedo. Actúa con un plan.', ph: 'hero', pb: false } },
+    { params: { id: 'calculadora' }, props: { kicker: 'Calculadora', title: 'Calculadora de reserva de emergencia', sub: 'Tu lista de la compra con cantidades, según tu hogar y tu nivel (72 horas, Avanzado o Prepper).', ph: 'alimentos', pb: false } },
     { params: { id: 'playbook' }, props: { kicker: 'The Playbook', title: 'Qué hacer cuando pasa', ph: 'incendio', pb: true } },
     ...pbs.map((p) => ({ params: { id: `playbook-${p.id}` }, props: { kicker: 'The Playbook', title: p.data.nombre, sub: p.data.subtitle ?? p.data.resumen, ph: p.data.photo, pb: true } })),
     { params: { id: 'preparate-prepper' }, props: { kicker: 'Prepárate · Nivel Prepper', title: 'Nivel Prepper', sub: 'Un año de reservas, energía off-grid, radio y más. Con la legalidad en España.', ph: 'mochila', pb: false } },

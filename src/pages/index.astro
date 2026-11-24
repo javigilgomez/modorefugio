@@ -24,7 +24,7 @@ const schema = [
       <h1>Prepárate sin miedo.<br /><span>Actúa con un plan.</span></h1>
       <p class="lead">Apagones, DANAs, olas de calor, ciberataques. Te contamos qué tener en casa <strong>antes</strong> —en versión básica y avanzada— y qué hacer, paso a paso, <strong>cuando pasa</strong>.</p>
       <div class="hero__cta">
-        <a href="/empieza-aqui/" class="btn btn--accent btn--lg"><Icon name="flag" size={20} /> Empieza aquí</a>
+        <a href="/calculadora/" class="btn btn--accent btn--lg"><Icon name="calculator" size={20} /> Calcula tu reserva</a>
         <a href="/playbook/" class="btn btn--playbook btn--lg"><Icon name="siren" size={20} /> ¿Está pasando ahora?</a>
       </div>
       <div class="hero__now">
@@ -37,21 +37,53 @@ const schema = [
 
   <section class="section paths">
     <div class="container">
-      <div class="grid grid--2">
+      <div class="pillars">
         <a class="path path--prep" href="/preparate/">
           <span class="path__k"><Icon name="calendar-check" size={18} /> Antes</span>
           <h2>Prepárate</h2>
-          <p>12 categorías —agua, comida, energía, botiquín, mochila…— cada una con nivel <strong>Básico</strong> para todos, <strong>Avanzado</strong> para ir más allá y <strong>Prepper</strong> para quien va en serio.</p>
-          <ul><li><span class="badge badge--basic">Básico</span> Lo que pide Protección Civil: 72 h de autonomía</li><li><span class="badge badge--advanced">Avanzado</span> 2 semanas, energía solar, potabilizar, radio</li><li><span class="badge badge--prepper">Prepper</span> 1 año de reservas, off-grid, radio HF, bug-out</li></ul>
+          <p>12 áreas —agua, comida, energía, botiquín, mochila…— cada una en tres niveles: <strong>Básico</strong>, <strong>Avanzado</strong> y <strong>Prepper</strong>.</p>
+          <ul>
+            <li><span class="badge badge--basic">Básico</span><span>72 horas de autonomía</span></li>
+            <li><span class="badge badge--advanced">Avanzado</span><span>2 semanas, solar y radio</span></li>
+            <li><span class="badge badge--prepper">Prepper</span><span>Larga duración y off-grid</span></li>
+          </ul>
           <span class="path__go">Ver las categorías <Icon name="arrow-right" size={18} /></span>
         </a>
         <a class="path path--pb" href="/playbook/">
           <span class="path__k"><Icon name="zap" size={18} /> Cuando pasa</span>
           <h2>The Playbook</h2>
-          <p>{pbs.length} planes de acción para el momento: qué hacer en los primeros minutos, horas y días. Checklists que se imprimen en PDF y funcionan sin internet.</p>
+          <p>{pbs.length} planes de acción para el momento: qué hacer en los primeros minutos, horas y días. También en PDF.</p>
           <ul><li><Icon name="timer" size={16} /> Ordenados por fases y prioridades</li><li><Icon name="file-down" size={16} /> Descargables en A4 para tu kit</li></ul>
           <span class="path__go">Abrir The Playbook <Icon name="arrow-right" size={18} /></span>
         </a>
+        <a class="path path--calc" href="/calculadora/">
+          <span class="path__k"><Icon name="calculator" size={18} /> La herramienta</span>
+          <h2>Calculadora</h2>
+          <p>Tu lista de la compra en 30 segundos: agua, comida, higiene, botiquín, luz y energía, según tu hogar y tu nivel.</p>
+          <ul><li><Icon name="check" size={16} /> 72 horas, Avanzado o Prepper</li><li><Icon name="check" size={16} /> Márcala, imprímela o guárdala en PDF</li></ul>
+          <span class="path__go">Calcular mi lista <Icon name="arrow-right" size={18} /></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight calcteaser">
+    <div class="container">
+      <div class="ct">
+        <div class="ct__txt">
+          <p class="eyebrow"><Icon name="calculator" size={16} /> El atajo más rápido</p>
+          <h2>¿Cuánta reserva necesita tu hogar?</h2>
+          <p class="muted">Indica quién vive en casa. Obtienes una lista de la compra con todas las cantidades, lista para marcar e imprimir.</p>
+        </div>
+        <form class="ct__form" action="/calculadora/" method="get">
+          <label>Adultos <input type="number" name="a" min="0" max="20" value="2" inputmode="numeric" /></label>
+          <label>Niños <input type="number" name="k" min="0" max="20" value="0" inputmode="numeric" /></label>
+          <label>Días <input type="number" name="d" min="1" max="90" value="14" inputmode="numeric" /></label>
+          <label>Nivel
+            <select name="l"><option value="1">72 horas</option><option value="2" selected>Avanzado</option><option value="3">Prepper</option></select>
+          </label>
+          <button class="btn btn--primary btn--lg" type="submit"><Icon name="list-checks" size={18} /> Crear lista</button>
+        </form>
       </div>
     </div>
   </section>
@@ -106,7 +138,7 @@ const schema = [
         <a class="btn btn--accent btn--lg" href="/empieza-aqui/que-nivel-eres/">Hacer el test</a>
         <div class="starts">
           <a href="/empieza-aqui/kit-basico-en-una-tarde/"><Icon name="clock" size={18} /> Tu kit básico en 1 tarde</a>
-          <a href="/herramientas/calculadora-agua-comida/"><Icon name="calculator" size={18} /> Calculadora de agua y comida</a>
+          <a href="/calculadora/"><Icon name="calculator" size={18} /> Calculadora de reserva</a>
           <a href="/telefonos-de-emergencia/"><Icon name="phone" size={18} /> Teléfonos de emergencia</a>
         </div>
       </div>
@@ -148,13 +180,25 @@ const schema = [
   .hero__now a:hover{background:var(--color-playbook);border-color:var(--color-playbook)}
   .hero__now .more{background:none;border:none;color:var(--amber-300)}
   .paths{margin-top:calc(-1*var(--space-12));position:relative;padding-top:0}
-  .path{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-8);border-radius:var(--radius-xl,24px);text-decoration:none;color:var(--color-text);background:var(--color-surface);box-shadow:var(--shadow-lg);border-top:6px solid var(--color-primary);transition:transform var(--motion-base)}
+  .path{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-8);border-radius:var(--radius-xl,24px);text-decoration:none;color:var(--color-text);background:var(--color-surface);box-shadow:var(--shadow-lg);border-top:6px solid var(--color-primary);transition:transform var(--motion-base);min-width:0;height:100%;box-sizing:border-box;overflow:hidden}
   .path:hover{transform:translateY(-3px)}
   .path--pb{border-top-color:var(--color-playbook);background:linear-gradient(180deg,var(--color-playbook-bg),var(--color-surface) 70%)}
-  .path h2{margin:0;font-size:var(--size-3xl)}
-  .path p{margin:0;color:var(--color-text-muted)}
+  .pillars{display:grid;gap:var(--space-5);grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+  .path--calc{border-top-color:var(--color-accent);background:linear-gradient(180deg,var(--color-secondary-soft),var(--color-surface) 70%)}
+  @media (max-width:1000px){.pillars{grid-template-columns:1fr}}
+  .calcteaser .ct{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:var(--space-8);align-items:center;padding:var(--space-8);border-radius:var(--radius-xl,24px);background:var(--color-surface);border:1px solid var(--color-border);min-width:0;box-sizing:border-box}
+  .ct__txt,.ct__form{min-width:0}
+  .ct__form{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-3);align-items:end}
+  .ct__form label{display:flex;flex-direction:column;gap:.3em;font-weight:600;font-size:var(--size-sm);min-width:0}
+  .ct__form input,.ct__form select{font:inherit;padding:.65em .7em;border:1.5px solid var(--color-border-strong);border-radius:var(--radius-sm);background:var(--color-bg);color:var(--color-text);min-height:44px;width:100%;max-width:100%;box-sizing:border-box}
+  .ct__form button{grid-column:1/-1}
+  @media (max-width:900px){.calcteaser .ct{grid-template-columns:1fr;padding:var(--space-5)}.ct__form{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+  .path h2{margin:0;font-size:var(--size-3xl);overflow-wrap:anywhere}
+  .path p{margin:0;color:var(--color-text-muted);overflow-wrap:anywhere}
   .path ul{list-style:none;padding:0;margin:var(--space-2) 0;display:grid;gap:var(--space-2);font-size:var(--size-sm)}
-  .path li{display:flex;gap:.6em;align-items:center}
+  .path li{display:flex;gap:.6em;align-items:center;min-width:0}
+  .path li > span:not(.badge){min-width:0;flex:1;overflow-wrap:anywhere}
+  .path .badge{flex-shrink:0;white-space:nowrap;overflow-wrap:normal}
   .path__k{font:700 var(--size-xs)/1 var(--font-body);text-transform:uppercase;letter-spacing:.1em;color:var(--color-secondary);display:flex;gap:.4em;align-items:center}
   .path--pb .path__k{color:var(--color-playbook)}
   .path__go{margin-top:auto;font-weight:700;color:var(--color-primary);display:flex;gap:.4em;align-items:center}

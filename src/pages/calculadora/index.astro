@@ -1,0 +1,419 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Icon from '../../components/Icon.astro';
+import Sources from '../../components/Sources.astro';
+import Faq from '../../components/Faq.astro';
+import { AFFILIATE } from '../../data/site';
+import { CATS, LEVELS, DEFAULT_STATE, rows, renderRows, summarize } from '../../lib/rechner';
+
+const crumbs = [{ name: 'Calculadora', href: '/calculadora/' }];
+const st = DEFAULT_STATE;
+const rs = rows(st);
+const sum = summarize(st, rs);
+const nf = (n: number) => n.toLocaleString('es-ES');
+const faq = [
+  { q: '¿Cuánta reserva recomienda Protección Civil?', a: 'Protección Civil y la Comisión Europea piden que cada hogar pueda valerse por sí mismo al menos 72 horas: 2 litros de agua por persona y día, comida que no necesite nevera, linterna, radio de pilas, botiquín, copias de documentos y algo de efectivo. El nivel Avanzado de esta calculadora sube a 14 días, que es el horizonte que ya usamos en Modo Refugio; no es una cifra oficial española, pero es un paso razonable cuando 3 días se quedan cortos.' },
+  { q: '¿Qué significan los tres niveles?', a: '<strong>72 horas</strong> es el mínimo oficial: agua, comida, luz, radio y botiquín para 3 días. <strong>Avanzado</strong> apunta a 14 días y añade mochila de evacuación, cocina sin luz y potabilizar agua. <strong>Prepper</strong> planifica 28 días o más, con redundancia, estación de energía y placa solar, radio y comida de larga duración.' },
+  { q: '¿Cómo cuenta niños, bebés y mascotas?', a: 'Los niños se cuentan al 70 % de un adulto en la comida y como un adulto en el agua (2 litros al día). Los bebés tienen partidas propias: leche de inicio, pañales y toallitas. Para mascotas, como orientación: 1 litro de agua y 300 g de comida por perro, y 0,25 litros y 100 g por gato y día. Son estimaciones; confirma la ración con tu veterinario.' },
+  { q: '¿Los enlaces de Amazon son publicidad?', a: 'Sí. Los enlaces con la etiqueta «Afiliado*» llevan a una búsqueda o a una ficha ya verificada en amazon.es. Si compras ahí, recibimos una pequeña comisión y para ti el precio no cambia. ' + AFFILIATE.amazonDisclosure + ' Puedes comprar lo mismo en el súper: las cantidades no dependen de la tienda.' },
+  { q: '¿Dónde se guardan mis datos?', a: 'Solo en tu navegador (localStorage). La calculadora no envía nada a un servidor. Con «Restablecer» lo borras todo. Las casillas que marques se conservan en la próxima visita.' },
+  { q: '¿Puedo imprimir la lista o guardarla en PDF?', a: 'Sí: «Imprimir / PDF» abre la vista de impresión del navegador; ahí puedes elegir «Guardar como PDF». Con «Copiar lista» la pegas en notas o en un mensaje.' },
+  { q: '¿Tengo que comprarlo todo de una vez?', a: 'No. En cada compra del súper, lleva un poco más. Empieza por el agua y la comida que ya comes, luego luz y radio, y después el resto. El resto del nivel lo puedes ir completando en meses.' }
+];
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a.replace(/<[^>]+>/g, '') } })) },
+  { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Calculadora de reserva de emergencia', url: 'https://modorefugio.com/calculadora/', applicationCategory: 'LifestyleApplication', operatingSystem: 'All', inLanguage: 'es', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' }, description: 'Calcula la reserva personal según las recomendaciones de Protección Civil y de la UE: lista de la compra con cantidades de agua, alimentos, higiene, botiquín, luz, energía, radio y más.' },
+];
+const stepper = (id: string, label: string, hint: string, min: number, max: number, val: number, icon: string) => ({ id, label, hint, min, max, val, icon });
+const steppers = [
+  stepper('A', 'Adultos', 'desde 14 años', 0, 20, st.A, 'user'),
+  stepper('K', 'Niños', '1 a 13 años', 0, 20, st.K, 'users'),
+  stepper('B', 'Bebés', 'menos de 1 año', 0, 5, st.B, 'baby'),
+  stepper('H', 'Perros', 'tamaño medio', 0, 10, st.H, 'dog'),
+  stepper('C', 'Gatos', 'gato doméstico', 0, 10, st.C, 'cat'),
+];
+---
+<Base title='Calculadora de reserva de emergencia: tu lista de la compra' description='Calcula tu reserva de emergencia: agua, comida, higiene, botiquín, luz, energía y radio, según Protección Civil y la UE (72 horas), 14 días o nivel Prepper. Lista para marcar, imprimir y guardar en el navegador.' image='/og/calculadora.png' crumbs={crumbs} schema={schema}>
+  <section class="container container--wide rz-wrap">
+    <Breadcrumbs items={crumbs} />
+    <header class="rz-hero">
+      <p class="eyebrow"><Icon name="calculator" size={16} /> La herramienta</p>
+      <h1>Calculadora de reserva: tu lista de la compra</h1>
+      <p class="lead">Indica quién vive en casa, cuántos días quieres aguantar y el nivel que buscas. Obtienes una lista completa con cantidades, alineada con las recomendaciones de Protección Civil y de la UE: agua, comida, higiene, botiquín, luz, energía, radio, cocina y documentos.</p>
+      <ul class="rz-bullets"><li><Icon name="check" size={16} /> Cantidades según Protección Civil y la UE</li><li><Icon name="check" size={16} /> Marca lo que ya tienes</li><li><Icon name="check" size={16} /> Imprime, guarda en PDF o copia la lista</li><li><Icon name="check" size={16} /> Se queda guardada en tu navegador</li></ul>
+    </header>
+
+    <div class="rz-form" id="rz-form" role="group" aria-label="Adultos, Días, Nivel">
+      <div class="rz-steppers">
+        {steppers.map((s) => (
+          <div class="rz-step">
+            <label for={`rz-${s.id}`}><Icon name={s.icon} size={18} /> {s.label}{s.hint && <small>{s.hint}</small>}</label>
+            <div class="rz-ctl">
+              <button type="button" class="rz-b" data-step={s.id} data-d="-1" aria-label={`${s.label}: reducir`}>−</button>
+              <input id={`rz-${s.id}`} type="number" inputmode="numeric" min={s.min} max={s.max} value={s.val} data-f={s.id} />
+              <button type="button" class="rz-b" data-step={s.id} data-d="1" aria-label={`${s.label}: aumentar`}>+</button>
+            </div>
+          </div>
+        ))}
+        <div class="rz-step rz-step--days">
+          <label for="rz-D"><Icon name="calendar-days" size={18} /> Días<small>autosuficiencia</small></label>
+          <div class="rz-ctl">
+            <button type="button" class="rz-b" data-step="D" data-d="-1" aria-label="Días: reducir">−</button>
+            <input id="rz-D" type="number" inputmode="numeric" min="1" max="90" value={st.D} data-f="D" />
+            <button type="button" class="rz-b" data-step="D" data-d="1" aria-label="Días: aumentar">+</button>
+          </div>
+          <div class="rz-presets" aria-label="Elegir días rápido">
+            {[3, 7, 14, 28, 56].map((d) => <button type="button" class="rz-chip" data-days={d}>{d}</button>)}
+          </div>
+        </div>
+      </div>
+      <fieldset class="rz-levels">
+        <legend>Nivel</legend>
+        {LEVELS.map((l) => (
+          <label class="rz-lv">
+            <input type="radio" name="rz-level" value={l.id} checked={l.id === st.lv} />
+            <span class="rz-lv__c"><strong>{l.name}</strong><em>{l.short}</em><small>{l.desc}</small></span>
+          </label>
+        ))}
+      </fieldset>
+    </div>
+
+    <div class="rz-sum" aria-live="polite">
+      <div><Icon name="droplets" size={22} /><strong id="rz-s-water">{nf(sum.water)}</strong><span>litros de agua</span></div>
+      <div><Icon name="flame" size={22} /><strong id="rz-s-kcal">{nf(sum.kcal)}</strong><span>kcal de energía</span></div>
+      <div><Icon name="weight" size={22} /><strong id="rz-s-kg">{nf(sum.kg)}</strong><span>kg de reserva (estimado)</span></div>
+      <div><Icon name="package-check" size={22} /><strong id="rz-s-items">{sum.items}</strong><span>artículos en la lista</span></div>
+    </div>
+
+    <div class="rz-bar" role="toolbar" aria-label="Toolbar">
+      <div class="rz-prog"><span id="rz-prog-t">0 de {rs.length} hechos</span><progress id="rz-prog" max={rs.length} value="0"></progress></div>
+      <div class="rz-actions">
+        <button type="button" class="btn btn--primary btn--sm" id="rz-print"><Icon name="printer" size={16} /> Imprimir / PDF</button>
+        <button type="button" class="btn btn--ghost btn--sm" id="rz-copy"><Icon name="copy" size={16} /> Copiar lista</button>
+        <button type="button" class="btn btn--ghost btn--sm" id="rz-share"><Icon name="link" size={16} /> Copiar enlace</button>
+        <label class="rz-toggle"><input type="checkbox" id="rz-hide" /> Ocultar lo hecho</label>
+        <button type="button" class="rz-reset" id="rz-reset">Restablecer</button>
+      </div>
+      <p class="rz-status" id="rz-status" role="status" aria-live="polite"></p>
+    </div>
+
+    <nav class="rz-jump" aria-label="Categorías">
+      {CATS.map((c) => <a href={`#cat-${c.id}`} data-jump={c.id}><Icon name={c.icon} size={15} /> {c.name}</a>)}
+    </nav>
+
+    <p class="rz-disc"><Icon name="info" size={16} /> <span><strong>Publicidad:</strong> Los enlaces con «Afiliado*» son enlaces de afiliado a resultados de búsqueda (o a una ficha ya verificada) en amazon.es. {AFFILIATE.amazonDisclosure} <a href="/divulgacion-afiliados/">Más información</a>. Las cantidades valen igual si compras en el súper.</span></p>
+
+    <div class="rz-printhead" aria-hidden="true">
+      <strong>Lista de la compra · reserva de emergencia</strong> · Modo Refugio · modorefugio.com
+      <div id="rz-printmeta"></div>
+    </div>
+
+    <div class="rz-list" id="rz-list">
+      {CATS.map((c) => {
+        const html = renderRows(rs, c.id);
+        return (
+          <section class="rz-cat" id={`cat-${c.id}`} data-cat={c.id} hidden={!html}>
+            <h2><Icon name={c.icon} size={22} /> {c.name} <span class="rz-count" data-count={c.id}></span></h2>
+            <p class="rz-blurb">{c.blurb}</p>
+            <ul class="rz-ul" data-ul={c.id} set:html={html}></ul>
+          </section>
+        );
+      })}
+    </div>
+
+    <noscript><p class="rz-noscript">Sin JavaScript ves la lista de ejemplo para 2 adultos, 1 niño, 14 días y nivel «Avanzado». Activa JavaScript para calcular la tuya.</p></noscript>
+
+    <div class="rz-next">
+      <h2>Seguir leyendo</h2>
+      <div class="rz-cards">
+        <a href="/preparate/agua/"><Icon name="droplets" size={20} /><strong>Cómo guardar agua</strong><span>Bidones, rotación, hervir y filtros.</span></a>
+        <a href="/playbook/apagon/"><Icon name="plug-zap" size={20} /><strong>Playbook de apagón</strong><span>Qué hacer en los primeros minutos, horas y días.</span></a>
+        <a href="/preparate/alimentos/"><Icon name="wheat" size={20} /><strong>Despensa de emergencia</strong><span>Lo que no necesita nevera ni casi fuego.</span></a>
+        <a href="/preparate/mochila-72h/"><Icon name="backpack" size={20} /><strong>Mochila de 72 horas</strong><span>Si tienes que salir en 10 minutos.</span></a>
+        <a href="/empieza-aqui/kit-72-horas/"><Icon name="list-checks" size={20} /><strong>El kit de 72 horas</strong><span>Lo que piden Protección Civil y la UE.</span></a>
+        <a href="/herramientas/calculadora-bateria/"><Icon name="battery-charging" size={20} /><strong>Calculadora de batería</strong><span>¿De qué tamaño tiene que ser la estación?</span></a>
+      </div>
+    </div>
+
+    <div class="prose rz-prose">
+      <h2>Cómo calcula esta herramienta</h2>
+      <ul>
+        <li><strong>Agua:</strong> 2 litros por persona y día (1,5 L para beber, 0,5 L para cocinar), según Protección Civil y la recomendación europea de 72 horas. A partir del nivel Avanzado se suma agua de uso para higiene.</li>
+        <li><strong>Alimentos:</strong> una despensa típica española (pasta, arroz, legumbres, conservas, leche UHT, aceite de oliva, embutido curado) que suma unas 2.200 kcal por adulto y día. Los niños se cuentan al 70 %. No es la tabla alemana BLE: está pensada para lo que encuentras en Mercadona, Dia, Lidl o Carrefour.</li>
+        <li><strong>Nivel:</strong> cada nivel incluye todo lo del anterior y añade partidas nuevas. Al cambiar de nivel, los días pasan a 3, 14 o 28, salvo que los hayas tocado tú.</li>
+        <li><strong>Se redondea al alza:</strong> packs, latas y botellas. Las cifras son una orientación; en el súper verás tamaños distintos.</li>
+      </ul>
+      <p class="muted xs">Aviso: esta lista no sustituye el consejo de Protección Civil, de tu médico o de un profesional. Si hay un bebé, un embarazo, alergias o una enfermedad crónica, habla de comida y medicación con tu médico o tu pediatra. Las cantidades para mascotas y el efectivo son estimaciones; consulta a tu veterinario y guarda el dinero con seguridad.</p>
+    </div>
+    <Faq items={faq} />
+    <Sources items={[
+      { nombre: 'Protección Civil — Autoprotección y kit de emergencia', url: 'https://www.proteccioncivil.es/' },
+      { nombre: 'Comisión Europea — Preparación de 72 horas', url: 'https://commission.europa.eu/topics/preparedness_es' },
+      { nombre: 'ES-Alert, sistema de avisos de emergencia (Ministerio del Interior)', url: 'https://www.interior.gob.es/' }
+    ]} updated={new Date('2026-11-24')} />
+  </section>
+</Base>
+
+<script>
+  import { CATS, DEFAULT_STATE, LEVELS, rows, renderRows, summarize, toText } from '../../lib/rechner';
+  import type { State, Level } from '../../lib/rechner';
+  const KEY = 'mr-rechner-v1';
+  type Saved = { s: State; checked: Record<string, boolean>; hide: boolean; dTouched: boolean };
+  let st: State = { ...DEFAULT_STATE };
+  let checked: Record<string, boolean> = {};
+  let hide = false;
+  let dTouched = false;
+  const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
+  const nf = (n: number) => n.toLocaleString('es-ES');
+  const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, Math.round(v) || 0));
+  const LIM: Record<string, [number, number]> = { A: [0, 20], K: [0, 20], B: [0, 5], H: [0, 10], C: [0, 10], D: [1, 90] };
+
+  function load() {
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (raw) {
+        const d = JSON.parse(raw) as Saved;
+        st = { ...DEFAULT_STATE, ...d.s };
+        checked = d.checked || {};
+        hide = !!d.hide;
+        dTouched = !!d.dTouched;
+      }
+    } catch {}
+    const q = new URLSearchParams(location.search);
+    if (['a', 'k', 'b', 'h', 'c', 'd', 'l'].some((k) => q.has(k))) {
+      const g = (k: string, def: number, k2: string) => (q.has(k) ? clamp(Number(q.get(k)), LIM[k2][0], LIM[k2][1]) : def);
+      st.A = g('a', st.A, 'A'); st.K = g('k', st.K, 'K'); st.B = g('b', st.B, 'B');
+      st.H = g('h', st.H, 'H'); st.C = g('c', st.C, 'C'); st.D = g('d', st.D, 'D');
+      const l = Number(q.get('l'));
+      if (l === 1 || l === 2 || l === 3) st.lv = l as Level;
+      if (q.has('d')) dTouched = true;
+    }
+  }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify({ s: st, checked, hide, dTouched } satisfies Saved)); } catch {}
+  }
+  function flash(msg: string) {
+    const el = $('rz-status'); el.textContent = msg;
+    clearTimeout((flash as any).t); (flash as any).t = setTimeout(() => { el.textContent = ''; }, 3500);
+  }
+  function syncInputs() {
+    (Object.keys(LIM) as (keyof State)[]).forEach((k) => { const i = document.querySelector<HTMLInputElement>(`[data-f="${k}"]`); if (i) i.value = String(st[k]); });
+    document.querySelectorAll<HTMLInputElement>('input[name="rz-level"]').forEach((r) => { r.checked = Number(r.value) === st.lv; });
+    document.querySelectorAll<HTMLElement>('[data-days]').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.days) === st.D)));
+    ($('rz-hide') as HTMLInputElement).checked = hide;
+    $('rz-list').classList.toggle('hide-done', hide);
+  }
+  let rs = rows(st);
+  function progress() {
+    const total = rs.length;
+    const done = rs.filter((r) => checked[r.item.id]).length;
+    $('rz-prog-t').textContent = `${done} de ${total} hechos`;
+    const p = $('rz-prog') as HTMLProgressElement; p.max = total; p.value = done;
+    for (const c of CATS) {
+      const list = rs.filter((r) => r.item.cat === c.id);
+      const d2 = list.filter((r) => checked[r.item.id]).length;
+      const el = document.querySelector<HTMLElement>(`[data-count="${c.id}"]`);
+      if (el) el.textContent = list.length ? `${d2}/${list.length}` : '';
+    }
+  }
+  function render() {
+    rs = rows(st);
+    const sum = summarize(st, rs);
+    $('rz-s-water').textContent = nf(sum.water);
+    $('rz-s-kcal').textContent = nf(sum.kcal);
+    $('rz-s-kg').textContent = nf(sum.kg);
+    $('rz-s-items').textContent = String(sum.items);
+    for (const c of CATS) {
+      const html = renderRows(rs, c.id, checked);
+      const sec = document.querySelector<HTMLElement>(`[data-cat="${c.id}"]`)!;
+      sec.hidden = !html;
+      sec.querySelector('ul')!.innerHTML = html;
+      document.querySelector<HTMLElement>(`[data-jump="${c.id}"]`)!.hidden = !html;
+    }
+    const lv = LEVELS.find((l) => l.id === st.lv)!;
+    $('rz-printmeta').textContent = `${st.A} adultos, ${st.K} niños, ${st.B} bebés, ${st.H} perros, ${st.C} gatos · ${st.D} días · Nivel: ${lv.name} · Fecha: ${new Date().toLocaleDateString('es-ES')}`;
+    syncInputs();
+    progress();
+    save();
+  }
+
+  load(); render();
+
+  const form = $('rz-form');
+  form.addEventListener('input', (e) => {
+    const t = e.target as HTMLInputElement;
+    if (t.dataset.f) {
+      const k = t.dataset.f as 'A' | 'K' | 'B' | 'H' | 'C' | 'D';
+      if (t.value === '') return;
+      st[k] = clamp(Number(t.value), LIM[k][0], LIM[k][1]);
+      if (k === 'D') dTouched = true;
+      render();
+    }
+  });
+  form.addEventListener('change', (e) => {
+    const t = e.target as HTMLInputElement;
+    if (t.name === 'rz-level') {
+      st.lv = Number(t.value) as Level;
+      if (!dTouched) st.D = LEVELS.find((l) => l.id === st.lv)!.days;
+      render();
+    } else if (t.dataset.f) { syncInputs(); }
+  });
+  form.addEventListener('click', (e) => {
+    const t = (e.target as HTMLElement).closest('button') as HTMLButtonElement | null;
+    if (!t) return;
+    if (t.dataset.step) {
+      const k = t.dataset.step as 'A' | 'K' | 'B' | 'H' | 'C' | 'D';
+      st[k] = clamp(st[k] + Number(t.dataset.d), LIM[k][0], LIM[k][1]);
+      if (k === 'D') dTouched = true;
+      render();
+    } else if (t.dataset.days) {
+      st.D = Number(t.dataset.days); dTouched = true; render();
+    }
+  });
+  $('rz-list').addEventListener('change', (e) => {
+    const t = e.target as HTMLInputElement;
+    const id = t.dataset.chk; if (!id) return;
+    if (t.checked) checked[id] = true; else delete checked[id];
+    t.closest('li')?.classList.toggle('is-done', t.checked);
+    progress(); save();
+  });
+  ($('rz-hide') as HTMLInputElement).addEventListener('change', (e) => { hide = (e.target as HTMLInputElement).checked; $('rz-list').classList.toggle('hide-done', hide); save(); });
+  $('rz-print').addEventListener('click', () => window.print());
+  $('rz-copy').addEventListener('click', async () => {
+    const text = toText(st, rs, checked);
+    try { await navigator.clipboard.writeText(text); flash('Lista copiada.'); }
+    catch { const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); flash('Lista copiada.'); } catch { flash('No se ha podido copiar.'); } ta.remove(); }
+  });
+  $('rz-share').addEventListener('click', async () => {
+    const u = new URL(location.href); u.search = new URLSearchParams({ a: String(st.A), k: String(st.K), b: String(st.B), h: String(st.H), c: String(st.C), d: String(st.D), l: String(st.lv) }).toString();
+    try { await navigator.clipboard.writeText(u.toString()); flash('Enlace con tus datos copiado.'); } catch { flash(u.toString()); }
+  });
+  $('rz-reset').addEventListener('click', () => {
+    if (!confirm('¿Borrar todos los datos y las casillas?')) return;
+    st = { ...DEFAULT_STATE }; checked = {}; hide = false; dTouched = false;
+    try { localStorage.removeItem(KEY); } catch {}
+    history.replaceState(null, '', location.pathname);
+    render(); flash('Restablecido.');
+  });
+</script>
+
+<style is:global>
+
+  .rz-wrap{padding-bottom:var(--space-16);max-width:100%;min-width:0;overflow-x:clip}
+  .rz-hero{margin-bottom:var(--space-6);min-width:0}
+  .rz-hero h1{margin-bottom:var(--space-3);overflow-wrap:anywhere}
+  .rz-bullets{list-style:none;padding:0;margin:var(--space-4) 0 0;display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-5);font-size:var(--size-sm);color:var(--color-text-muted)}
+  .rz-bullets li{display:flex;align-items:center;gap:.4em;min-width:0}
+  .rz-bullets .icon{color:var(--color-secondary);flex:none}
+  .rz-form{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-6);box-shadow:var(--shadow-sm);min-width:0;max-width:100%;box-sizing:border-box;overflow:hidden}
+  .rz-steppers{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--space-4)}
+  .rz-step{display:flex;flex-direction:column;gap:.5em;min-width:0}
+  .rz-step label{font-weight:650;font-size:var(--size-sm);display:flex;flex-direction:column;gap:.1em;color:var(--color-heading);min-width:0}
+  .rz-step label .icon{color:var(--color-secondary);margin-right:.3em}
+  .rz-step label small{font-weight:400;color:var(--color-text-muted);font-size:var(--size-xs);overflow-wrap:anywhere}
+  .rz-ctl{display:flex;align-items:stretch;border:1.5px solid var(--color-border-strong);border-radius:var(--radius-md);overflow:hidden;background:var(--color-bg);min-width:0;max-width:100%}
+  .rz-ctl input{width:100%;min-width:0;border:0;text-align:center;font:600 var(--size-lg)/1 var(--font-body);background:transparent;color:var(--color-text);padding:.55em 0;-moz-appearance:textfield}
+  .rz-ctl input::-webkit-outer-spin-button,.rz-ctl input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+  .rz-b{border:0;background:var(--color-bg-subtle);color:var(--color-heading);font:600 1.3rem/1 var(--font-body);width:44px;min-width:44px;flex:none;min-height:44px;cursor:pointer;touch-action:manipulation}
+  .rz-b:hover{background:var(--color-secondary-soft)}
+  .rz-b:active{transform:scale(.94)}
+  .rz-presets{display:flex;gap:.3em;flex-wrap:wrap}
+  .rz-chip{border:1px solid var(--color-border-strong);background:var(--color-bg);color:var(--color-text);border-radius:var(--radius-pill);padding:.25em .7em;font:600 var(--size-xs)/1.4 var(--font-body);cursor:pointer;min-height:28px}
+  .rz-chip[aria-pressed='true']{background:var(--color-primary);color:var(--color-on-primary);border-color:var(--color-primary)}
+  .rz-levels{border:0;margin:var(--space-6) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-3);min-width:0}
+  .rz-levels legend{font-weight:650;font-size:var(--size-sm);color:var(--color-heading);margin-bottom:var(--space-2);padding:0}
+  .rz-lv{position:relative;cursor:pointer;display:block;min-width:0}
+  .rz-lv input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;margin:0}
+  .rz-lv__c{display:flex;flex-direction:column;gap:.15em;border:2px solid var(--color-border);border-radius:var(--radius-md);padding:var(--space-4);height:100%;min-width:0;box-sizing:border-box;transition:border-color .15s,background .15s}
+  .rz-lv__c strong{font:700 var(--size-lg)/1.2 var(--font-heading);color:var(--color-heading);overflow-wrap:anywhere}
+  .rz-lv__c em{font-style:normal;font-size:var(--size-xs);text-transform:uppercase;letter-spacing:.06em;color:var(--color-secondary);font-weight:700}
+  .rz-lv__c small{color:var(--color-text-muted);font-size:var(--size-sm);line-height:1.4;margin-top:.3em;overflow-wrap:anywhere}
+  .rz-lv input:checked + .rz-lv__c{border-color:var(--color-primary);background:var(--color-secondary-soft)}
+  .rz-lv input:focus-visible + .rz-lv__c{outline:3px solid var(--color-focus,var(--color-secondary));outline-offset:2px}
+  .rz-sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-3);margin:var(--space-5) 0;min-width:0}
+  .rz-sum > div{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.15em;padding:var(--space-4);border-radius:var(--radius-lg);background:var(--color-primary);color:var(--color-on-primary);min-width:0;box-sizing:border-box}
+  .rz-sum strong{font:700 var(--size-2xl)/1.1 var(--font-heading);overflow-wrap:anywhere}
+  .rz-sum span{font-size:var(--size-xs);opacity:.85;overflow-wrap:anywhere}
+  .rz-bar{position:sticky;top:var(--header-height);z-index:5;background:var(--color-bg);padding:var(--space-3) 0;border-bottom:1px solid var(--color-border);display:flex;flex-wrap:wrap;gap:var(--space-3) var(--space-5);align-items:center;min-width:0;max-width:100%;box-sizing:border-box}
+  .rz-prog{display:flex;flex-direction:column;gap:.25em;min-width:140px;flex:1 1 180px;font-size:var(--size-sm);font-weight:600}
+  .rz-prog progress{width:100%;height:10px;accent-color:var(--color-primary)}
+  .rz-actions{display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center;margin-left:auto;min-width:0;max-width:100%}
+  .rz-toggle{display:flex;gap:.4em;align-items:center;font-size:var(--size-sm);cursor:pointer;padding:.4em .6em}
+  .rz-toggle input{width:18px;height:18px;flex:none}
+  .rz-reset{background:none;border:0;color:var(--color-link);text-decoration:underline;cursor:pointer;font:inherit;font-size:var(--size-sm);padding:.4em .6em;min-height:36px}
+  .rz-status{flex-basis:100%;margin:0;min-height:1.2em;font-size:var(--size-sm);color:var(--color-secondary);font-weight:600}
+  .rz-jump{display:flex;gap:.4em;flex-wrap:wrap;margin:var(--space-4) 0;min-width:0}
+  .rz-jump a{display:inline-flex;align-items:center;gap:.4em;padding:.35em .8em;border-radius:var(--radius-pill);border:1px solid var(--color-border-strong);background:var(--color-surface);color:var(--color-text);text-decoration:none;font-size:var(--size-xs);font-weight:600;max-width:100%;overflow-wrap:anywhere}
+  .rz-jump a:hover{background:var(--color-secondary-soft)}
+  .rz-jump a[hidden]{display:none}
+  .rz-disc{display:flex;gap:.6em;align-items:flex-start;font-size:var(--size-sm);color:var(--color-text-muted);background:var(--color-bg-subtle);padding:var(--space-3) var(--space-4);border-radius:var(--radius-md);margin:var(--space-4) 0 var(--space-6);min-width:0;max-width:100%;box-sizing:border-box}
+  .rz-disc > span{flex:1;min-width:0;overflow-wrap:anywhere}
+  .rz-disc .icon{margin-top:.2em;flex:none}
+  .rz-printhead{display:none}
+  .rz-cat{margin-bottom:var(--space-8);min-width:0;max-width:100%}
+  .rz-cat[hidden]{display:none}
+  .rz-cat h2{font-size:var(--size-2xl);display:flex;align-items:center;flex-wrap:wrap;gap:.5em;margin-bottom:.2em;min-width:0}
+  .rz-cat h2 .icon{color:var(--color-secondary);flex:none}
+  .rz-count{font:600 var(--size-sm)/1 var(--font-body);color:var(--color-text-muted);background:var(--color-bg-subtle);padding:.3em .6em;border-radius:var(--radius-pill);margin-left:.4em}
+  .rz-blurb{color:var(--color-text-muted);font-size:var(--size-sm);margin-bottom:var(--space-3);overflow-wrap:anywhere}
+  .rz-ul{list-style:none;padding:0;margin:0;border:1px solid var(--color-border);border-radius:var(--radius-lg);overflow:hidden;background:var(--color-surface);max-width:100%;box-sizing:border-box}
+  .rz-row{display:flex;gap:var(--space-4);align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4);border-bottom:1px solid var(--color-border);min-width:0;max-width:100%;box-sizing:border-box}
+  .rz-row:last-child{border-bottom:0}
+  .rz-chk{display:flex;gap:var(--space-3);align-items:flex-start;cursor:pointer;flex:1;min-width:0}
+  .rz-chk input{position:absolute;opacity:0;width:1px;height:1px}
+  .rz-box{flex:none;width:26px;height:26px;border:2px solid var(--color-border-strong);border-radius:7px;background:var(--color-bg);display:grid;place-items:center;margin-top:1px;transition:background .12s,border-color .12s}
+  .rz-box::after{content:'';width:6px;height:12px;border:solid var(--color-on-primary);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) scale(0);margin-top:-2px;transition:transform .12s}
+  .rz-chk input:checked + .rz-box{background:var(--color-primary);border-color:var(--color-primary)}
+  .rz-chk input:checked + .rz-box::after{transform:rotate(45deg) scale(1)}
+  .rz-chk input:focus-visible + .rz-box{outline:3px solid var(--color-secondary);outline-offset:2px}
+  .rz-txt{display:flex;flex-direction:column;gap:.15em;min-width:0}
+  .rz-name{font-weight:600;color:var(--color-heading);overflow-wrap:anywhere}
+  .rz-note{font-size:var(--size-sm);color:var(--color-text-muted);line-height:1.4;overflow-wrap:anywhere}
+  .rz-row.is-done .rz-name{text-decoration:line-through;opacity:.55}
+  .rz-row.is-done .rz-note{opacity:.55}
+  .rz-side{display:flex;flex-direction:column;align-items:flex-end;gap:.4em;flex:none;min-width:0;max-width:42%;text-align:right;box-sizing:border-box}
+  .rz-qty{font:700 var(--size-base)/1.2 var(--font-heading);color:var(--color-primary);background:var(--color-secondary-soft);padding:.3em .7em;border-radius:var(--radius-pill);white-space:normal;overflow-wrap:anywhere;max-width:100%;box-sizing:border-box}
+  .rz-buy{font-size:var(--size-xs);font-weight:600;text-decoration:none;color:var(--color-link);display:inline-flex;flex-wrap:wrap;gap:.5em;align-items:center;justify-content:flex-end;white-space:normal;overflow-wrap:anywhere;max-width:100%;min-width:0;box-sizing:border-box}
+  .rz-buy:hover{text-decoration:underline}
+  .rz-ad{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--color-text-muted);border:1px solid var(--color-border-strong);padding:.05em .4em;border-radius:4px;white-space:nowrap}
+  .rz-buy--int::after{content:' →'}
+  .hide-done .is-done{display:none}
+  .rz-next{margin-top:var(--space-12);min-width:0}
+  .rz-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-4)}
+  .rz-cards a{display:flex;flex-direction:column;gap:.3em;padding:var(--space-5);border:1px solid var(--color-border);border-radius:var(--radius-lg);background:var(--color-surface);text-decoration:none;color:var(--color-text);min-width:0;box-sizing:border-box}
+  .rz-cards a:hover{border-color:var(--color-secondary);box-shadow:var(--shadow-md)}
+  .rz-cards .icon{color:var(--color-secondary)}
+  .rz-cards strong{color:var(--color-heading);overflow-wrap:anywhere}
+  .rz-cards span{font-size:var(--size-sm);color:var(--color-text-muted);overflow-wrap:anywhere}
+  .rz-prose{margin-top:var(--space-10)}
+  .rz-noscript{padding:var(--space-4);background:var(--color-bg-subtle);border-radius:var(--radius-md)}
+  @media (max-width:1200px){.rz-steppers{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  @media (max-width:1000px){.rz-sum{grid-template-columns:repeat(2,minmax(0,1fr))}.rz-cards{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.rz-levels{grid-template-columns:1fr}.rz-side{max-width:48%}}
+  @media (max-width:700px){
+    .rz-form{padding:var(--space-4)}.rz-steppers{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .rz-row{flex-direction:column;align-items:stretch;gap:var(--space-2);min-width:0;max-width:100%;box-sizing:border-box}.rz-side{flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start;text-align:left;padding-left:calc(26px + var(--space-3));min-width:0;max-width:100%}
+    .rz-cards{grid-template-columns:1fr}.rz-bar{position:static}.rz-actions{margin-left:0}
+  }
+  @media print{
+    header.site,footer.site,.nav--drawer,#cookie-banner,.cookie-banner,.skip,.crumbs,.rz-hero,.rz-form,.rz-sum,.rz-bar,.rz-jump,.rz-next,.rz-prose,.faq,.sources,.rz-buy,.rz-count,.rz-noscript,.rz-disc{display:none!important}
+    body{background:#fff!important;color:#000!important;font-size:10.5pt}
+    .container{max-width:none;padding:0}
+    .rz-printhead{display:block;font-size:11pt;margin-bottom:8pt;border-bottom:1pt solid #000;padding-bottom:6pt}
+    .rz-cat{break-inside:avoid-page;margin-bottom:10pt}
+    .rz-cat h2{font-size:13pt;margin:0 0 3pt}
+    .rz-blurb{display:none}
+    .rz-ul{border:0;border-radius:0;background:none}
+    .rz-row{padding:2pt 0;border-bottom:.5pt solid #bbb;break-inside:avoid;gap:8pt}
+    .rz-box{border-color:#000;width:13pt;height:13pt;border-radius:2pt;background:#fff!important;print-color-adjust:exact}
+    .rz-chk input:checked + .rz-box::after{border-color:#000}
+    .rz-chk input:checked + .rz-box{background:#fff!important}
+    .rz-note{display:none}
+    .rz-qty{background:none;padding:0;color:#000;font-size:10pt}
+    .rz-row.is-done .rz-name{text-decoration:line-through}
+    .rz-side{flex-direction:row;max-width:none}
+    .hide-done .is-done{display:none}
+    @page{size:A4;margin:14mm}
+  }
+
+</style>

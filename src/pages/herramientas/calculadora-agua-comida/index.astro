@@ -11,6 +11,11 @@ const crumbs = [{ name: 'Herramientas', href: '/herramientas/' }, { name: 'Calcu
     <p class="eyebrow"><Icon name="calculator" size={16} /> Herramienta</p>
     <h1>¿Cuánta agua y comida necesito?</h1>
     <p class="lead">Calcula tu reserva de emergencia. Usamos 3 litros por persona y día (beber, cocinar e higiene mínima) y unas 2.000 kcal por adulto y día.</p>
+
+    <aside class="callout" style="margin:var(--space-6) 0;padding:var(--space-4) var(--space-5);border-radius:var(--radius-md);background:var(--color-secondary-soft);min-width:0;max-width:100%;box-sizing:border-box">
+      <p style="margin:0"><strong>Nueva:</strong> la <a href="/calculadora/">calculadora de reserva</a> te arma la lista de la compra completa (agua, comida, higiene, botiquín, luz, energía) con enlaces a Amazon, en 72 horas, Avanzado o Prepper. Esta página sigue siendo el cálculo rápido de litros y raciones.</p>
+    </aside>
+
     <form class="calc" id="calc">
       <label>Adultos <input type="number" name="adultos" min="0" max="20" value="2" /></label>
       <label>Niños (menores de 12) <input type="number" name="ninos" min="0" max="20" value="1" /></label>
