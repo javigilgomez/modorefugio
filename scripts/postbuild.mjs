@@ -43,3 +43,14 @@ for (const [url, name] of jobs.og) {
 }
 console.log('OG', jobs.og.length);
 await browser.close(); server.close();
+
+// Alias de la URL antigua del PDF (antes _redirects de Netlify; GitHub Pages no hace 301 de .pdf).
+const oldPdf = path.join(ROOT, 'pdf', 'playbook-sin-internet.pdf');
+const newPdf = path.join(ROOT, 'pdf', 'playbook-caida-mundial-de-internet.pdf');
+if (fs.existsSync(newPdf)) {
+  fs.copyFileSync(newPdf, oldPdf);
+  const pub = path.resolve('public', 'pdf', 'playbook-sin-internet.pdf');
+  fs.mkdirSync(path.dirname(pub), { recursive: true });
+  fs.copyFileSync(newPdf, pub);
+  console.log('PDF alias playbook-sin-internet.pdf');
+}
